@@ -624,6 +624,7 @@ message +=
 });
 
 message += `
+
 👤 الاسم: ${name}
 
 📞 الهاتف: ${phone}
@@ -642,6 +643,12 @@ await fetch(scriptURL, {
 
 method:"POST",
 
+mode:"no-cors",
+
+headers:{
+"Content-Type":"application/json"
+},
+
 body: JSON.stringify({
 
 name:name,
@@ -654,9 +661,15 @@ total:total
 
 });
 
+console.log("تم إرسال الطلب للشيت");
+
 }catch(err){
 
-console.log(err);
+console.log("خطأ:", err);
+
+alert("حدث خطأ أثناء الإرسال");
+
+return;
 
 }
 
@@ -678,7 +691,7 @@ saveCart();
 
 updateCart();
 
-alert("تم إرسال الطلب");
+alert("تم إرسال الطلب بنجاح");
 
 }
 
