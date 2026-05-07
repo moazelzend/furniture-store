@@ -30,31 +30,31 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 tailwind.config = {
 
-    theme: {
+theme: {
 
-        extend: {
+extend: {
 
-            colors: {
+colors: {
 
-                brand: {
+brand: {
 
-                    dark: '#0f172a',
-                    gold: '#d4a373',
-                    light: '#f8f6f2'
+dark: '#0f172a',
+gold: '#d4a373',
+light: '#f8f6f2'
 
-                }
+}
 
-            },
+},
 
-            fontFamily: {
+fontFamily: {
 
-                sans: ['Tajawal', 'sans-serif']
+sans: ['Tajawal', 'sans-serif']
 
-            }
+}
 
-        }
+}
 
-    }
+}
 
 }
 
@@ -63,12 +63,12 @@ tailwind.config = {
 <style>
 
 body{
-    font-family:'Tajawal',sans-serif;
-    background:#f8f6f2;
+font-family:'Tajawal',sans-serif;
+background:#f8f6f2;
 }
 
 html{
-    scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 </style>
@@ -76,14 +76,6 @@ html{
 </head>
 
 <body class="text-slate-800">
-
-<!-- Top Bar -->
-
-<div class="bg-brand-dark text-white text-center py-2 text-sm">
-
-✨ شحن مجاني للطلبات فوق 20,000 جنيه ✨
-
-</div>
 
 <!-- Header -->
 
@@ -96,14 +88,12 @@ html{
 <i class="fa-solid fa-couch text-3xl text-brand-gold"></i>
 
 <h1 class="text-3xl font-black">
-
 Era&Art
-
 </h1>
 
 </div>
 
-<!-- Cart Button -->
+<!-- Cart -->
 
 <button
 onclick="toggleCart(true)"
@@ -128,41 +118,26 @@ class="absolute -top-2 -right-2 bg-brand-gold text-white w-5 h-5 text-xs rounded
 <!-- Hero -->
 
 <section
-class="relative h-[550px] bg-cover bg-center flex items-center text-white"
+class="relative h-[500px] bg-cover bg-center flex items-center text-white"
 style="background-image:
 linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
 url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg');">
 
 <div class="container mx-auto px-6">
 
-<span class="text-brand-gold font-bold tracking-widest">
+<h1 class="text-6xl font-black leading-tight">
 
-تصاميم فاخرة
-
-</span>
-
-<h1 class="text-5xl md:text-7xl font-black mt-4 leading-tight">
-
-أثاث يرتقي
+أثاث فاخر
 <br>
-بأسلوب حياتك
+لمنزل عصري
 
 </h1>
 
 <p class="mt-6 text-lg text-gray-200 max-w-xl">
 
-تشكيلة أثاث عصرية مصنوعة من أفضل الخامات
-بتصميمات أوروبية حديثة.
+أفضل تصميمات الأثاث الأوروبية الحديثة
 
 </p>
-
-<a
-href="#collection"
-class="inline-block mt-8 bg-brand-gold text-black px-8 py-4 font-bold rounded-lg hover:scale-105 transition">
-
-تسوق الآن
-
-</a>
 
 </div>
 
@@ -170,27 +145,7 @@ class="inline-block mt-8 bg-brand-gold text-black px-8 py-4 font-bold rounded-lg
 
 <!-- Products -->
 
-<section
-id="collection"
-class="container mx-auto px-6 py-20">
-
-<div class="text-center mb-16">
-
-<h2 class="text-5xl font-black mb-5">
-
-التشكيلة المختارة
-
-</h2>
-
-<div class="w-20 h-1 bg-brand-gold mx-auto mb-6"></div>
-
-<p class="text-gray-500">
-
-أفضل قطع الأثاث الحديثة لمنزلك
-
-</p>
-
-</div>
+<section class="container mx-auto px-6 py-20">
 
 <div
 id="store-products"
@@ -210,16 +165,14 @@ class="fixed inset-0 hidden z-50">
 
 <div
 onclick="toggleCart(false)"
-class="absolute inset-0 bg-black/50 backdrop-blur-sm">
+class="absolute inset-0 bg-black/50">
 
 </div>
 
 <!-- Drawer -->
 
 <div
-class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col shadow-2xl">
-
-<!-- Header -->
+class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
 
 <div class="bg-brand-dark text-white p-6 flex justify-between items-center">
 
@@ -239,43 +192,33 @@ class="text-3xl">
 
 </div>
 
-<!-- Items -->
+<!-- Cart Items -->
 
 <div
 id="cart-items"
 class="flex-1 overflow-y-auto p-6 space-y-4">
 
-<p class="text-center text-gray-500">
-
-لا توجد منتجات داخل السلة
-
-</p>
-
 </div>
 
 <!-- Footer -->
 
-<div class="border-t p-6 bg-gray-50">
+<div class="border-t p-6">
 
-<div class="flex justify-between items-center mb-6 text-2xl font-black">
+<div class="flex justify-between text-2xl font-black mb-6">
 
 <span>
-
 الإجمالي
-
 </span>
 
 <span id="cart-total">
-
 0 ج.م
-
 </span>
 
 </div>
 
 <button
 onclick="checkout()"
-class="w-full bg-brand-gold text-black py-4 font-black rounded-lg hover:opacity-90 transition">
+class="w-full bg-brand-gold text-black py-4 font-black rounded-lg">
 
 إتمام الشراء
 
@@ -287,29 +230,21 @@ class="w-full bg-brand-gold text-black py-4 font-black rounded-lg hover:opacity-
 
 </div>
 
-<!-- Footer -->
-
-<footer class="bg-brand-dark text-white py-12">
-
-<div class="container mx-auto px-6 text-center">
-
-<h2 class="text-4xl font-black mb-4">
-
-Era&Art
-
-</h2>
-
-<p class="text-slate-400">
-
-جميع الحقوق محفوظة © 2026
-
-</p>
-
-</div>
-
-</footer>
-
 <script>
+
+/* =========================
+   رابط Google Sheet
+========================= */
+
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbyTYZDfWRel_slqIvt36bhl5xuAFYlEzhbIoHduEMZe1O7ad_0U-dKkne9GTyFzgtGl/exec";
+
+/* =========================
+   رقم واتساب
+========================= */
+
+const phone =
+"201068130159";
 
 /* =========================
    المنتجات
@@ -318,35 +253,35 @@ Era&Art
 let products = [
 
 {
-    id: 1,
-    name: "كنبة مودرن",
-    price: 18500,
-    image: "https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg",
-    desc: "كنبة فاخرة بتصميم عصري مميز"
+id:1,
+name:"كنبة مودرن",
+price:18500,
+image:"https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg",
+desc:"كنبة فاخرة بتصميم عصري"
 },
 
 {
-    id: 2,
-    name: "طاولة قهوة",
-    price: 7200,
-    image: "https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg",
-    desc: "طاولة أنيقة للمعيشة"
+id:2,
+name:"طاولة قهوة",
+price:7200,
+image:"https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg",
+desc:"طاولة أنيقة"
 },
 
 {
-    id: 3,
-    name: "سرير فاخر",
-    price: 26000,
-    image: "https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg",
-    desc: "سرير ملكي بخامات ممتازة"
+id:3,
+name:"سرير فاخر",
+price:26000,
+image:"https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg",
+desc:"سرير ملكي"
 },
 
 {
-    id: 4,
-    name: "كرسي مريح",
-    price: 5400,
-    image: "https://images.pexels.com/photos/276534/pexels-photo-276534.jpeg",
-    desc: "كرسي عصري مريح للغاية"
+id:4,
+name:"كرسي مريح",
+price:5400,
+image:"https://images.pexels.com/photos/276534/pexels-photo-276534.jpeg",
+desc:"كرسي مودرن"
 }
 
 ];
@@ -361,22 +296,20 @@ let cart = [];
    فتح وغلق السلة
 ========================= */
 
-function toggleCart(show) {
+function toggleCart(show){
 
-    const drawer =
-    document.getElementById("cart-drawer");
+const drawer =
+document.getElementById("cart-drawer");
 
-    if (!drawer) return;
+if(show){
 
-    if (show) {
+drawer.classList.remove("hidden");
 
-        drawer.classList.remove("hidden");
+} else {
 
-    } else {
+drawer.classList.add("hidden");
 
-        drawer.classList.add("hidden");
-
-    }
+}
 
 }
 
@@ -384,30 +317,28 @@ function toggleCart(show) {
    إضافة للسلة
 ========================= */
 
-function addToCart(id) {
+function addToCart(id){
 
-    const product =
-    products.find(item => item.id === id);
+const product =
+products.find(item => item.id === id);
 
-    if (!product) return;
+const existing =
+cart.find(item => item.id === id);
 
-    const existing =
-    cart.find(item => item.id === id);
+if(existing){
 
-    if (existing) {
+existing.qty++;
 
-        existing.qty++;
+} else {
 
-    } else {
+cart.push({
+...product,
+qty:1
+});
 
-        cart.push({
-            ...product,
-            qty: 1
-        });
+}
 
-    }
-
-    updateCart();
+updateCart();
 
 }
 
@@ -415,80 +346,70 @@ function addToCart(id) {
    تحديث السلة
 ========================= */
 
-function updateCart() {
+function updateCart(){
 
-    const badge =
-    document.getElementById("cart-badge");
+const badge =
+document.getElementById("cart-badge");
 
-    const itemsContainer =
-    document.getElementById("cart-items");
+const items =
+document.getElementById("cart-items");
 
-    const totalContainer =
-    document.getElementById("cart-total");
+const totalEl =
+document.getElementById("cart-total");
 
-    badge.innerText =
-    cart.reduce((sum, item) => sum + item.qty, 0);
+badge.innerText =
+cart.reduce((sum,item)=>sum+item.qty,0);
 
-    itemsContainer.innerHTML = "";
+items.innerHTML = "";
 
-    let total = 0;
+let total = 0;
 
-    if (cart.length === 0) {
+if(cart.length === 0){
 
-        itemsContainer.innerHTML = `
+items.innerHTML = `
+<p class="text-center text-gray-500">
+السلة فارغة
+</p>
+`;
 
-        <p class="text-center text-gray-500">
+}
 
-            لا توجد منتجات داخل السلة
+cart.forEach(item => {
 
-        </p>
+total += item.price * item.qty;
 
-        `;
+items.innerHTML += `
 
-    }
+<div class="flex gap-4 border-b pb-4">
 
-    cart.forEach(item => {
+<img
+src="${item.image}"
+class="w-24 h-24 object-cover rounded-lg">
 
-        total += item.price * item.qty;
+<div>
 
-        itemsContainer.innerHTML += `
+<h3 class="font-black">
+${item.name}
+</h3>
 
-        <div class="flex gap-4 border-b pb-4">
+<p class="text-brand-gold mt-2">
+${item.price} ج.م
+</p>
 
-            <img
-            src="${item.image}"
-            class="w-24 h-24 object-cover rounded-lg">
+<p class="text-sm text-gray-500 mt-2">
+الكمية: ${item.qty}
+</p>
 
-            <div class="flex-1">
+</div>
 
-                <h3 class="font-black text-lg">
+</div>
 
-                    ${item.name}
+`;
 
-                </h3>
+});
 
-                <p class="text-brand-gold font-bold mt-1">
-
-                    ${item.price} ج.م
-
-                </p>
-
-                <p class="text-sm text-gray-500 mt-2">
-
-                    الكمية: ${item.qty}
-
-                </p>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-    totalContainer.innerText =
-    total + " ج.م";
+totalEl.innerText =
+total + " ج.م";
 
 }
 
@@ -496,43 +417,104 @@ function updateCart() {
    إتمام الشراء
 ========================= */
 
-function checkout() {
+async function checkout(){
 
-    if (cart.length === 0) {
+if(cart.length === 0){
 
-        alert("السلة فارغة");
+alert("السلة فارغة");
 
-        return;
+return;
 
-    }
+}
 
-    let message =
-"🛋️ طلب جديد من متجر Era&Art\n\n";
+const name =
+prompt("ادخل الاسم");
 
-    let total = 0;
+if(!name) return;
 
-    cart.forEach(item => {
+const phoneNumber =
+prompt("ادخل رقم الهاتف");
 
-        total += item.price * item.qty;
+if(!phoneNumber) return;
 
-        message +=
-`${item.name}
+const address =
+prompt("ادخل العنوان");
+
+if(!address) return;
+
+let total = 0;
+
+let productsText = "";
+
+let message =
+`🛋️ طلب جديد من متجر Era&Art
+
+`;
+
+cart.forEach(item => {
+
+total += item.price * item.qty;
+
+productsText +=
+`${item.name} × ${item.qty} | `;
+
+message +=
+`📦 ${item.name}
 الكمية: ${item.qty}
 السعر: ${item.price} ج.م
 
 `;
 
-    });
+});
 
-    message += `💰 الإجمالي: ${total} ج.م`;
+message += `
+👤 الاسم: ${name}
 
-    const phone =
-    "201234567890"; /* ضع رقم واتسابك */
+📞 الهاتف: ${phoneNumber}
 
-    const whatsappURL =
+📍 العنوان:
+${address}
+
+💰 الإجمالي: ${total} ج.م`;
+
+/* إرسال إلى Google Sheet */
+
+try {
+
+await fetch(scriptURL, {
+
+method:"POST",
+
+mode:"no-cors",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+name:name,
+phone:phoneNumber,
+address:address,
+products:productsText,
+total:total
+
+})
+
+});
+
+} catch(err){
+
+console.log(err);
+
+}
+
+/* واتساب */
+
+const url =
 `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-    window.open(whatsappURL, "_blank");
+location.href = url;
 
 }
 
@@ -540,67 +522,62 @@ function checkout() {
    عرض المنتجات
 ========================= */
 
-function renderProducts() {
+function renderProducts(){
 
-    const container =
-    document.getElementById("store-products");
+const container =
+document.getElementById("store-products");
 
-    container.innerHTML = "";
+container.innerHTML = "";
 
-    products.forEach(product => {
+products.forEach(product => {
 
-        container.innerHTML += `
+container.innerHTML += `
 
-        <div class="bg-white shadow-xl overflow-hidden rounded-2xl group">
+<div class="bg-white shadow-xl overflow-hidden rounded-2xl">
 
-            <div class="overflow-hidden h-72">
+<div class="overflow-hidden h-72">
 
-                <img
-                src="${product.image}"
-                alt="${product.name}"
-                class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+<img
+src="${product.image}"
+class="w-full h-full object-cover hover:scale-110 transition duration-500">
 
-            </div>
+</div>
 
-            <div class="p-5">
+<div class="p-5">
 
-                <h3 class="text-2xl font-black mb-2">
+<h3 class="text-2xl font-black mb-2">
+${product.name}
+</h3>
 
-                    ${product.name}
+<p class="text-gray-500 mb-4">
+${product.desc}
+</p>
 
-                </h3>
+<div class="flex justify-between items-center">
 
-                <p class="text-gray-500 mb-4">
+<span class="text-brand-gold text-2xl font-black">
 
-                    ${product.desc}
+${product.price} ج.م
 
-                </p>
+</span>
 
-                <div class="flex justify-between items-center">
+<button
+onclick="addToCart(${product.id})"
+class="bg-brand-dark text-white px-5 py-2 rounded-lg">
 
-                    <span class="text-brand-gold text-2xl font-black">
+أضف للسلة
 
-                        ${product.price} ج.م
+</button>
 
-                    </span>
+</div>
 
-                    <button
-                    onclick="addToCart(${product.id})"
-                    class="bg-brand-dark text-white px-5 py-2 rounded-lg hover:bg-brand-gold hover:text-black transition">
+</div>
 
-                        أضف للسلة
+</div>
 
-                    </button>
+`;
 
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
+});
 
 }
 
@@ -608,17 +585,11 @@ function renderProducts() {
    تشغيل الموقع
 ========================= */
 
-function renderAll() {
-
-    renderProducts();
-
-    updateCart();
-
-}
-
 window.onload = () => {
 
-    renderAll();
+renderProducts();
+
+updateCart();
 
 };
 
