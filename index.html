@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Era&Art | للأثاث الفاخر</title>
@@ -54,14 +53,10 @@ scroll-behavior:smooth;
 <i class="fa-solid fa-couch text-3xl text-[#d4a373]"></i>
 
 <h1 class="text-3xl font-black">
-
 Era&Art
-
 </h1>
 
 </div>
-
-<!-- Cart -->
 
 <button
 onclick="toggleCart(true)"
@@ -129,15 +124,11 @@ class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 id="cart-drawer"
 class="fixed inset-0 hidden z-50">
 
-<!-- Overlay -->
-
 <div
 onclick="toggleCart(false)"
 class="absolute inset-0 bg-black/50">
 
 </div>
-
-<!-- Drawer -->
 
 <div
 class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
@@ -147,9 +138,7 @@ class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
 <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
 
 <h2 class="text-2xl font-black">
-
 سلة الشراء
-
 </h2>
 
 <button
@@ -202,6 +191,18 @@ class="w-full border border-gray-300 p-3 rounded-lg h-24"></textarea>
 </span>
 
 </div>
+
+<!-- Cancel Order -->
+
+<button
+onclick="clearCart()"
+class="w-full bg-red-500 text-white py-3 font-black rounded-lg">
+
+إلغاء الطلب
+
+</button>
+
+<!-- Checkout -->
 
 <button
 onclick="checkout()"
@@ -279,6 +280,28 @@ desc:"كرسي مودرن"
 
 let cart = [];
 
+/* تحميل السلة */
+
+const savedCart =
+localStorage.getItem("cart");
+
+if(savedCart){
+
+cart = JSON.parse(savedCart);
+
+}
+
+/* حفظ السلة */
+
+function saveCart(){
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+}
+
 /* =========================
    فتح وغلق السلة
 ========================= */
@@ -325,9 +348,89 @@ qty:1
 
 }
 
+saveCart();
+
 updateCart();
 
 toggleCart(true);
+
+}
+
+/* =========================
+   زيادة الكمية
+========================= */
+
+function increaseQty(id){
+
+const item =
+cart.find(p => p.id === id);
+
+if(item){
+
+item.qty++;
+
+saveCart();
+
+updateCart();
+
+}
+
+}
+
+/* =========================
+   تقليل الكمية
+========================= */
+
+function decreaseQty(id){
+
+const item =
+cart.find(p => p.id === id);
+
+if(item){
+
+item.qty--;
+
+if(item.qty <= 0){
+
+cart =
+cart.filter(p => p.id !== id);
+
+}
+
+saveCart();
+
+updateCart();
+
+}
+
+}
+
+/* =========================
+   حذف منتج
+========================= */
+
+function removeItem(id){
+
+cart =
+cart.filter(p => p.id !== id);
+
+saveCart();
+
+updateCart();
+
+}
+
+/* =========================
+   إلغاء الطلب بالكامل
+========================= */
+
+function clearCart(){
+
+cart = [];
+
+saveCart();
+
+updateCart();
 
 }
 
@@ -375,7 +478,7 @@ items.innerHTML += `
 src="${item.image}"
 class="w-24 h-24 object-cover rounded-lg">
 
-<div>
+<div class="flex-1">
 
 <h3 class="font-black">
 ${item.name}
@@ -385,9 +488,37 @@ ${item.name}
 ${item.price} ج.م
 </p>
 
-<p class="text-sm text-gray-500 mt-2">
-الكمية: ${item.qty}
-</p>
+<div class="flex items-center gap-2 mt-3">
+
+<button
+onclick="decreaseQty(${item.id})"
+class="bg-gray-200 w-8 h-8 rounded">
+
+-
+
+</button>
+
+<span class="font-black">
+${item.qty}
+</span>
+
+<button
+onclick="increaseQty(${item.id})"
+class="bg-gray-200 w-8 h-8 rounded">
+
++
+
+</button>
+
+</div>
+
+<button
+onclick="removeItem(${item.id})"
+class="text-red-500 text-sm mt-3">
+
+حذف المنتج
+
+</button>
 
 </div>
 
@@ -511,6 +642,8 @@ window.open(url, "_blank");
 
 cart = [];
 
+saveCart();
+
 updateCart();
 
 /* تفريغ الحقول */
@@ -561,9 +694,7 @@ ${product.desc}
 <div class="flex justify-between items-center">
 
 <span class="text-[#d4a373] text-2xl font-black">
-
 ${product.price} ج.م
-
 </span>
 
 <button
