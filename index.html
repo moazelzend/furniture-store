@@ -667,6 +667,52 @@
     </script> 
     <script>
 async function handleCheckout(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('cust-name').value;
+  const phone = document.getElementById('cust-phone').value;
+  const address = document.getElementById('cust-address').value;
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  // تسجيل الطلب
+  const { error } = await supabase
+    .from('orders')
+    .insert([
+      { 
+        customer_name: name,
+        phone: phone,
+        address: address,
+        total: total
+      }
+    ]);
+
+  if (error) {
+    alert("في خطأ");
+    console.log(error);
+    return;
+  }
+
+  // خصم المخزون
+  for (let item of cart) {
+    const { data } = await supabase
+      .from('products')
+      .select('stock')
+      .eq('id', item.id)
+      .single();
+
+    const newStock = data.stock - 1;
+
+    await supabase
+      .from('products')
+      .update({ stock: newStock })
+      .eq('id', item.id);
+  }
+
+  alert("✅ تم تسجيل الطلب");
+  cart = [];
+  loadProducts();
+}
     e.preventDefault();
 
     if (cart.length === 0) {
