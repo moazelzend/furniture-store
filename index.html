@@ -664,7 +664,58 @@
 
         // بناء المتجر واللوحة بالكامل عند بدء التحميل الأول للمتصفح
         renderAll();
-    </script>
+    </script> 
+    <script>
+async function handleCheckout(e) {
+    e.preventDefault();
+
+    if (cart.length === 0) {
+        alert("السلة فارغة");
+        return;
+    }
+
+    const name = document.getElementById('cust-name').value;
+    const phone = document.getElementById('cust-phone').value;
+    const address = document.getElementById('cust-address').value;
+
+    const total = cart.reduce((sum, item) => 
+        sum + (item.price * item.qty), 0);
+
+    const productsText = cart.map(item => 
+        item.name + " × " + item.qty).join(" | ");
+
+    const data = {
+        name: name,
+        phone: phone,
+        address: address,
+        products: productsText,
+        total: total
+    };
+
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxtByP6FEVl7AnwJpXEFLU1p1jQIzDOtZYe3H2h-7GVRExIewc_Tdti1SAhaV21MiJK/exec";
+
+    await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+
+    alert("✅ تم تسجيل الطلب بنجاح");
+
+    const whatsappNumber = "201068130159"; 
+    const message = `طلب جديد:
+الاسم: ${name}
+الهاتف: ${phone}
+العنوان: ${address}
+المنتجات: ${productsText}
+الإجمالي: ${total} جنيه`;
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`);
+
+    cart = [];
+    localStorage.removeItem("cart");
+    location.reload();
+}
+</script>
 </body>
 </html>
 ```
