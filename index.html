@@ -1,168 +1,243 @@
-// 1. إعدادات قاعدة البيانات (Supabase)
-const supabaseUrl = 'https://your-project-url.supabase.co';
-const supabaseKey = 'your-anon-key';
-const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Era&art | للأثاث الفاخر</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { dark: '#1E293B', gold: '#C5A880', light: '#F8F6F2' }
+                    },
+                    fontFamily: { sans: ['Tajawal', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Tajawal', sans-serif; background-color: #F8F6F2; scroll-behavior: smooth; }
+        .tab-content.hidden { display: none; }
+    </style>
+</head>
+<body class="text-slate-800">
+    <div id="toast-container" class="fixed top-5 left-5 z-[100] flex flex-col gap-2"></div>
+    <div class="bg-brand-dark text-white text-center py-2 text-xs font-light">
+        ✨ توصيل مجاني للطلبات فوق 20000 الف جنيه | تقسيط مرن حتى 12 شهراً ✨
+    </div>
 
-// 2. المصفوفات الافتراضية
-const defaultProducts = [
-    { id: 1, name: "كنبة مخملية سويدية رمادية", price: 4200, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80", desc: "مصنوعة من الخشب السويدي الفاخر ومبطنة بأرقى الأقمشة الإيطالية المقاومة للسوائل." },
-    { id: 2, name: "طاولة طعام دائرية خشب البلوط", price: 3500, image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80", desc: "طاولة طعام أنيقة دائرية الشكل تتسع لأربعة أشخاص من خشب البلوط الطبيعي." },
-    { id: 3, name: "سرير ماستر مخملي دافئ", price: 5800, image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80", desc: "سرير مزدوج بتصميم دافئ مع ظهر مبطن يمنحك راحة تامة أثناء القراءة والاسترخاء." },
-    { id: 4, name: "كرسي صالة مودرن مريح", price: 1850, image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=600&q=80", desc: "تصميم عصري كلاسيكي خفيف الوزن يضفي زاوية جمالية مبهرة لغرفتك." }
-];
+    <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <button onclick="switchTab('store')" class="text-2xl font-black text-brand-dark flex items-center gap-2">
+                    <span class="text-brand-gold"><i class="fa-solid fa-couch"></i></span>
+                    <span>Era</span>
+                </button>
+                <nav class="hidden md:flex items-center gap-6 font-medium text-sm text-gray-600">
+                    <button onclick="switchTab('store')" class="hover:text-brand-gold transition">الرئيسية</button>
+                    <button onclick="switchTab('admin')" class="hover:text-brand-gold text-red-600 font-semibold transition flex items-center gap-1">
+                        <span class="inline-block w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+                        لوحة التحكم
+                    </button>
+                </nav>
+            </div>
+            <button onclick="toggleCart(true)" class="relative p-2 text-brand-dark hover:text-brand-gold transition">
+                <i class="fa-solid fa-bag-shopping text-xl"></i>
+                <span id="cart-badge" class="absolute -top-1 -right-1 bg-brand-gold text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+            </button>
+        </div>
+    </header>
+    <div id="store-view" class="tab-content">
+        <section class="relative h-[500px] bg-cover bg-center flex items-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80');">
+            <div class="container mx-auto px-6 text-right">
+                <span class="text-brand-gold font-bold text-sm tracking-widest uppercase mb-3 block">تصاميم إسكندنافية معاصرة</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 max-w-2xl">أثاث يرتقي بأسلوب <br><span class="text-brand-gold">حياتك اليومية</span></h1>
+                <a href="#collection" class="bg-brand-gold hover:bg-white hover:text-brand-dark text-brand-dark font-bold px-8 py-4 transition shadow-lg inline-flex items-center gap-3">
+                    <span>تسوق الآن</span> <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
+        </section>
 
-let products = [...defaultProducts];
-let cart = [];
-let orders = [];
-// 3. التحميل الأولي من الذاكرة المحلية
-function initData() {
-    try {
-        const savedProducts = localStorage.getItem('f_products');
-        if (savedProducts) products = JSON.parse(savedProducts);
+        <section id="collection" class="container mx-auto px-6 py-16">
+            <div id="store-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- المنتجات تظهر هنا -->
+            </div>
+        </section>
+    </div>
+    <div id="admin-view" class="tab-content hidden min-h-screen bg-slate-900 text-slate-100 p-6 md:p-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-12 border-b border-slate-800 pb-6">
+                <h1 class="text-3xl font-extrabold flex items-center gap-3"> الإدارة </h1>
+                <button onclick="switchTab('store')" class="bg-brand-gold text-slate-950 font-bold px-6 py-3">المتجر</button>
+            </div>
 
-        const savedCart = localStorage.getItem('f_cart');
-        if (savedCart) cart = JSON.parse(savedCart);
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <span class="text-slate-400 text-sm">المبيعات</span>
+                    <div class="text-3xl font-black" id="stat-sales">0 ج.م</div>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <span class="text-slate-400 text-sm">الطلبات</span>
+                    <div class="text-3xl font-black" id="stat-orders">0</div>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <span class="text-slate-400 text-sm">المنتجات</span>
+                    <div class="text-3xl font-black" id="stat-products">0</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="bg-slate-800/30 border border-slate-800 p-8 rounded-xl h-fit">
+                    <h3 class="text-xl font-bold mb-6">إضافة قطعة جديدة</h3>
+                    <form onsubmit="handleProductSubmit(event)" class="space-y-5">
+                        <input id="prod-name" required type="text" placeholder="اسم القطعة" class="w-full bg-slate-900 border border-slate-700 p-3 text-white">
+                        <input id="prod-price" required type="number" placeholder="السعر" class="w-full bg-slate-900 border border-slate-700 p-3 text-white">
+                        <input id="prod-image" required type="url" placeholder="رابط الصورة" class="w-full bg-slate-900 border border-slate-700 p-3 text-white text-xs">
+                        <textarea id="prod-desc" required rows="3" placeholder="الوصف" class="w-full bg-slate-900 border border-slate-700 p-3 text-white"></textarea>
+                        <button type="submit" class="w-full bg-brand-gold text-slate-950 font-bold py-4 rounded">نشر المنتج</button>
+                    </form>
+                </div>
+                <div class="lg:col-span-2 space-y-8">
+                    <div id="admin-orders-container" class="bg-slate-800/30 p-6 rounded-xl border border-slate-800">
+                         <h3 class="font-bold mb-4">طلبات العملاء</h3>
+                         <div id="admin-orders-list" class="space-y-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" onclick="toggleCart(false)"></div>
+        <div class="absolute inset-y-0 left-0 max-w-md w-full bg-white shadow-2xl flex flex-col z-10">
+            <div class="p-6 border-b flex justify-between items-center bg-brand-dark text-white">
+                <h3 class="text-lg font-bold">سلة الشراء</h3>
+                <button onclick="toggleCart(false)"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+            <div class="p-6 border-t bg-gray-50">
+                <div class="flex justify-between mb-6 font-bold text-lg">
+                    <span>الإجمالي:</span> <span id="cart-total">0 جنيه</span>
+                </div>
+                <form onsubmit="handleCheckout(event)" class="space-y-4">
+                    <input id="cust-name" required type="text" placeholder="الاسم الكامل" class="w-full border p-3">
+                    <input id="cust-phone" required type="tel" placeholder="رقم الجوال" class="w-full border p-3">
+                    <textarea id="cust-address" required placeholder="العنوان بالتفصيل" class="w-full border p-3"></textarea>
+                    <button type="submit" class="w-full bg-brand-gold text-brand-dark font-bold py-4 shadow-md">إرسال الطلب عبر واتساب</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const defaultProducts = [
+            { id: 1, name: "كنبة مخملية سويدية رمادية", price: 4200, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80", desc: "خشب سويدي فاخر وقماش إيطالي." },
+            { id: 2, name: "طاولة طعام دائرية خشب البلوط", price: 3500, image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80", desc: "تصميم عصري يتسع لأربعة أشخاص." }
+        ];
 
-        const savedOrders = localStorage.getItem('f_orders');
-        if (savedOrders) orders = JSON.parse(savedOrders);
-    } catch (e) {
-        console.error("خطأ في قراءة البيانات:", e);
-    }
-    renderAll();
-}
-// 4. معالجة عملية الدفع والطلب
-async function handleCheckout(e) {
-    if (e) e.preventDefault();
+        let products = [...defaultProducts];
+        let cart = [];
+        let orders = [];
 
-    if (cart.length === 0) {
-        showToast("السلة فارغة حالياً", "error");
-        return;
-    }
+        function initApp() {
+            const savedP = localStorage.getItem('f_products');
+            if (savedP) products = JSON.parse(savedP);
+            const savedC = localStorage.getItem('f_cart');
+            if (savedC) cart = JSON.parse(savedC);
+            const savedO = localStorage.getItem('f_orders');
+            if (savedO) orders = JSON.parse(savedO);
+            renderAll();
+        }
 
-    const name = document.getElementById('cust-name').value;
-    const phone = document.getElementById('cust-phone').value;
-    const address = document.getElementById('cust-address').value;
-    const total = cart.reduce((sum, item) => sum + (item.price * (item.qty || 1)), 0);
+        function updateStorage() {
+            localStorage.setItem('f_products', JSON.stringify(products));
+            localStorage.setItem('f_cart', JSON.stringify(cart));
+            localStorage.setItem('f_orders', JSON.stringify(orders));
+        }
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-lg text-white font-bold text-sm shadow-lg ${type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`;
+            toast.innerText = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
 
-    try {
-        // إرسال الطلب لـ Supabase
-        const { error: orderError } = await _supabase.from('orders').insert([{
-            customer_name: name,
-            phone: phone,
-            address: address,
-            total: total
-        }]);
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`${tabId}-view`).classList.remove('hidden');
+        }
 
-        if (orderError) throw orderError;
-        // خصم الكميات من المخزون
-        for (let item of cart) {
-            const { data: prod } = await _supabase.from('products').select('stock').eq('id', item.id).single();
-            if (prod) {
-                await _supabase.from('products').update({ stock: prod.stock - (item.qty || 1) }).eq('id', item.id);
+        function toggleCart(show) {
+            document.getElementById('cart-drawer').classList.toggle('hidden', !show);
+        }
+
+        function addToCart(prodId) {
+            const product = products.find(p => p.id === prodId);
+            const existing = cart.find(item => item.id === prodId);
+            existing ? existing.qty++ : cart.push({ ...product, qty: 1 });
+            updateStorage(); renderAll(); showToast("تمت الإضافة للسلة");
+        }
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+                updateStorage(); renderAll();
             }
         }
 
-        // نجاح العملية
-        orders.push({ name, phone, address, total, status: 'مكتمل' });
-        cart = [];
-        saveToLocalStorage();
-        showToast("✅ تم تسجيل طلبك بنجاح");
-        toggleCart(false);
-        renderAll();
-
-        // فتح واتساب للتاكيد
-        const msg = `طلب جديد: ${name}%0Aالإجمالي: ${total} ج.م`;
-        window.open(`https://wa.me/201234567890?text=${msg}`, '_blank');
-    } catch (err) {
-        console.error(err);
-        showToast("حدث خطأ في الشبكة"، "error");
-    }
-}
-// 5. إدارة المنتجات
-function handleProductSubmit(e) {
-    e.preventDefault();
-    const newProd = {
-        id: Date.now(),
-        name: document.getElementById('prod-name').value,
-        price: Number(document.getElementById('prod-price').value),
-        image: document.getElementById('prod-image').value,
-        desc: document.getElementById('prod-desc').value
-    };
-    products.push(newProd);
-    saveToLocalStorage();
-    renderAll();
-    e.target.reset();
-    showToast("تم إضافة المنتج للمتجر");
-}
-
-function deleteProduct(id) {
-    products = products.filter(p => p.id !== id);
-    saveToLocalStorage();
-    renderAll();
-    showToast("تم حذف المنتج", "error");
-}
-// 6. وظائف السلة
-function addToCart(prodId) {
-    const product = products.find(p => p.id === prodId);
-    const existing = cart.find(item => item.id === prodId);
-    if (existing) {
-        existing.qty++;
-    } else {
-        cart.push({ ...product, qty: 1 });
-    }
-    saveToLocalStorage();
-    renderAll();
-    showToast("تمت الإضافة للسلة");
-}
-
-function changeQty(id, delta) {
-    const item = cart.find(i => i.id === id);
-    if (item) {
-        item.qty += delta;
-        if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-        saveToLocalStorage();
-        renderAll();
-    }
-}
-
-function saveToLocalStorage() {
-    localStorage.setItem('f_products', JSON.stringify(products));
-    localStorage.setItem('f_cart', JSON.stringify(cart));
-    localStorage.setItem('f_orders', JSON.stringify(orders));
-}
-            // 7. عرض البيانات وتشغيل النظام
-function renderAll() {
-    const store = document.getElementById('store-products');
-    if (store) {
-        store.innerHTML = products.map(p => `
-            <div class="bg-white rounded-lg shadow-sm border p-4 flex flex-col group transition hover:shadow-lg">
-                <img src="${p.image}" class="aspect-video object-cover rounded mb-4">
-                <h3 class="font-bold text-brand-dark">${p.name}</h3>
-                <div class="text-brand-gold font-bold my-2">${p.price.toLocaleString()} ج.م</div>
-                <button onclick="addToCart(${p.id})" class="bg-brand-dark text-white py-2 rounded hover:bg-brand-gold hover:text-brand-dark transition">أضف للسلة</button>
-            </div>
-        `).join('');
-    }
-
-    const cartList = document.getElementById('cart-items');
-    if (cartList) {
-        cartList.innerHTML = cart.map(item => `
-            <div class="flex gap-4 border-b pb-2 items-center">
-                <img src="${item.image}" class="w-12 h-12 object-cover rounded">
-                <div class="flex-1 text-xs font-bold">${item.name}</div>
-                <div class="flex items-center gap-2">
-                    <button onclick="changeQty(${item.id}, -1)" class="bg-gray-100 px-2 rounded">-</button>
-                    <span>${item.qty}</span>
-                    <button onclick="changeQty(${item.id}, 1)" class="bg-gray-100 px-2 rounded">+</button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    document.getElementById('cart-badge').innerText = cart.reduce((a, b) => a + b.qty, 0);
-    document.getElementById('cart-total').innerText = cart.reduce((a, b) => a + (b.price * b.qty), 0).toLocaleString() + " جنيه";
-}
-
-// تشغيل النظام فوراً
-initData();
+        function handleCheckout(e) {
+            e.preventDefault();
+            const name = document.getElementById('cust-name').value;
+            const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            orders.push({ name, total, status: 'قيد المراجعة', id: Date.now() });
             
+            window.open(`https://wa.me/201234567890?text=طلب جديد من ${name} بقيمة ${total} ج.م`, '_blank');
+            cart = []; updateStorage(); renderAll(); toggleCart(false);
+            showToast("تم إرسال الطلب!");
+        }
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+            const newProd = {
+                id: Date.now(),
+                name: document.getElementById('prod-name').value,
+                price: Number(document.getElementById('prod-price').value),
+                image: document.getElementById('prod-image').value,
+                desc: document.getElementById('prod-desc').value
+            };
+            products.push(newProd);
+            updateStorage(); renderAll(); e.target.reset();
+            showToast("تم إضافة المنتج");
+        }
+        function renderAll() {
+            const store = document.getElementById('store-products');
+            if (store) {
+                store.innerHTML = products.map(p => `
+                    <div class="bg-white rounded-lg border p-4">
+                        <img src="${p.image}" class="w-full h-48 object-cover rounded mb-4">
+                        <h3 class="font-bold">${p.name}</h3>
+                        <div class="text-brand-gold font-bold my-2">${p.price} ج.م</div>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-brand-dark text-white py-2 rounded">إضافة للسلة</button>
+                    </div>
+                `).join('');
+            }
+
+            const cartBadge = document.getElementById('cart-badge');
+            if (cartBadge) cartBadge.innerText = cart.reduce((a, b) => a + b.qty, 0);
+
+            const cartTotal = document.getElementById('cart-total');
+            if (cartTotal) cartTotal.innerText = cart.reduce((a, b) => a + (b.price * b.qty), 0) + ' جنيه';
+
+            // تحديث إحصائيات الإدارة
+            if(document.getElementById('stat-sales')) document.getElementById('stat-sales').innerText = orders.reduce((a, b) => a + b.total, 0) + ' ج.م';
+            if(document.getElementById('stat-orders')) document.getElementById('stat-orders').innerText = orders.length;
+            if(document.getElementById('stat-products')) document.getElementById('stat-products').innerText = products.length;
+        }
+
+        initApp();
+    </script>
+</body>
+</html>
