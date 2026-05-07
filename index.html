@@ -762,30 +762,22 @@ async function handleCheckout(e) {
     location.reload();
 }
 </script>
-<script src="...supabase..."></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-/* إعداد Supabase */
 const supabaseUrl = "https://cyhigbqcnxiqzsdttteq.supabase.co";
 const supabaseKey = "sb_publishable_q5IJNJp5GX8QwEJEq0tWew_jwsOMwdz";
 
 const { createClient } = supabase;
 const db = createClient(supabaseUrl, supabaseKey);
 
-/* سلة المشتريات */
 let cart = [];
 
-/* تحميل المنتجات من قاعدة البيانات */
 async function loadProducts() {
-  const { data, error } = await db
-    .from("products")
-    .select("*");
+  const { data, error } = await db.from("products").select("*");
 
   if (error) {
-    console.log("Supabase Error:", error);
+    console.log(error);
     return;
   }
 
@@ -809,13 +801,11 @@ async function loadProducts() {
   });
 }
 
-/* إضافة منتج للسلة */
 function addToCart(id, price) {
   cart.push({ id, price });
-  alert("تم إضافة المنتج للسلة");
+  alert("تم إضافة المنتج");
 }
 
-/* إتمام الطلب */
 async function handleCheckout(e) {
   e.preventDefault();
 
@@ -830,32 +820,27 @@ async function handleCheckout(e) {
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-  const { error } = await db
-    .from("orders")
-    .insert([
-      {
-        customer_name: name,
-        phone: phone,
-        address: address,
-        total: total
-      }
-    ]);
+  const { error } = await db.from("orders").insert([
+    {
+      customer_name: name,
+      phone: phone,
+      address: address,
+      total: total
+    }
+  ]);
 
   if (error) {
     console.log(error);
-    alert("حدث خطأ أثناء تسجيل الطلب");
     return;
   }
 
   alert("✅ تم تسجيل الطلب بنجاح");
-
   cart = [];
   loadProducts();
 }
 
-/* تشغيل تحميل المنتجات */
 loadProducts();
 </script>
-</script>
+
 </body>
 </html>
