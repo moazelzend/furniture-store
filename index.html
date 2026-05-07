@@ -12,6 +12,12 @@
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
+<!-- Font Awesome -->
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
 <!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,12 +25,6 @@
 <link
 href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
 rel="stylesheet">
-
-<!-- Font Awesome -->
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-/>
 
 <script>
 
@@ -85,10 +85,12 @@ scroll-behavior:smooth;
 
 <div class="flex items-center gap-3">
 
-<i class="fa-solid fa-couch text-3xl text-brand-gold"></i>
+<i class="fa-solid fa-couch text-3xl text-[#d4a373]"></i>
 
 <h1 class="text-3xl font-black">
+
 Era&Art
+
 </h1>
 
 </div>
@@ -103,7 +105,7 @@ class="relative">
 
 <span
 id="cart-badge"
-class="absolute -top-2 -right-2 bg-brand-gold text-white w-5 h-5 text-xs rounded-full flex items-center justify-center">
+class="absolute -top-2 -right-2 bg-[#d4a373] text-white w-5 h-5 text-xs rounded-full flex items-center justify-center">
 
 0
 
@@ -174,7 +176,9 @@ class="absolute inset-0 bg-black/50">
 <div
 class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
 
-<div class="bg-brand-dark text-white p-6 flex justify-between items-center">
+<!-- Header -->
+
+<div class="bg-slate-900 text-white p-6 flex justify-between items-center">
 
 <h2 class="text-2xl font-black">
 
@@ -200,11 +204,28 @@ class="flex-1 overflow-y-auto p-6 space-y-4">
 
 </div>
 
-<!-- Footer -->
+<!-- Checkout -->
 
-<div class="border-t p-6">
+<div class="border-t p-6 space-y-4 bg-gray-50">
 
-<div class="flex justify-between text-2xl font-black mb-6">
+<input
+id="customer-name"
+type="text"
+placeholder="الاسم"
+class="w-full border p-3 rounded-lg">
+
+<input
+id="customer-phone"
+type="text"
+placeholder="رقم الهاتف"
+class="w-full border p-3 rounded-lg">
+
+<textarea
+id="customer-address"
+placeholder="العنوان"
+class="w-full border p-3 rounded-lg h-24"></textarea>
+
+<div class="flex justify-between text-2xl font-black">
 
 <span>
 الإجمالي
@@ -218,7 +239,7 @@ class="flex-1 overflow-y-auto p-6 space-y-4">
 
 <button
 onclick="checkout()"
-class="w-full bg-brand-gold text-black py-4 font-black rounded-lg">
+class="w-full bg-[#d4a373] text-black py-4 font-black rounded-lg">
 
 إتمام الشراء
 
@@ -305,7 +326,7 @@ if(show){
 
 drawer.classList.remove("hidden");
 
-} else {
+}else{
 
 drawer.classList.add("hidden");
 
@@ -329,7 +350,7 @@ if(existing){
 
 existing.qty++;
 
-} else {
+}else{
 
 cart.push({
 ...product,
@@ -339,6 +360,8 @@ qty:1
 }
 
 updateCart();
+
+toggleCart(true);
 
 }
 
@@ -392,7 +415,7 @@ class="w-24 h-24 object-cover rounded-lg">
 ${item.name}
 </h3>
 
-<p class="text-brand-gold mt-2">
+<p class="text-[#d4a373] mt-2">
 ${item.price} ج.م
 </p>
 
@@ -428,19 +451,21 @@ return;
 }
 
 const name =
-prompt("ادخل الاسم");
-
-if(!name) return;
+document.getElementById("customer-name").value;
 
 const phoneNumber =
-prompt("ادخل رقم الهاتف");
-
-if(!phoneNumber) return;
+document.getElementById("customer-phone").value;
 
 const address =
-prompt("ادخل العنوان");
+document.getElementById("customer-address").value;
 
-if(!address) return;
+if(!name || !phoneNumber || !address){
+
+alert("من فضلك املأ جميع البيانات");
+
+return;
+
+}
 
 let total = 0;
 
@@ -503,7 +528,7 @@ total:total
 
 });
 
-} catch(err){
+}catch(err){
 
 console.log(err);
 
@@ -514,7 +539,21 @@ console.log(err);
 const url =
 `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-location.href = url;
+window.open(url, "_blank");
+
+/* تفريغ السلة */
+
+cart = [];
+
+updateCart();
+
+/* تفريغ الحقول */
+
+document.getElementById("customer-name").value = "";
+document.getElementById("customer-phone").value = "";
+document.getElementById("customer-address").value = "";
+
+alert("تم إرسال الطلب بنجاح");
 
 }
 
@@ -555,7 +594,7 @@ ${product.desc}
 
 <div class="flex justify-between items-center">
 
-<span class="text-brand-gold text-2xl font-black">
+<span class="text-[#d4a373] text-2xl font-black">
 
 ${product.price} ج.م
 
@@ -563,7 +602,7 @@ ${product.price} ج.م
 
 <button
 onclick="addToCart(${product.id})"
-class="bg-brand-dark text-white px-5 py-2 rounded-lg">
+class="bg-slate-900 text-white px-5 py-2 rounded-lg">
 
 أضف للسلة
 
