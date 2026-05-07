@@ -667,15 +667,24 @@
     </script> 
     <script>
 async function handleCheckout(e) {
-  e.preventDefault();
+  // 1. منع تحديث الصفحة أولاً
+  if (e) e.preventDefault();
 
+  // 2. التحقق من السلة (يجب أن يكون داخل الدالة وفي بدايتها)
+  if (cart.length === 0) {
+    alert("السلة فارغة");
+    return;
+  }
+
+  // 3. جلب بيانات العميل
   const name = document.getElementById('cust-name').value;
   const phone = document.getElementById('cust-phone').value;
   const address = document.getElementById('cust-address').value;
 
+  // 4. حساب الإجمالي
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-  // تسجيل الطلب
+  // 5. تسجيل الطلب في Supabase
   const { error } = await supabase
     .from('orders')
     .insert([
@@ -688,12 +697,12 @@ async function handleCheckout(e) {
     ]);
 
   if (error) {
-    alert("في خطأ");
+    alert("حدث خطأ أثناء تسجيل الطلب");
     console.log(error);
     return;
   }
 
-  // خصم المخزون
+  // 6. خصم المخزون لكل منتج في السلة
   for (let item of cart) {
     const { data } = await supabase
       .from('products')
@@ -701,24 +710,23 @@ async function handleCheckout(e) {
       .eq('id', item.id)
       .single();
 
-    const newStock = data.stock - 1;
+    if (data) {
+        const newStock = data.stock - 1;
 
-    await supabase
-      .from('products')
-      .update({ stock: newStock })
-      .eq('id', item.id);
+        await supabase
+          .from('products')
+          .update({ stock: newStock })
+          .eq('id', item.id);
+    }
   }
 
-  alert("✅ تم تسجيل الطلب");
-  cart = [];
-  loadProducts();
+  // 7. إنهاء العملية بنجاح
+  alert("✅ تم تسجيل الطلب بنجاح");
+  cart = []; // تفريغ السلة
+  loadProducts(); // تحديث عرض المنتجات بالمخزون الجديد
+  
+  // إذا كان لديك نافذة (Modal) تغلقها، أضف الكود هنا
 }
-    e.preventDefault();
-
-    if (cart.length === 0) {
-        alert("السلة فارغة");
-        return;
-    }
 
     const name = document.getElementById('cust-name').value;
     const phone = document.getElementById('cust-phone').value;
