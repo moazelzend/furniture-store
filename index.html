@@ -772,57 +772,94 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 </body>
 </html>
 ```
-    <!-- كل محتوى الصفحة فوق -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- سكربت Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabaseUrl = "https://cyhigbqcnxiqzsdttteq.supabase.co";
+const supabaseKey = "sb_publishable_q5IJNJp5GX8QwEJEq0tWew_jwsOMwdz";
 
-    <script>
-    const supabaseUrl = 'https://cyhigbqcnxiqzsdttteq.supabase.co';
-    const supabaseKey = 'sb_publishable_q5IJNJp5GX8QwEJEq0tWew_jwsOMwdz';
+const { createClient } = supabase;
+const db = createClient(supabaseUrl, supabaseKey);
 
-    const { createClient } = supabase;
-    const db = createClient(supabaseUrl, supabaseKey);
+let cart = [];
 
-    let cart = [];
+/* تحميل المنتجات */
+async function loadProducts() {
+  const { data, error } = await db
+    .from("products")
+    .select("*");
 
-    async function loadProducts() {
-      const { data, error } = await db
-        .from('products')
-        .select('*');
+  if (error) {
+    console.log(error);
+    return;
+  }
 
-      if (error) {
-        console.log(error);
-        return;
+  const container = document.getElementById("store-products");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  data.forEach(product => {
+    container.innerHTML += `
+      <div style="border:1px solid #ddd;padding:15px;margin:10px;">
+        <img src="${product.image}" style="width:100%;height:200px;object-fit:cover;">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <h4>${product.price} جنيه</h4>
+        <button onclick="addToCart(${product.id}, ${product.price})">
+          أضف للسلة
+        </button>
+      </div>
+    `;
+  });
+}
+
+/* إضافة للسلة */
+function addToCart(id, price) {
+  cart.push({ id, price });
+  alert("تم إضافة المنتج");
+}
+
+/* تسجيل الطلب */
+async function handleCheckout(e) {
+  e.preventDefault();
+
+  if (cart.length === 0) {
+    alert("السلة فارغة");
+    return;
+  }
+
+  const name = document.getElementById("cust-name").value;
+  const phone = document.getElementById("cust-phone").value;
+  const address = document.getElementById("cust-address").value;
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  const { error } = await db
+    .from("orders")
+    .insert([
+      {
+        customer_name: name,
+        phone: phone,
+        address: address,
+        total: total
       }
+    ]);
 
-      const container = document.getElementById("store-products");
-      if (!container) return;
+  if (error) {
+    console.log(error);
+    alert("حدث خطأ");
+    return;
+  }
 
-      container.innerHTML = "";
+  alert("✅ تم تسجيل الطلب بنجاح");
 
-      data.forEach(product => {
-        container.innerHTML += `
-          <div style="border:1px solid #ddd;padding:15px;margin:10px;">
-            <img src="${product.image}" style="width:100%;height:200px;object-fit:cover;">
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <h4>${product.price} جنيه</h4>
-            <button onclick="addToCart(${product.id}, ${product.price})">
-              أضف للسلة
-            </button>
-          </div>
-        `;
-      });
-    }
+  cart = [];
+  loadProducts();
+}
 
-    function addToCart(id, price) {
-      cart.push({ id, price });
-      alert("تم إضافة المنتج");
-    }
-
-    loadProducts();
-    </script>
+loadProducts();
+</script>
 
 </body>
 </html>
