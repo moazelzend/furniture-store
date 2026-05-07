@@ -332,6 +332,63 @@ let products = [
 ];
 
 /* =========================
+   السلة
+========================= */
+
+let cart = [];
+
+/* =========================
+   إضافة منتج للسلة
+========================= */
+
+function addToCart(id) {
+
+    const product =
+    products.find(item => item.id === id);
+
+    if (!product) return;
+
+    const existing =
+    cart.find(item => item.id === id);
+
+    if (existing) {
+
+        existing.qty++;
+
+    } else {
+
+        cart.push({
+            ...product,
+            qty: 1
+        });
+
+    }
+
+    updateCart();
+
+}
+
+/* =========================
+   تحديث السلة
+========================= */
+
+function updateCart() {
+
+    const badge =
+    document.getElementById("cart-badge");
+
+    if (badge) {
+
+        badge.innerText =
+        cart.reduce((sum, item) => sum + item.qty, 0);
+
+    }
+
+    console.log(cart);
+
+}
+
+/* =========================
    عرض المنتجات
 ========================= */
 
@@ -374,6 +431,7 @@ function renderProducts() {
                     </span>
 
                     <button
+                    onclick="addToCart(${product.id})"
                     class="bg-brand-dark text-white px-5 py-2 rounded-lg hover:bg-brand-gold hover:text-black transition">
 
                         أضف للسلة
@@ -400,6 +458,8 @@ function renderAll() {
 
     renderProducts();
 
+    updateCart();
+
     console.log("الموقع يعمل");
 
 }
@@ -411,6 +471,3 @@ window.onload = () => {
 };
 
 </script>
-
-</body>
-</html>
