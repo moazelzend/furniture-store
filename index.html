@@ -819,11 +819,24 @@ function deleteOrder(index) {
    تشغيل الموقع
 ========================= */
 
+<script>
+
+/* تشغيل الموقع */
+
 window.onload = () => {
 
-    renderAll();
+    if (typeof renderAll === "function") {
+
+        renderAll();
+
+    } else {
+
+        console.log("renderAll غير موجودة");
+
+    }
 
 };
+
 </script>
 
 </body>
