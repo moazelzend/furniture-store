@@ -168,84 +168,6 @@ class="inline-block mt-8 bg-brand-gold text-black px-8 py-4 font-bold rounded-lg
 
 </section>
 
-<!-- Features -->
-
-<section class="container mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-4 gap-6">
-
-<div class="bg-white p-6 shadow-lg flex gap-4 items-center rounded-xl">
-
-<i class="fa-solid fa-truck-fast text-3xl text-brand-gold"></i>
-
-<div>
-
-<h3 class="font-black">شحن سريع</h3>
-
-<p class="text-sm text-gray-500">
-
-لكافة المحافظات
-
-</p>
-
-</div>
-
-</div>
-
-<div class="bg-white p-6 shadow-lg flex gap-4 items-center rounded-xl">
-
-<i class="fa-solid fa-shield-halved text-3xl text-brand-gold"></i>
-
-<div>
-
-<h3 class="font-black">ضمان 5 سنوات</h3>
-
-<p class="text-sm text-gray-500">
-
-ضمان جودة حقيقي
-
-</p>
-
-</div>
-
-</div>
-
-<div class="bg-white p-6 shadow-lg flex gap-4 items-center rounded-xl">
-
-<i class="fa-solid fa-credit-card text-3xl text-brand-gold"></i>
-
-<div>
-
-<h3 class="font-black">تقسيط</h3>
-
-<p class="text-sm text-gray-500">
-
-بدون فوائد
-
-</p>
-
-</div>
-
-</div>
-
-<div class="bg-white p-6 shadow-lg flex gap-4 items-center rounded-xl">
-
-<i class="fa-solid fa-rotate-left text-3xl text-brand-gold"></i>
-
-<div>
-
-<h3 class="font-black">استرجاع</h3>
-
-<p class="text-sm text-gray-500">
-
-خلال 14 يوم
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
 <!-- Products -->
 
 <section
@@ -352,7 +274,8 @@ class="flex-1 overflow-y-auto p-6 space-y-4">
 </div>
 
 <button
-class="w-full bg-brand-gold text-black py-4 font-black rounded-lg">
+onclick="checkout()"
+class="w-full bg-brand-gold text-black py-4 font-black rounded-lg hover:opacity-90 transition">
 
 إتمام الشراء
 
@@ -566,6 +489,50 @@ function updateCart() {
 
     totalContainer.innerText =
     total + " ج.م";
+
+}
+
+/* =========================
+   إتمام الشراء
+========================= */
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("السلة فارغة");
+
+        return;
+
+    }
+
+    let message =
+"🛋️ طلب جديد من متجر Era&Art\n\n";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total += item.price * item.qty;
+
+        message +=
+`${item.name}
+الكمية: ${item.qty}
+السعر: ${item.price} ج.م
+
+`;
+
+    });
+
+    message += `💰 الإجمالي: ${total} ج.م`;
+
+    const phone =
+    "201234567890"; /* ضع رقم واتسابك */
+
+    const whatsappURL =
+`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappURL, "_blank");
 
 }
 
