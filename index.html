@@ -113,7 +113,30 @@ class="fixed inset-0 bg-white z-[99999] flex items-center justify-center">
 class="fixed top-6 right-6 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl hidden z-[9999]">
 تمت العملية بنجاح
 </div>
+<div id="successPopup"
+class="fixed inset-0 bg-black/60 hidden z-[99999] flex items-center justify-center p-6">
 
+  <div class="bg-white rounded-3xl p-10 max-w-md w-full text-center">
+
+    <div class="text-6xl mb-5">✅</div>
+
+    <h2 class="text-3xl font-black mb-4">
+      تم استلام طلبك
+    </h2>
+
+    <p class="text-gray-600 leading-8 mb-6">
+      سنتواصل معك خلال 10 دقائق لتأكيد الطلب
+    </p>
+
+    <button
+    onclick="closeSuccessPopup()"
+    class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
+      إغلاق
+    </button>
+
+  </div>
+
+</div>
 <header class="bg-white shadow sticky top-0 z-50">
 
 <div class="container mx-auto px-6 py-4 flex justify-between items-center">
