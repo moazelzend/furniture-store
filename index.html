@@ -99,6 +99,91 @@ url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
 
 </section>
 
+<!-- FEATURES -->
+
+<section class="container mx-auto px-6 py-20">
+
+<h2 class="text-5xl font-black text-center mb-16">
+
+لماذا تختار Era&Art ؟
+
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+<div class="bg-white p-10 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition duration-300">
+
+<div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+
+<i class="fa-solid fa-gem text-4xl text-amber-700"></i>
+
+</div>
+
+<h3 class="text-2xl font-black mb-4">
+
+خامات فاخرة
+
+</h3>
+
+<p class="text-gray-500 leading-8">
+
+نستخدم أفضل أنواع الخامات الحديثة
+لضمان الجودة والفخامة.
+
+</p>
+
+</div>
+
+<div class="bg-white p-10 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition duration-300">
+
+<div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+
+<i class="fa-solid fa-truck-fast text-4xl text-amber-700"></i>
+
+</div>
+
+<h3 class="text-2xl font-black mb-4">
+
+شحن سريع
+
+</h3>
+
+<p class="text-gray-500 leading-8">
+
+توصيل سريع وآمن لجميع المحافظات
+بأفضل خدمة ممكنة.
+
+</p>
+
+</div>
+
+<div class="bg-white p-10 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition duration-300">
+
+<div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+
+<i class="fa-solid fa-headset text-4xl text-amber-700"></i>
+
+</div>
+
+<h3 class="text-2xl font-black mb-4">
+
+دعم مستمر
+
+</h3>
+
+<p class="text-gray-500 leading-8">
+
+فريق دعم جاهز دائمًا للرد على
+جميع استفسارات العملاء.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
 <!-- PRODUCTS -->
 
 <section class="container mx-auto px-6 py-20">
@@ -123,20 +208,14 @@ class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 id="cartDrawer"
 class="fixed inset-0 hidden z-50">
 
-<!-- overlay -->
-
 <div
 onclick="toggleCart(false)"
 class="absolute inset-0 bg-black/50">
 
 </div>
 
-<!-- drawer -->
-
 <div
 class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
-
-<!-- header -->
 
 <div class="bg-slate-900 text-white p-5 flex justify-between items-center">
 
@@ -156,15 +235,11 @@ class="text-3xl">
 
 </div>
 
-<!-- items -->
-
 <div
 id="cart-items"
 class="flex-1 overflow-y-auto p-5 space-y-5">
 
 </div>
-
-<!-- checkout -->
 
 <div class="border-t p-5 bg-gray-50 space-y-4">
 
@@ -221,23 +296,11 @@ class="w-full bg-amber-700 text-white py-4 rounded-lg font-black">
 
 <script>
 
-/* =========================
-   رابط Google Script
-========================= */
-
 const scriptURL =
 "https://script.google.com/macros/s/AKfycbwGFDl89NZP3rtbloRgV2bnfxSM-cgpUHpIkRt8TbCj_pc4rDxPbhe0slC-9IhYgL5hqA/exec";
 
-/* =========================
-   رقم واتساب
-========================= */
-
 const whatsappNumber =
 "201068130159";
-
-/* =========================
-   المنتجات
-========================= */
 
 let products = [
 
@@ -275,14 +338,8 @@ desc:"كرسي مودرن مريح"
 
 ];
 
-/* =========================
-   السلة
-========================= */
-
 let cart =
 JSON.parse(localStorage.getItem("cart")) || [];
-
-/* حفظ السلة */
 
 function saveCart(){
 
@@ -292,8 +349,6 @@ JSON.stringify(cart)
 );
 
 }
-
-/* فتح وغلق السلة */
 
 function toggleCart(show){
 
@@ -312,8 +367,6 @@ drawer.classList.add("hidden");
 
 }
 
-/* عرض المنتجات */
-
 function renderProducts(){
 
 const container =
@@ -325,7 +378,7 @@ products.forEach(product=>{
 
 container.innerHTML += `
 
-<div class="bg-white rounded-2xl overflow-hidden shadow-xl">
+<div class="bg-white rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 hover:shadow-2xl transition duration-300">
 
 <img
 src="${product.image}"
@@ -373,8 +426,6 @@ class="bg-slate-900 text-white px-5 py-2 rounded-lg">
 
 }
 
-/* إضافة للسلة */
-
 function addToCart(id){
 
 const product =
@@ -403,8 +454,6 @@ updateCart();
 toggleCart(true);
 
 }
-
-/* تحديث السلة */
 
 function updateCart(){
 
@@ -507,8 +556,6 @@ total + " ج.م";
 
 }
 
-/* زيادة كمية */
-
 function increaseQty(id){
 
 const item =
@@ -521,8 +568,6 @@ saveCart();
 updateCart();
 
 }
-
-/* تقليل كمية */
 
 function decreaseQty(id){
 
@@ -544,8 +589,6 @@ updateCart();
 
 }
 
-/* حذف منتج */
-
 function removeItem(id){
 
 cart =
@@ -557,8 +600,6 @@ updateCart();
 
 }
 
-/* إلغاء الطلب */
-
 function clearCart(){
 
 cart = [];
@@ -568,8 +609,6 @@ saveCart();
 updateCart();
 
 }
-
-/* إتمام الشراء */
 
 async function checkout(){
 
@@ -635,8 +674,6 @@ ${address}
 💰 الإجمالي:
 ${total} ج.م`;
 
-/* إرسال لجوجل شيت */
-
 try{
 
 await fetch(scriptURL, {
@@ -661,19 +698,11 @@ total:total
 
 });
 
-console.log("تم إرسال الطلب للشيت");
-
 }catch(err){
 
-console.log("خطأ:", err);
-
-alert("حدث خطأ أثناء الإرسال");
-
-return;
+console.log(err);
 
 }
-
-/* واتساب */
 
 const whatsappURL =
 `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -682,8 +711,6 @@ window.open(
 whatsappURL,
 "_blank"
 );
-
-/* تفريغ السلة */
 
 cart = [];
 
@@ -695,8 +722,6 @@ alert("تم إرسال الطلب بنجاح");
 
 }
 
-/* تشغيل الموقع */
-
 window.onload = ()=>{
 
 renderProducts();
@@ -706,6 +731,7 @@ updateCart();
 };
 
 </script>
+
 <!-- FOOTER -->
 
 <footer class="bg-slate-900 text-white mt-20">
@@ -713,8 +739,6 @@ updateCart();
 <div class="container mx-auto px-6 py-16">
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-<!-- عن المتجر -->
 
 <div>
 
@@ -759,8 +783,6 @@ class="hover:text-amber-500 transition">
 
 </div>
 
-<!-- تواصل معنا -->
-
 <div>
 
 <h3 class="text-2xl font-black mb-5">
@@ -804,8 +826,6 @@ info@eraart.com
 </div>
 
 </div>
-
-<!-- تقييمات العملاء -->
 
 <div>
 
@@ -855,8 +875,6 @@ info@eraart.com
 
 </div>
 
-<!-- روابط سريعة -->
-
 <div
 class="border-t border-slate-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-5">
 
@@ -903,5 +921,17 @@ class="hover:text-amber-500 transition">
 </div>
 
 </footer>
+
+<!-- FLOATING WHATSAPP -->
+
+<a
+href="https://wa.me/201068130159"
+target="_blank"
+class="fixed bottom-6 left-6 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl hover:scale-110 transition z-50">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
 </body>
 </html>
