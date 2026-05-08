@@ -1203,7 +1203,9 @@ ${item.price} ج.م
 <button
 onclick="decreaseQty(${item.id})"
 class="bg-gray-200 w-8 h-8 rounded">
+
 -
+
 </button>
 
 <span>${item.qty}</span>
@@ -1211,7 +1213,9 @@ class="bg-gray-200 w-8 h-8 rounded">
 <button
 onclick="increaseQty(${item.id})"
 class="bg-gray-200 w-8 h-8 rounded">
+
 +
+
 </button>
 
 </div>
@@ -1219,7 +1223,9 @@ class="bg-gray-200 w-8 h-8 rounded">
 <button
 onclick="removeItem(${item.id})"
 class="text-red-500 text-sm mt-3">
+
 حذف المنتج
+
 </button>
 
 </div>
@@ -1231,9 +1237,7 @@ class="text-red-500 text-sm mt-3">
 });
 
 totalEl.innerText = total + " ج.م";
-
 updateDashboard();
-
 }
 
 /* =========================
