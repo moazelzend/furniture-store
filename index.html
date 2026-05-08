@@ -718,53 +718,57 @@ class="w-full bg-amber-700 text-white py-4 rounded-lg font-black flex justify-ce
 PRODUCT DETAILS MODAL
 ========================= -->
 
+<!-- =========================
+PRODUCT DETAILS MODAL
+========================= -->
+
 <div
 id="productModal"
 class="fixed inset-0 bg-black/70 hidden z-[9999] flex items-center justify-center p-4">
 
-<div
-class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+  <div
+  class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
 
-<button
-onclick="closeModal()"
-class="absolute top-4 left-4 text-4xl z-10 text-black">
-×
-</button>
+    <button
+    onclick="closeModal()"
+    class="absolute top-4 left-4 text-4xl z-10 text-black">
+      ×
+    </button>
 
-<div class="flex flex-col md:flex-row">
+    <div class="flex flex-col md:flex-row">
 
-<img
-id="modalImage"
-class="w-full md:w-1/2 h-72 md:h-auto object-cover">
+      <img
+      id="modalImage"
+      class="w-full md:w-1/2 h-72 md:h-auto object-cover">
 
-<div class="p-6 md:p-8 flex flex-col justify-center md:w-1/2">
+      <div class="p-6 md:p-8 flex flex-col justify-center md:w-1/2">
 
-<h2
-id="modalName"
-class="text-3xl md:text-5xl font-black mb-5""></h2>
+        <h2
+        id="modalName"
+        class="text-3xl md:text-5xl font-black mb-5">
+        </h2>
 
-<div
-id="modalDesc"
-class="text-gray-600 leading-9 text-lg mb-6 bg-gray-50 p-5 rounded-2xl">
-</div>
+        <div
+        id="modalDesc"
+        class="text-gray-600 leading-8 text-lg mb-6 bg-gray-50 p-5 rounded-2xl">
+        </div>
 
-<div
-id="modalPrice"
-class="text-amber-700 text-5xl font-black mb-8"></div>
+        <div
+        id="modalPrice"
+        class="text-amber-700 text-4xl md:text-5xl font-black mb-8">
+        </div>
 
-<button
-id="modalAddBtn"
-class="bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition text-xl">
+        <button
+        id="modalAddBtn"
+        class="bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition text-xl">
+          أضف للسلة
+        </button>
 
-أضف للسلة
+      </div>
 
-</button>
+    </div>
 
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </div>
 
