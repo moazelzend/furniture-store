@@ -1416,13 +1416,25 @@ ${product.name}
 ${product.price} ج.م
 </p>
 
+<div class="flex gap-3">
+
 <button
 onclick="addToCart(${product.id})"
-class="w-full bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition">
+class="flex-1 bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition">
 
 أضف للسلة
 
 </button>
+
+<button
+onclick="toggleWishlist(${product.id})"
+class="w-14 bg-red-500 hover:bg-red-600 text-white rounded-2xl transition">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</div>
 
 </div>
 
