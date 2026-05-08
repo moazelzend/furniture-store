@@ -414,14 +414,43 @@ const scriptURL =
 
 const whatsappNumber = "201068130159";
 
-let products = [
-{
-id:1,
-name:"كنبة مودرن",
-price:18000,
-image:"https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg",
-desc:"كنبة فاخرة مودرن"
-},
+let products = [];
+
+/* تحميل المنتجات من Google Sheet */
+
+async function loadProducts(){
+
+try{
+
+const response =
+await fetch(
+"https://script.google.com/macros/s/AKfycbwZrftuR1JJXrHYa02j4yF_EAVFuwlPescau-sMwlpgvb3JRNCSwnAaPi-DjT6TgD8PTQ/exec"
+);
+
+products =
+await response.json();
+
+/* تحويل الأسعار لأرقام */
+
+products = products.map(product=>({
+
+...product,
+
+price:Number(product.price)
+
+}));
+
+renderProducts();
+
+}catch(error){
+
+console.log(error);
+
+showToast("حدث خطأ أثناء تحميل المنتجات");
+
+}
+
+}
 {
 id:2,
 name:"سرير فاخر",
