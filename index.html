@@ -954,7 +954,8 @@ category: product.category
 }));
 
 filteredProducts = [...products];
-
+document.getElementById("adminProducts").innerText =
+products.length;
 loader.style.display = "none";
 
 renderProducts(filteredProducts);
