@@ -1882,6 +1882,7 @@ Number(localStorage.getItem("ordersCount") || 0);
 orders++;
 
 localStorage.setItem("ordersCount", orders);
+showSuccessPopup();
 showToast("تم إرسال الطلب بنجاح");
 
 }catch(err){
