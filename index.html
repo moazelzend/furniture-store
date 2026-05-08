@@ -1939,7 +1939,6 @@ container.innerHTML = html;
 
 }
 
-
 window.onload = ()=>{
 
 loadProducts();
@@ -1952,6 +1951,8 @@ renderWishlist();
 
 document.getElementById("wishlist-count").innerText =
 wishlist.length;
+
+document.getElementById("pageLoader").style.display = "none";
 
 };
 
