@@ -1425,7 +1425,12 @@ cart = [];
 saveCart();
 
 updateCart();
+let orders =
+Number(localStorage.getItem("ordersCount") || 0);
 
+orders++;
+
+localStorage.setItem("ordersCount", orders);
 showToast("تم إرسال الطلب بنجاح");
 
 }catch(err){
