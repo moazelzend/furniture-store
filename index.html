@@ -610,9 +610,16 @@ renderProducts(filteredProducts);
 
 function addToCart(id){
 
-const product = products.find(p => p.id === id);
+const product =
+products.find(p => Number(p.id) === Number(id));
 
-const existing = cart.find(p => p.id === id);
+if(!product){
+showToast("المنتج غير موجود");
+return;
+}
+
+const existing =
+cart.find(p => Number(p.id) === Number(id));
 
 if(existing){
 
