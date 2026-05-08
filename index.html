@@ -828,8 +828,25 @@ ${product.desc}
 ${product.price} ج.م
 </span>
 
+<div class="flex gap-3">
+
+<button
+onclick="openModal(${product.id})"
+class="bg-gray-200 hover:bg-gray-300 text-slate-900 px-4 py-3 rounded-xl font-bold transition">
+
+التفاصيل
+
+</button>
+
 <button
 onclick="addToCart(${product.id})"
+class="bg-slate-900 hover:bg-amber-700 text-white px-5 py-3 rounded-xl font-bold transition duration-300 hover:scale-105">
+
+أضف للسلة
+
+</button>
+
+</div>
 class="bg-slate-900 hover:bg-amber-700 text-white px-5 py-3 rounded-xl font-bold transition duration-300 hover:scale-105">
 
 أضف للسلة
