@@ -1526,6 +1526,37 @@ btn.disabled = false;
 /* =========================
    تشغيل الموقع
 ========================= */
+```javascript id="k7p3ws"
+/* =========================
+SCROLL TO TOP
+========================= */
+
+const scrollBtn =
+document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY > 300){
+
+scrollBtn.classList.remove("hidden");
+
+}else{
+
+scrollBtn.classList.add("hidden");
+
+}
+
+});
+
+scrollBtn.addEventListener("click",()=>{
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+});
+```
 
 window.onload = ()=>{
 
