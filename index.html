@@ -746,6 +746,23 @@ document.getElementById("productModal")
 
 }
 ```
+```javascript id="v9m2xr"
+/* =========================
+CLOSE MODAL OUTSIDE CLICK
+========================= */
+
+document.getElementById("productModal")
+.addEventListener("click",(e)=>{
+
+if(e.target.id === "productModal"){
+
+closeModal();
+
+}
+
+});
+```
+   
 ```javascript id="x7u2qp"
 /* =========================
 VALIDATION + SECURITY
