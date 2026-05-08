@@ -1800,7 +1800,21 @@ showToast("املأ جميع البيانات");
 return;
 
 }
+if(name.length < 3){
 
+showToast("الاسم يجب أن يكون 3 أحرف على الأقل");
+
+return;
+
+}
+
+if(address.length < 10){
+
+showToast("العنوان غير كامل");
+
+return;
+
+}
 if(!validatePhone(phone)){
 
 showToast("رقم الهاتف غير صحيح");
