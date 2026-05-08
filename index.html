@@ -1396,10 +1396,6 @@ return;
 
 }
 
-let html = "";
-
-wishlistProducts.forEach(product=>{
-
 html += `
 
 <div class="bg-white rounded-[30px] overflow-hidden shadow-xl p-4">
@@ -1421,23 +1417,18 @@ ${product.price} ج.م
 <button
 onclick="addToCart(${product.id})"
 class="flex-1 bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition">
-
 أضف للسلة
-
 </button>
 
 <button
 onclick="toggleWishlist(${product.id})"
-class="w-14 bg-red-500 hover:bg-red-600 text-white rounded-2xl transition">
-
+class="w-14 bg-red-500 hover:bg-red-600 text-white rounded-2xl">
 <i class="fa-solid fa-trash"></i>
-
 </button>
 
 </div>
 
 </div>
-
 `;
 
 });
