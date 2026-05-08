@@ -1643,7 +1643,25 @@ updateCart();
 
 }
 
+/* =========================
+   زيادة الكمية
+========================= */
 
+function increaseQty(id){
+
+const item = cart.find(p => p.id === id);
+
+if(item){
+
+item.qty++;
+
+saveCart();
+
+updateCart();
+
+}
+
+}
 /* =========================
    حذف منتج
 ========================= */
