@@ -655,6 +655,10 @@ const totalEl = document.getElementById("cart-total");
 
 const count = document.getElementById("cart-count");
 
+if(!items || !totalEl || !count){
+return;
+}
+
 items.innerHTML = "";
 
 let total = 0;
