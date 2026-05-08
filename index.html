@@ -857,8 +857,11 @@ product.image;
 document.getElementById("modalName").innerText =
 product.name;
 
-document.getElementById("modalDesc").innerText =
-product.desc;
+document.getElementById("modalDesc").innerHTML =
+`
+<h3 class="text-2xl font-black mb-4">تفاصيل المنتج</h3>
+<p>${product.desc}</p>
+`;
 
 document.getElementById("modalPrice").innerText =
 product.price + " ج.م";
