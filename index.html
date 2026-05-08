@@ -1858,7 +1858,13 @@ await fetch(scriptURL, {
 
 method:"POST",
 
-mode:"no-cors",
+await fetch(scriptURL,{
+ method:"POST",
+ headers:{
+   "Content-Type":"application/json"
+ },
+ body: JSON.stringify(...)
+});
 
 headers:{
 "Content-Type":"application/json"
