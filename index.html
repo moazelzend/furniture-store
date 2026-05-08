@@ -826,23 +826,35 @@ class="bg-slate-900 hover:bg-amber-700 text-white px-5 py-3 rounded-xl font-bold
 }
 
 
+```javascript id="s4pk2d"
 /* =========================
-   البحث
+BETTER SEARCH + FILTER
 ========================= */
 
 document.addEventListener("input", function(e){
 
-if(e.target.id === "searchInput"){
+if(
+e.target.id === "searchInput"
+||
+e.target.id === "priceFilter"
+){
 
-searchProducts(e.target.value);
+applyFilters();
 
 }
 
 });
 
-function searchProducts(value){
 
-const search = value.toLowerCase();
+function applyFilters(){
+
+const search =
+document.getElementById("searchInput")
+.value.toLowerCase();
+
+const price =
+document.getElementById("priceFilter")
+.value;
 
 filteredProducts = products.filter(product => {
 
@@ -854,13 +866,41 @@ currentCategory === "الكل"
 ||
 product.category === currentCategory;
 
-return matchName && matchCategory;
+let matchPrice = true;
+
+if(price === "5000"){
+
+matchPrice = product.price < 5000;
+
+}
+
+else if(price === "15000"){
+
+matchPrice = product.price < 15000;
+
+}
+
+else if(price === "20000"){
+
+matchPrice = product.price > 20000;
+
+}
+
+return (
+matchName
+&&
+matchCategory
+&&
+matchPrice
+);
 
 });
 
 renderProducts(filteredProducts);
 
 }
+```
+
 
 
 /* =========================
