@@ -1574,6 +1574,8 @@ SCROLL TO TOP
 const scrollBtn =
 document.getElementById("scrollTopBtn");
 
+if(scrollBtn){
+
 window.addEventListener("scroll",()=>{
 
 if(window.scrollY > 300){
@@ -1596,6 +1598,8 @@ behavior:"smooth"
 });
 
 });
+
+}
 
 
 window.onload = ()=>{
