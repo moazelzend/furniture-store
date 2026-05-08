@@ -1025,6 +1025,11 @@ renderProducts(filteredProducts);
    التصنيفات
 ========================= */
 
+```javascript id="d7n4qp"
+/* =========================
+IMPROVED FILTER PRODUCTS
+========================= */
+
 function filterProducts(category,event){
 
 currentCategory = category;
@@ -1048,22 +1053,11 @@ event.target.classList.add(
 "text-white"
 );
 
-if(category === "الكل"){
-
-filteredProducts = [...products];
-
-}else{
-
-filteredProducts =
-products.filter(
-product => product.category === category
-);
+applyFilters();
 
 }
+```
 
-renderProducts(filteredProducts);
-
-}
 
 
 /* =========================
