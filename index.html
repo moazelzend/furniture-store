@@ -2010,8 +2010,14 @@ window.onload = ()=>{
 loadProducts();
 
 updateCart();
+
 loadCustomerData();
-renderWishlist();   
+
+renderWishlist();
+
+document.getElementById("wishlist-count").innerText =
+wishlist.length;
+
 };
 
 </script>
