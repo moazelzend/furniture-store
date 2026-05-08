@@ -1217,7 +1217,9 @@ data.forEach(product=>{
 html += `
 
 <div
-class="bg-white rounded-[30px] overflow-hidden shadow-xl hover:-translate-y-3 hover:shadow-2xl transition duration-500 group fade-up">
+class="bg-white rounded-[32px] overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 group relative border border-gray-100 fade-up">
+
+<!-- IMAGE -->
 
 <div class="overflow-hidden relative">
 
@@ -1227,35 +1229,78 @@ src="${product.image}"
 class="w-full h-72 object-cover group-hover:scale-110 transition duration-700 cursor-pointer"
 loading="lazy">
 
-<div class="absolute top-4 left-4 bg-amber-700 text-white px-4 py-1 rounded-full text-sm font-bold">
+<!-- CATEGORY -->
+
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-sm font-black shadow">
+
 ${product.category}
-</div>
 
 </div>
+
+<!-- FAVORITE -->
+
+<button
+class="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur flex items-center justify-center text-slate-700 hover:text-red-500 transition shadow">
+
+<i class="fa-regular fa-heart"></i>
+
+</button>
+
+</div>
+
+<!-- CONTENT -->
 
 <div class="p-6">
 
 <h3
 onclick="openModal(${product.id})"
 class="text-2xl font-black mb-3 cursor-pointer hover:text-amber-700 transition">
+
 ${product.name}
+
 </h3>
 
-<p class="text-gray-500 leading-8 mb-5 min-h-[60px]">
+<p class="text-gray-500 leading-8 mb-6 min-h-[70px]">
+
 ${product.desc}
+
 </p>
 
-<div class="flex items-center justify-between">
+<!-- PRICE + RATING -->
+
+<div class="flex items-center justify-between mb-6">
+
+<div>
+
+<p class="text-gray-400 text-sm mb-1">
+السعر
+</p>
 
 <span class="text-amber-700 text-3xl font-black">
 ${product.price} ج.م
 </span>
 
+</div>
+
+<div class="text-amber-400 text-lg">
+
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
 <div class="flex gap-3">
 
 <button
 onclick="openModal(${product.id})"
-class="bg-gray-200 hover:bg-gray-300 text-slate-900 px-4 py-3 rounded-xl font-bold transition">
+class="flex-1 bg-gray-100 hover:bg-gray-200 text-slate-900 py-4 rounded-2xl font-black transition">
 
 التفاصيل
 
@@ -1263,13 +1308,13 @@ class="bg-gray-200 hover:bg-gray-300 text-slate-900 px-4 py-3 rounded-xl font-bo
 
 <button
 onclick="addToCart(${product.id})"
-class="bg-slate-900 hover:bg-amber-700 text-white px-5 py-3 rounded-xl font-bold transition duration-300 hover:scale-105">
+class="flex-1 bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition duration-300 hover:scale-[1.03] flex items-center justify-center gap-2">
 
 <i class="fa-solid fa-cart-plus"></i>
 
-</button>
+أضف للسلة
 
-</div>
+</button>
 
 </div>
 
@@ -1278,13 +1323,11 @@ class="bg-slate-900 hover:bg-amber-700 text-white px-5 py-3 rounded-xl font-bold
 </div>
 
 `;
-
 });
 
 container.innerHTML = html;
 
 }
-
 /* =========================
 BETTER SEARCH + FILTER
 ========================= */
