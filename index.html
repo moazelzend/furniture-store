@@ -117,7 +117,21 @@ Era&Art
 </nav>
 
 <div class="flex items-center gap-4">
+<!-- WISHLIST BUTTON -->
 
+<button
+onclick="document.getElementById('wishlist-container').scrollIntoView({behavior:'smooth'})"
+class="relative">
+
+<i class="fa-solid fa-heart text-2xl text-red-500"></i>
+
+<span
+id="wishlist-count"
+class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+0
+</span>
+
+</button>
 <button
 onclick="toggleCart(true)"
 class="relative">
