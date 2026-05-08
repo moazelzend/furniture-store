@@ -1165,37 +1165,6 @@ if(!items || !totalEl || !count){
 return;
 }
 
-
-
-/* =========================
-ADMIN DASHBOARD UPDATE
-========================= */
-
-function updateDashboard(){
-
-const total =
-cart.reduce((sum,item)=>
-sum + (item.price * item.qty)
-,0);
-
-document.getElementById("adminProducts")
-.innerText = products.length;
-
-document.getElementById("adminOrders")
-.innerText =
-localStorage.getItem("ordersCount") || 0;
-
-document.getElementById("adminCart")
-.innerText =
-cart.reduce((sum,item)=>sum + item.qty,0);
-
-document.getElementById("adminTotal")
-.innerText =
-total + " ج.م";
-
-}
-
-
 items.innerHTML = "";
 
 let total = 0;
@@ -1234,9 +1203,7 @@ ${item.price} ج.م
 <button
 onclick="decreaseQty(${item.id})"
 class="bg-gray-200 w-8 h-8 rounded">
-
 -
-
 </button>
 
 <span>${item.qty}</span>
@@ -1244,9 +1211,7 @@ class="bg-gray-200 w-8 h-8 rounded">
 <button
 onclick="increaseQty(${item.id})"
 class="bg-gray-200 w-8 h-8 rounded">
-
 +
-
 </button>
 
 </div>
@@ -1254,9 +1219,7 @@ class="bg-gray-200 w-8 h-8 rounded">
 <button
 onclick="removeItem(${item.id})"
 class="text-red-500 text-sm mt-3">
-
 حذف المنتج
-
 </button>
 
 </div>
@@ -1268,26 +1231,34 @@ class="text-red-500 text-sm mt-3">
 });
 
 totalEl.innerText = total + " ج.م";
+
 updateDashboard();
-}
-
-
-/* =========================
-   زيادة الكمية
-========================= */
-
-function increaseQty(id){
-
-const item = cart.find(p=>p.id===id);
-
-item.qty++;
-
-saveCart();
-
-updateCart();
 
 }
 
+function updateDashboard(){
+
+const total =
+cart.reduce((sum,item)=>
+sum + (item.price * item.qty)
+,0);
+
+document.getElementById("adminProducts")
+.innerText = products.length;
+
+document.getElementById("adminOrders")
+.innerText =
+localStorage.getItem("ordersCount") || 0;
+
+document.getElementById("adminCart")
+.innerText =
+cart.reduce((sum,item)=>sum + item.qty,0);
+
+document.getElementById("adminTotal")
+.innerText =
+total + " ج.م";
+
+}
 
 /* =========================
    تقليل الكمية
