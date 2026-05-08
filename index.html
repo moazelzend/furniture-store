@@ -582,6 +582,69 @@ let filteredProducts = [];
 let currentCategory = "الكل";
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+```javascript id="o1wq7k"
+/* =========================
+MOBILE MENU
+========================= */
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const mobileMenu =
+document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click",()=>{
+
+mobileMenu.classList.toggle("hidden");
+
+});
+
+
+/* =========================
+PRODUCT MODAL
+========================= */
+
+function openModal(id){
+
+const product =
+products.find(p => p.id === id);
+
+if(!product) return;
+
+document.getElementById("modalImage").src =
+product.image;
+
+document.getElementById("modalName").innerText =
+product.name;
+
+document.getElementById("modalDesc").innerText =
+product.desc;
+
+document.getElementById("modalPrice").innerText =
+product.price + " ج.م";
+
+document.getElementById("modalAddBtn").onclick =
+()=>{
+
+addToCart(product.id);
+
+closeModal();
+
+};
+
+document.getElementById("productModal")
+.classList.remove("hidden");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("productModal")
+.classList.add("hidden");
+
+}
+```
 
 
 /* =========================
