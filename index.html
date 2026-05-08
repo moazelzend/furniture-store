@@ -1888,35 +1888,18 @@ ${total} ج.م`;
 
 try{
 
-await fetch(scriptURL, {
-
-method:"POST",
-
 await fetch(scriptURL,{
- method:"POST",
- headers:{
-   "Content-Type":"application/json"
- },
- body: JSON.stringify(...)
-});
-
+method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
-
 body: JSON.stringify({
-
 name:cleanName,
-
 phone:phone,
-
 address:cleanAddress,
 products:productsText,
-
 total:total
-
 })
-
 });
 
 const whatsappURL =
