@@ -1677,6 +1677,10 @@ showToast("تم حذف المنتج");
 
 function clearCart(){
 
+if(!confirm("هل تريد إلغاء الطلب؟")){
+return;
+}
+
 cart = [];
 
 saveCart();
