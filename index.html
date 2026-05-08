@@ -254,158 +254,75 @@ class="bg-white text-slate-900 px-8 py-4 rounded-xl font-black hover:scale-105 t
 
 <section id="products" class="container mx-auto px-6 py-20">
 
-<h2 class="text-5xl font-black text-center mb-16">
-المنتجات
-</h2>
+<!-- =========================
+   Search + Categories
+========================= -->
+
+<div class="mb-14">
+
+<div class="flex flex-col md:flex-row gap-5 justify-between items-center">
+
+<div class="relative w-full md:w-[420px]">
+
+<input
+id="searchInput"
+type="text"
+placeholder="ابحث عن منتج..."
+class="w-full bg-white border-2 border-transparent focus:border-amber-600 outline-none rounded-2xl px-5 py-4 pr-14 shadow-lg text-lg">
+
+<i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></i>
+
+</div>
+
+<div class="flex flex-wrap gap-3 justify-center">
+
+<button
+onclick="filterProducts('الكل',event)"
+class="category-btn bg-slate-900 text-white px-6 py-3 rounded-xl font-bold">
+الكل
+</button>
+
+<button
+onclick="filterProducts('غرف معيشة',event)"
+class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
+غرف معيشة
+</button>
+
+<button
+onclick="filterProducts('غرف نوم',event)"
+class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
+غرف نوم
+</button>
+
+<button
+onclick="filterProducts('طاولات',event)"
+class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
+طاولات
+</button>
+
+<button
+onclick="filterProducts('ديكور',event)"
+class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
+ديكور
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+   Products
+========================= -->
 
 <div
 id="products-container"
 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 </div>
 
-</section>
 
-<div
-id="cartDrawer"
-class="fixed inset-0 hidden z-50">
-
-<div onclick="toggleCart(false)" class="absolute inset-0 bg-black/50"></div>
-
-<div class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
-
-<div class="bg-slate-900 text-white p-5 flex justify-between items-center">
-<h2 class="text-2xl font-black">سلة الشراء</h2>
-<button onclick="toggleCart(false)" class="text-3xl">×</button>
-</div>
-
-<div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-5"></div>
-
-<div class="border-t p-5 bg-gray-50 space-y-4">
-
-<input
-id="customer-name"
-type="text"
-placeholder="الاسم"
-class="w-full border p-3 rounded-lg">
-
-<input
-id="customer-phone"
-type="text"
-placeholder="رقم الهاتف"
-class="w-full border p-3 rounded-lg">
-
-<textarea
-id="customer-address"
-placeholder="العنوان"
-class="w-full border p-3 rounded-lg h-24"></textarea>
-
-<div class="flex justify-between text-2xl font-black">
-<span>الإجمالي</span>
-<span id="cart-total">0 ج.م</span>
-</div>
-
-<button
-onclick="clearCart()"
-class="w-full bg-red-500 text-white py-3 rounded-lg font-black">
-إلغاء الطلب
-</button>
-
-<button
-id="checkoutBtn"
-onclick="checkout()"
-class="w-full bg-amber-700 text-white py-4 rounded-lg font-black flex justify-center items-center gap-3">
-إتمام الشراء
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<footer class="bg-slate-900 text-white mt-20">
-
-<div class="container mx-auto px-6 py-16">
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-<div>
-<h3 class="text-3xl font-black mb-5">Era&Art</h3>
-<p class="text-gray-300 leading-8">
-متجر متخصص في الأثاث العصري والمودرن بأفضل الخامات والتصميمات الراقية لمنزلك.
-</p>
-<div class="flex gap-4 mt-6 text-2xl">
-<a href="https://facebook.com" class="hover:text-amber-500 transition"><i class="fa-brands fa-facebook"></i></a>
-<a href="https://instagram.com" class="hover:text-amber-500 transition"><i class="fa-brands fa-instagram"></i></a>
-<a href="https://wa.me/201068130159" target="_blank" class="hover:text-amber-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
-</div>
-</div>
-
-<div>
-<h3 class="text-2xl font-black mb-5">تواصل معنا</h3>
-<div class="space-y-5 text-gray-300">
-<div class="flex items-center gap-3">
-<i class="fa-solid fa-phone text-amber-500"></i>
-<span>01068130159</span>
-</div>
-<div class="flex items-center gap-3">
-<i class="fa-solid fa-envelope text-amber-500"></i>
-<span>info@eraart.com</span>
-</div>
-<div class="flex items-center gap-3">
-<i class="fa-solid fa-location-dot text-amber-500"></i>
-<span>القاهرة - مصر</span>
-</div>
-</div>
-</div>
-
-<div>
-<h3 class="text-2xl font-black mb-5">آراء العملاء</h3>
-<div class="space-y-5">
-<div class="bg-slate-800 p-4 rounded-2xl">
-<div class="text-amber-400 text-lg mb-2">★★★★★</div>
-<p class="text-gray-300 leading-7">خامات ممتازة جدًا والتوصيل سريع.</p>
-</div>
-<div class="bg-slate-800 p-4 rounded-2xl">
-<div class="text-amber-400 text-lg mb-2">★★★★★</div>
-<p class="text-gray-300 leading-7">أفضل متجر أثاث تعاملت معه.</p>
-</div>
-</div>
-</div>
-
-</div>
-
-<div class="border-t border-slate-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-5">
-
-<div class="flex gap-6 text-gray-300 flex-wrap justify-center">
-<a href="#home" class="hover:text-amber-500 transition">الرئيسية</a>
-<a href="#products" class="hover:text-amber-500 transition">المنتجات</a>
-<a href="https://wa.me/201068130159" class="hover:text-amber-500 transition">واتساب</a>
-<a href="mailto:info@eraart.com" class="hover:text-amber-500 transition">الإيميل</a>
-</div>
-
-<p class="text-gray-400 text-center">
-© 2026 Era&Art - جميع الحقوق محفوظة
-</p>
-
-</div>
-
-</div>
-
-</footer>
-
-<a
-href="https://wa.me/201068130159"
-target="_blank"
-class="fixed bottom-6 left-6 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl hover:scale-110 transition z-50">
-<i class="fa-brands fa-whatsapp"></i>
-</a>
-
-<button
-onclick="window.scrollTo({top:0,behavior:'smooth'})"
-class="fixed bottom-6 right-6 w-14 h-14 bg-slate-900 text-white rounded-full shadow-2xl hover:scale-110 transition z-50">
-<i class="fa-solid fa-arrow-up"></i>
-</button>
 
 <script>
 
@@ -418,6 +335,10 @@ const productsURL =
 const whatsappNumber = "201068130159";
 
 let products = [];
+
+let filteredProducts = [];
+
+let currentCategory = "الكل";
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -435,14 +356,24 @@ const response = await fetch(productsURL);
 products = await response.json();
 
 products = products.map(product => ({
+
 id: Number(product.id),
+
 name: product.name,
+
 price: Number(product.price),
+
 image: product.image,
-desc: product.desc
+
+desc: product.desc,
+
+category: product.category || "غرف معيشة"
+
 }));
 
-renderProducts();
+filteredProducts = [...products];
+
+renderProducts(filteredProducts);
 
 }catch(error){
 
@@ -512,35 +443,67 @@ drawer.classList.add("hidden");
    عرض المنتجات
 ========================= */
 
-function renderProducts(){
+function renderProducts(data){
 
-const container = document.getElementById("products-container");
+const container =
+document.getElementById("products-container");
 
 container.innerHTML = "";
 
-products.forEach(product=>{
+if(data.length === 0){
+
+container.innerHTML = `
+<div class="col-span-full text-center">
+
+<h3 class="text-3xl font-black text-gray-400">
+لا توجد منتجات
+</h3>
+
+</div>
+`;
+
+return;
+
+}
+
+data.forEach(product=>{
 
 container.innerHTML += `
 
-<div class="bg-white rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 hover:shadow-2xl transition duration-300">
+<div class="bg-white rounded-[30px] overflow-hidden shadow-xl hover:-translate-y-3 hover:shadow-2xl transition duration-500 group">
 
-<img src="${product.image}" class="w-full h-72 object-cover" loading="lazy">
+<div class="overflow-hidden relative">
 
-<div class="p-5">
+<img
+src="${product.image}"
+class="w-full h-72 object-cover group-hover:scale-110 transition duration-700"
+loading="lazy">
 
-<h3 class="text-2xl font-black mb-2">${product.name}</h3>
+<div class="absolute top-4 left-4 bg-amber-700 text-white px-4 py-1 rounded-full text-sm font-bold">
+${product.category}
+</div>
 
-<p class="text-gray-500 mb-4">${product.desc}</p>
+</div>
 
-<div class="flex justify-between items-center">
+<div class="p-6">
 
-<span class="text-amber-700 text-2xl font-black">
+<h3 class="text-2xl font-black mb-3">
+${product.name}
+</h3>
+
+<p class="text-gray-500 leading-8 mb-5 min-h-[60px]">
+${product.desc}
+</p>
+
+<div class="flex items-center justify-between">
+
+<span class="text-amber-700 text-3xl font-black">
 ${product.price} ج.م
 </span>
 
 <button
 onclick="addToCart(${product.id})"
-class="bg-slate-900 text-white px-5 py-2 rounded-lg hover:bg-amber-700 transition">
+class="bg-slate-900 hover:bg-amber-700 text-white px-5 py-3 rounded-xl font-bold transition duration-300 hover:scale-105">
 
 أضف للسلة
 
@@ -555,6 +518,88 @@ class="bg-slate-900 text-white px-5 py-2 rounded-lg hover:bg-amber-700 transitio
 `;
 
 });
+
+}
+
+
+/* =========================
+   البحث
+========================= */
+
+document.addEventListener("input", function(e){
+
+if(e.target.id === "searchInput"){
+
+searchProducts(e.target.value);
+
+}
+
+});
+
+function searchProducts(value){
+
+const search = value.toLowerCase();
+
+filteredProducts = products.filter(product => {
+
+const matchName =
+product.name.toLowerCase().includes(search);
+
+const matchCategory =
+currentCategory === "الكل"
+||
+product.category === currentCategory;
+
+return matchName && matchCategory;
+
+});
+
+renderProducts(filteredProducts);
+
+}
+
+
+/* =========================
+   التصنيفات
+========================= */
+
+function filterProducts(category,event){
+
+currentCategory = category;
+
+document.querySelectorAll(".category-btn")
+.forEach(btn=>{
+
+btn.classList.remove(
+"bg-slate-900",
+"text-white"
+);
+
+btn.classList.add("bg-white");
+
+});
+
+event.target.classList.remove("bg-white");
+
+event.target.classList.add(
+"bg-slate-900",
+"text-white"
+);
+
+if(category === "الكل"){
+
+filteredProducts = [...products];
+
+}else{
+
+filteredProducts =
+products.filter(
+product => product.category === category
+);
+
+}
+
+renderProducts(filteredProducts);
 
 }
 
