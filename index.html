@@ -1241,9 +1241,12 @@ ${product.category}
 <!-- FAVORITE -->
 
 <button
-class="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur flex items-center justify-center text-slate-700 hover:text-red-500 transition shadow">
+onclick="toggleWishlist(${product.id})"
+class="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur flex items-center justify-center transition shadow">
 
-<i class="fa-regular fa-heart"></i>
+<i class="${wishlist.includes(product.id)
+? 'fa-solid text-red-500'
+: 'fa-regular text-slate-700'} fa-heart"></i>
 
 </button>
 
