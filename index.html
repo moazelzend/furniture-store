@@ -980,7 +980,13 @@ return regex.test(phone);
 
 
 function sanitizeInput(value){
-
+function escapeHTML(str){
+ return str
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;");
+}
 return value
 .replace(/</g,"")
 .replace(/>/g,"")
