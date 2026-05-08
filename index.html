@@ -1371,7 +1371,8 @@ const container =
 document.getElementById("wishlist-container");
 
 if(!container) return;
-
+document.getElementById("wishlist-count").innerText =
+wishlist.length;
 const wishlistProducts =
 products.filter(product =>
 wishlist.includes(product.id)
