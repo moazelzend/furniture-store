@@ -861,6 +861,44 @@ function saveCart(){
 localStorage.setItem("cart", JSON.stringify(cart));
 
 }
+```javascript id="x5t8qw"
+/* =========================
+SAVE CUSTOMER DATA
+========================= */
+
+function saveCustomerData(){
+
+localStorage.setItem(
+"customerName",
+document.getElementById("customer-name").value
+);
+
+localStorage.setItem(
+"customerPhone",
+document.getElementById("customer-phone").value
+);
+
+localStorage.setItem(
+"customerAddress",
+document.getElementById("customer-address").value
+);
+
+}
+
+
+function loadCustomerData(){
+
+document.getElementById("customer-name").value =
+localStorage.getItem("customerName") || "";
+
+document.getElementById("customer-phone").value =
+localStorage.getItem("customerPhone") || "";
+
+document.getElementById("customer-address").value =
+localStorage.getItem("customerAddress") || "";
+
+}
+```
 
 
 /* =========================
