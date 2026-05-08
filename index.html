@@ -1164,7 +1164,78 @@ const count = document.getElementById("cart-count");
 if(!items || !totalEl || !count){
 return;
 }
- 
+
+items.innerHTML = "";
+
+let total = 0;
+
+count.innerText =
+cart.reduce((sum,item)=>sum + item.qty,0);
+
+if(cart.length === 0){
+
+items.innerHTML =
+`<p class="text-center text-gray-500">السلة فارغة</p>`;
+
+}
+
+cart.forEach(item=>{
+
+total += item.price * item.qty;
+
+items.innerHTML += `
+
+<div class="border-b pb-4 flex gap-4">
+
+<img src="${item.image}"
+class="w-24 h-24 object-cover rounded-lg">
+
+<div class="flex-1">
+
+<h3 class="font-black">${item.name}</h3>
+
+<p class="text-amber-700 mt-2">
+${item.price} ج.م
+</p>
+
+<div class="flex items-center gap-2 mt-3">
+
+<button
+onclick="decreaseQty(${item.id})"
+class="bg-gray-200 w-8 h-8 rounded">
+-
+</button>
+
+<span>${item.qty}</span>
+
+<button
+onclick="increaseQty(${item.id})"
+class="bg-gray-200 w-8 h-8 rounded">
++
+</button>
+
+</div>
+
+<button
+onclick="removeItem(${item.id})"
+class="text-red-500 text-sm mt-3">
+حذف المنتج
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+totalEl.innerText = total + " ج.م";
+
+updateDashboard();
+
+}
+
 /* =========================
 ADMIN DASHBOARD UPDATE
 ========================= */
