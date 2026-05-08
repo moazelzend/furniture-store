@@ -1371,8 +1371,7 @@ const container =
 document.getElementById("wishlist-container");
 
 if(!container) return;
-document.getElementById("wishlist-count").innerText =
-wishlist.length;
+
 const wishlistProducts =
 products.filter(product =>
 wishlist.includes(product.id)
@@ -1382,19 +1381,20 @@ if(wishlistProducts.length === 0){
 
 container.innerHTML = `
 <div class="col-span-full text-center py-20">
-
 <i class="fa-regular fa-heart text-6xl text-gray-300 mb-5"></i>
-
 <h3 class="text-3xl font-black text-gray-400">
 لا توجد منتجات بالمفضلة
 </h3>
-
 </div>
 `;
 
 return;
 
 }
+
+let html = "";
+
+wishlistProducts.forEach(product=>{
 
 html += `
 
@@ -1435,7 +1435,7 @@ class="w-14 bg-red-500 hover:bg-red-600 text-white rounded-2xl">
 
 container.innerHTML = html;
 
-}   
+}
 /* =========================
 BETTER SEARCH + FILTER
 ========================= */
