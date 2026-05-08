@@ -1982,6 +1982,54 @@ behavior:"smooth"
 }
 
 
+/* =========================
+BEST PRODUCTS
+========================= */
+
+function renderBestProducts(){
+
+const container =
+document.getElementById("best-products");
+
+if(!container) return;
+
+const best = products.slice(0,3);
+
+let html = "";
+
+best.forEach(product=>{
+
+html += `
+<div class="bg-white rounded-3xl overflow-hidden shadow-2xl">
+
+<img src="${product.image}"
+class="w-full h-80 object-cover">
+
+<div class="p-6">
+
+<h3 class="text-2xl font-black mb-3">
+${product.name}
+</h3>
+
+<p class="text-gray-500 mb-5">
+${product.desc}
+</p>
+
+<span class="text-amber-700 text-3xl font-black">
+${product.price} ج.م
+</span>
+
+</div>
+</div>
+`;
+
+});
+
+container.innerHTML = html;
+
+}
+
+
 window.onload = ()=>{
 
 loadProducts();
