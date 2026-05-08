@@ -948,29 +948,6 @@ function renderProducts(data){
 const container =
 document.getElementById("products-container");
 
-container.innerHTML = "";
-
-if(data.length === 0){
-
-container.innerHTML = `
-<div class="col-span-full text-center">
-
-<h3 class="text-3xl font-black text-gray-400">
-لا توجد منتجات
-</h3>
-
-</div>
-`;
-
-return;
-
-}
-
-function renderProducts(data){
-
-const container =
-document.getElementById("products-container");
-
 if(data.length === 0){
 
 container.innerHTML = `
