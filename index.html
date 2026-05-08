@@ -1364,7 +1364,6 @@ container.innerHTML = html;
 /* =========================
 RENDER WISHLIST
 ========================= */
-
 function renderWishlist(){
 
 const container =
@@ -1387,7 +1386,6 @@ container.innerHTML = `
 </h3>
 </div>
 `;
-
 return;
 
 }
@@ -1397,11 +1395,9 @@ let html = "";
 wishlistProducts.forEach(product=>{
 
 html += `
-
 <div class="bg-white rounded-[30px] overflow-hidden shadow-xl p-4">
 
-<img
-src="${product.image}"
+<img src="${product.image}"
 class="w-full h-64 object-cover rounded-2xl mb-4">
 
 <h3 class="text-2xl font-black mb-3">
@@ -1416,7 +1412,7 @@ ${product.price} ج.م
 
 <button
 onclick="addToCart(${product.id})"
-class="flex-1 bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition">
+class="flex-1 bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black">
 أضف للسلة
 </button>
 
@@ -1427,7 +1423,6 @@ class="w-14 bg-red-500 hover:bg-red-600 text-white rounded-2xl">
 </button>
 
 </div>
-
 </div>
 `;
 
@@ -1436,6 +1431,7 @@ class="w-14 bg-red-500 hover:bg-red-600 text-white rounded-2xl">
 container.innerHTML = html;
 
 }
+
 /* =========================
 BETTER SEARCH + FILTER
 ========================= */
