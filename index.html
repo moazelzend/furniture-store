@@ -871,9 +871,17 @@ let filteredProducts = [];
 
 let currentCategory = "الكل";
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let wishlist =
-JSON.parse(localStorage.getItem("wishlist")) || [];
+function safeParse(key){
+  try{
+    return JSON.parse(localStorage.getItem(key)) || [];
+  }catch{
+    return [];
+  }
+}
+
+let cart = safeParse("cart");
+
+let wishlist = safeParse("wishlist");
 /* =========================
 MOBILE MENU
 ========================= */
