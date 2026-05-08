@@ -924,7 +924,38 @@ return;
 
 data.forEach(product=>{
 
-container.innerHTML += `
+function renderProducts(data){
+
+const container =
+document.getElementById("products-container");
+
+if(data.length === 0){
+
+container.innerHTML = `
+<div class="col-span-full text-center py-20">
+
+<i class="fa-solid fa-box-open text-6xl text-gray-300 mb-5"></i>
+
+<h3 class="text-3xl font-black text-gray-400">
+لا توجد منتجات
+</h3>
+
+<p class="text-gray-500 mt-3">
+جرّب البحث بكلمة أخرى
+</p>
+
+</div>
+`;
+
+return;
+
+}
+
+let html = "";
+
+data.forEach(product=>{
+
+html += `
 
 <div
 class="bg-white rounded-[30px] overflow-hidden shadow-xl hover:-translate-y-3 hover:shadow-2xl transition duration-500 group fade-up">
@@ -934,7 +965,7 @@ class="bg-white rounded-[30px] overflow-hidden shadow-xl hover:-translate-y-3 ho
 <img
 onclick="openModal(${product.id})"
 src="${product.image}"
-class="w-full h-72 object-cover group-hover:scale-110 transition duration-700"
+class="w-full h-72 object-cover group-hover:scale-110 transition duration-700 cursor-pointer"
 loading="lazy">
 
 <div class="absolute top-4 left-4 bg-amber-700 text-white px-4 py-1 rounded-full text-sm font-bold">
@@ -975,7 +1006,7 @@ class="bg-gray-200 hover:bg-gray-300 text-slate-900 px-4 py-3 rounded-xl font-bo
 onclick="addToCart(${product.id})"
 class="bg-slate-900 hover:bg-amber-700 text-white px-5 py-3 rounded-xl font-bold transition duration-300 hover:scale-105">
 
-أضف للسلة
+<i class="fa-solid fa-cart-plus"></i>
 
 </button>
 
@@ -990,6 +1021,8 @@ class="bg-slate-900 hover:bg-amber-700 text-white px-5 py-3 rounded-xl font-bold
 `;
 
 });
+
+container.innerHTML = html;
 
 }
 
