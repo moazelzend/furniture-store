@@ -1447,7 +1447,31 @@ applyFilters();
 /* =========================
    إضافة للسلة
 ========================= */
+function toggleWishlist(id){
 
+if(wishlist.includes(id)){
+
+wishlist =
+wishlist.filter(item => item !== id);
+
+showToast("تمت إزالة المنتج من المفضلة");
+
+}else{
+
+wishlist.push(id);
+
+showToast("تمت إضافة المنتج للمفضلة");
+
+}
+
+localStorage.setItem(
+"wishlist",
+JSON.stringify(wishlist)
+);
+
+renderProducts(filteredProducts);
+
+}
 function addToCart(id){
 
 const product =
