@@ -1043,7 +1043,15 @@ loader.innerHTML = `
 /* =========================
    Toast
 ========================= */
+function showSuccessPopup(){
+  document.getElementById("successPopup")
+  .classList.remove("hidden");
+}
 
+function closeSuccessPopup(){
+  document.getElementById("successPopup")
+  .classList.add("hidden");
+}
 function showToast(text){
 
 const toast = document.getElementById("toast");
