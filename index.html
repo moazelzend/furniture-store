@@ -1120,6 +1120,35 @@ const count = document.getElementById("cart-count");
 if(!items || !totalEl || !count){
 return;
 }
+```javascript id="m3x7qp"
+/* =========================
+ADMIN DASHBOARD UPDATE
+========================= */
+
+function updateDashboard(){
+
+const total =
+cart.reduce((sum,item)=>
+sum + (item.price * item.qty)
+,0);
+
+document.getElementById("adminProducts")
+.innerText = products.length;
+
+document.getElementById("adminOrders")
+.innerText =
+localStorage.getItem("ordersCount") || 0;
+
+document.getElementById("adminCart")
+.innerText =
+cart.reduce((sum,item)=>sum + item.qty,0);
+
+document.getElementById("adminTotal")
+.innerText =
+total + " ج.م";
+
+}
+```
 
 items.innerHTML = "";
 
