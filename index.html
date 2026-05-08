@@ -1224,6 +1224,20 @@ return;
 
 }
 
+if(!validatePhone(phone)){
+
+showToast("رقم الهاتف غير صحيح");
+
+return;
+
+}
+
+const cleanName =
+sanitizeInput(name);
+
+const cleanAddress =
+sanitizeInput(address);
+
 const btn =
 document.getElementById("checkoutBtn");
 
