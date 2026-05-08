@@ -1791,11 +1791,8 @@ showToast("تم إلغاء الطلب");
 async function checkout(){
 
 if(cart.length === 0){
-
 showToast("السلة فارغة");
-
 return;
-
 }
 
 const name =
@@ -1806,42 +1803,31 @@ document.getElementById("customer-phone").value;
 
 const address =
 document.getElementById("customer-address").value;
+
 saveCustomerData();
+
 if(!name || !phone || !address){
-
 showToast("املأ جميع البيانات");
-
 return;
-
 }
+
 if(name.length < 3){
-
 showToast("الاسم يجب أن يكون 3 أحرف على الأقل");
-
 return;
-
 }
 
 if(address.length < 10){
-
 showToast("العنوان غير كامل");
-
 return;
-
 }
+
 if(!validatePhone(phone)){
-
 showToast("رقم الهاتف غير صحيح");
-
 return;
-
 }
 
-const cleanName =
-sanitizeInput(name);
-
-const cleanAddress =
-sanitizeInput(address);
+const cleanName = sanitizeInput(name);
+const cleanAddress = sanitizeInput(address);
 
 const btn =
 document.getElementById("checkoutBtn");
@@ -1852,7 +1838,6 @@ btn.innerHTML =
 btn.disabled = true;
 
 let total = 0;
-
 let productsText = "";
 
 let message =
@@ -1875,7 +1860,6 @@ message +=
 });
 
 message += `
-
 👤 الاسم: ${cleanName}
 
 📞 الهاتف: ${phone}
@@ -1894,43 +1878,41 @@ headers:{
 "Content-Type":"application/json"
 },
 body: JSON.stringify({
-name:cleanName,
-phone:phone,
-address:cleanAddress,
-products:productsText,
-total:total
+name: cleanName,
+phone: phone,
+address: cleanAddress,
+products: productsText,
+total: total
 })
 });
 
 const whatsappURL =
 `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-window.open(whatsappURL, "_blank");
+window.open(whatsappURL,"_blank");
 
 cart = [];
-
 saveCart();
-
 updateCart();
+
 let orders =
 Number(localStorage.getItem("ordersCount") || 0);
 
 orders++;
 
 localStorage.setItem("ordersCount", orders);
+
 showSuccessPopup();
 showToast("تم إرسال الطلب بنجاح");
 
 }catch(err){
 
 console.log(err);
-
 showToast("حدث خطأ أثناء الإرسال");
 
 }
 
-btn.innerHTML = `إتمام الشراء`;
-
+btn.innerHTML = "إتمام الشراء";
 btn.disabled = false;
 
 }
