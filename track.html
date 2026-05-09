@@ -55,7 +55,42 @@ function escapeHTML(str){
     .replace(/"/g,"&quot;");
 }
 
-async function trackOrder(){
+function handleResponse(data){
+
+  const result =
+  document.getElementById("result");
+
+  if(data.result === "not_found"){
+    result.innerHTML =
+    `<p class="text-red-500 text-2xl font-black">
+      الطلب غير موجود
+    </p>`;
+    return;
+  }
+
+  const orderId =
+  document.getElementById("orderId").value.trim();
+
+  result.innerHTML = `
+    <div class="bg-gray-50 rounded-2xl p-6 text-right space-y-4">
+
+      <h2 class="text-3xl font-black text-amber-700 text-center">
+        ${escapeHTML(data.status)}
+      </h2>
+
+      <p><b>رقم الطلب:</b> ${escapeHTML(orderId)}</p>
+
+      <p><b>الاسم:</b> ${escapeHTML(data.name)}</p>
+
+      <p><b>المنتجات:</b> ${escapeHTML(data.products)}</p>
+
+      <p><b>الإجمالي:</b> ${escapeHTML(data.total)} ج.م</p>
+
+    </div>
+  `;
+}
+
+function trackOrder(){
 
   const orderId =
   document.getElementById("orderId").value.trim();
@@ -69,56 +104,30 @@ async function trackOrder(){
   }
 
   result.innerHTML =
-  `<p class="text-gray-500 text-xl">جاري البحث...</p>`;
+  `<p class="text-gray-500 text-xl">
+    جاري البحث...
+  </p>`;
 
-  try{
+  const oldScript =
+  document.getElementById("jsonpScript");
 
-   const res = await fetch(
-  sheetURL + "?orderId=" + orderId,
-  { method: "GET", mode: "cors" }
-);
-
-    const data =
-    await res.json();
-
-    if(data.result === "not_found"){
-
-      result.innerHTML =
-      `<p class="text-red-500 text-2xl font-black">
-      الطلب غير موجود
-      </p>`;
-
-      return;
-    }
-
-    result.innerHTML = `
-      <div class="bg-gray-50 rounded-2xl p-6 text-right space-y-4">
-
-        <h2 class="text-3xl font-black text-amber-700 text-center">
-          ${escapeHTML(data.status)}
-        </h2>
-
-        <p><b>رقم الطلب:</b> ${escapeHTML(orderId)}</p>
-
-        <p><b>الاسم:</b> ${escapeHTML(data.name)}</p>
-
-        <p><b>المنتجات:</b> ${escapeHTML(data.products)}</p>
-
-        <p><b>الإجمالي:</b> ${escapeHTML(data.total)} ج.م</p>
-
-      </div>
-    `;
-
-  }catch(error){
-
-    result.innerHTML =
-    `<p class="text-red-500 text-2xl font-black">
-      حدث خطأ أثناء الاتصال
-    </p>`;
-
+  if(oldScript){
+    oldScript.remove();
   }
 
+  const script =
+  document.createElement("script");
+
+  script.id = "jsonpScript";
+
+  script.src =
+    sheetURL +
+    "?orderId=" + orderId +
+    "&callback=handleResponse";
+
+  document.body.appendChild(script);
 }
+
 </script>
 
 </body>
