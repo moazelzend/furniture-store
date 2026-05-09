@@ -21,11 +21,11 @@ class="w-full border p-4 rounded-xl mb-4 text-center">
 
 <button
 onclick="trackOrder()"
-class="w-full bg-amber-700 text-white py-4 rounded-xl">
+class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 بحث
 </button>
 
-<div id="result" class="mt-6 text-center"></div>
+<div id="result" class="mt-6 text-center text-xl"></div>
 
 </div>
 
@@ -33,62 +33,56 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl">
 const sheetURL =
 "https://script.google.com/macros/s/AKfycbxO-pvTB451KYuK7TmWRe5fO_vWfVyV4ln69lDN9h9ksksx_OqtPVTk2KLRPDBqBwGH1w/exec";
 
-const params =
-new URLSearchParams(window.location.search);
-
-const autoId =
-params.get("orderId");
+/* لو داخل من زر تتبع الطلب */
+const params = new URLSearchParams(window.location.search);
+const autoId = params.get("orderId");
 
 if(autoId){
- document.getElementById("orderId").value = autoId;
- trackOrder();
+  document.getElementById("orderId").value = autoId;
+  setTimeout(trackOrder, 300);
 }
 
 function trackOrder(){
 
-const id =
-document.getElementById("orderId").value.trim();
+  const id =
+    document.getElementById("orderId").value.trim();
 
-const result =
-document.getElementById("result");
+  const result =
+    document.getElementById("result");
 
-if(!id){
- result.innerHTML="أدخل رقم الطلب";
- return;
-}
+  if(!id){
+    result.innerHTML =
+      "<p class='text-red-500'>أدخل رقم الطلب</p>";
+    return;
+  }
 
-result.innerHTML="جاري البحث...";
+  result.innerHTML = "جاري البحث...";
 
-const cb="cb"+Date.now();
+  fetch(sheetURL + "?orderId=" + encodeURIComponent(id))
+    .then(res => res.json())
+    .then(data => {
 
-window[cb]=function(data){
+      if(data.result === "not_found"){
+        result.innerHTML =
+          "<p class='text-red-500'>الطلب غير موجود</p>";
+        return;
+      }
 
-if(data.result==="not_found"){
- result.innerHTML="الطلب غير موجود";
-}else{
- result.innerHTML=
- `
- <p>رقم الطلب: ${data.orderId}</p>
- <p>الحالة: ${data.status}</p>
- <p>الاسم: ${data.name}</p>
- <p>المنتجات: ${data.products}</p>
- <p>الإجمالي: ${data.total} ج.م</p>
- `;
-}
-
-script.remove();
-delete window[cb];
-};
-
-const script =
-document.createElement("script");
-
-script.src =
-sheetURL +
-"?orderId="+encodeURIComponent(id)+
-"&callback="+cb;
-
-document.body.appendChild(script);
+      result.innerHTML = `
+        <div class="bg-green-50 p-6 rounded-2xl">
+          <p class="mb-3">رقم الطلب: <b>${data.orderId}</b></p>
+          <p class="mb-3">الحالة: <b>${data.status}</b></p>
+          <p class="mb-3">الاسم: <b>${data.name}</b></p>
+          <p class="mb-3">المنتجات: <b>${data.products}</b></p>
+          <p>الإجمالي: <b>${data.total} ج.م</b></p>
+        </div>
+      `;
+    })
+    .catch(err => {
+      console.log(err);
+      result.innerHTML =
+        "<p class='text-red-500'>فشل الاتصال بالسيرفر</p>";
+    });
 }
 </script>
 
