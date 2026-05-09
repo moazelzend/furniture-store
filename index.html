@@ -1930,22 +1930,21 @@ ${total} ج.م`;
 
 try{
 
-  await fetch(scriptURL,{
-    mode:"no-cors",
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body: JSON.stringify({
-      orderId: orderId,
-      name: cleanName,
-      phone: phone,
-      address: cleanAddress,
-      products: productsText,
-      total: total,
-      status: "جديد"
-    })
-  });
+ await fetch(scriptURL,{
+  method:"POST",
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body: JSON.stringify({
+    orderId: orderId,
+    name: cleanName,
+    phone: phone,
+    address: cleanAddress,
+    products: productsText,
+    total: total,
+    status: "جديد"
+  })
+});
 
   cart = [];
   saveCart();
