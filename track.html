@@ -44,8 +44,9 @@ body{
 
 <script>
 
+<script>
 const sheetURL =
-"https://script.google.com/macros/s/AKfycbwGFDl89NZP3rtbloRgV2bnfxSM-cgpUHpIkRt8TbCj_pc4rDxPbhe0slC-9IhYgL5hqA/exec";
+"https://script.google.com/macros/s/AKfycbwlh80sYiERi81R76-9MCwduYoOm7C6c770mQh6aaW3HhK_qdTLxjAdj-UAnyjZNlAM8w/exec";
 
 function escapeHTML(str){
   return String(str)
@@ -53,41 +54,6 @@ function escapeHTML(str){
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;");
-}
-
-function handleResponse(data){
-
-  const result =
-  document.getElementById("result");
-
-  if(data.result === "not_found"){
-    result.innerHTML =
-    `<p class="text-red-500 text-2xl font-black">
-      الطلب غير موجود
-    </p>`;
-    return;
-  }
-
-  const orderId =
-  document.getElementById("orderId").value.trim();
-
-  result.innerHTML = `
-    <div class="bg-gray-50 rounded-2xl p-6 text-right space-y-4">
-
-      <h2 class="text-3xl font-black text-amber-700 text-center">
-        ${escapeHTML(data.status)}
-      </h2>
-
-      <p><b>رقم الطلب:</b> ${escapeHTML(orderId)}</p>
-
-      <p><b>الاسم:</b> ${escapeHTML(data.name)}</p>
-
-      <p><b>المنتجات:</b> ${escapeHTML(data.products)}</p>
-
-      <p><b>الإجمالي:</b> ${escapeHTML(data.total)} ج.م</p>
-
-    </div>
-  `;
 }
 
 function trackOrder(){
@@ -104,30 +70,45 @@ function trackOrder(){
   }
 
   result.innerHTML =
-  `<p class="text-gray-500 text-xl">
-    جاري البحث...
-  </p>`;
+  `<p class="text-gray-500 text-xl">جاري البحث...</p>`;
 
-  const oldScript =
-  document.getElementById("jsonpScript");
+  const callbackName =
+  "jsonp_callback_" + Date.now();
 
-  if(oldScript){
-    oldScript.remove();
-  }
+  window[callbackName] = function(data){
+
+    if(data.result === "not_found"){
+      result.innerHTML =
+      `<p class="text-red-500 text-2xl font-black">
+      الطلب غير موجود
+      </p>`;
+    }else{
+      result.innerHTML = `
+      <div class="bg-gray-50 rounded-2xl p-6 text-right space-y-4">
+      <h2 class="text-3xl font-black text-amber-700 text-center">
+      ${escapeHTML(data.status)}
+      </h2>
+
+      <p><b>الاسم:</b> ${escapeHTML(data.name)}</p>
+      <p><b>المنتجات:</b> ${escapeHTML(data.products)}</p>
+      <p><b>الإجمالي:</b> ${escapeHTML(data.total)} ج.م</p>
+      </div>`;
+    }
+
+    delete window[callbackName];
+    script.remove();
+  };
 
   const script =
   document.createElement("script");
 
-  script.id = "jsonpScript";
-
   script.src =
-    sheetURL +
-    "?orderId=" + orderId +
-    "&callback=handleResponse";
+  sheetURL +
+  "?orderId=" + encodeURIComponent(orderId) +
+  "&callback=" + callbackName;
 
   document.body.appendChild(script);
 }
-
 </script>
 
 </body>
