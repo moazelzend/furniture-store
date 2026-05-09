@@ -1891,54 +1891,56 @@ ${total} ج.م`;
 
 try{
 
-await fetch(scriptURL,{
-mode:"no-cors",
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body: JSON.stringify({
-orderId: orderId,
-name: cleanName,
-phone: phone,
-address: cleanAddress,
-products: productsText,
-total: total,
-status: "جديد"
-})
+  await fetch(scriptURL,{
+    mode:"no-cors",
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      orderId: orderId,
+      name: cleanName,
+      phone: phone,
+      address: cleanAddress,
+      products: productsText,
+      total: total,
+      status: "جديد"
+    })
+  });
 
+  cart = [];
+  saveCart();
+  updateCart();
 
+  localStorage.removeItem("customerName");
+  localStorage.removeItem("customerPhone");
+  localStorage.removeItem("customerAddress");
 
-cart = [];
-saveCart();
-updateCart();
-localStorage.removeItem("customerName");
-localStorage.removeItem("customerPhone");
-localStorage.removeItem("customerAddress");
+  document.getElementById("customer-name").value = "";
+  document.getElementById("customer-phone").value = "";
+  document.getElementById("customer-address").value = "";
 
-document.getElementById("customer-name").value = "";
-document.getElementById("customer-phone").value = "";
-document.getElementById("customer-address").value = "";
-let orders =
-Number(localStorage.getItem("ordersCount") || 0);
+  let orders =
+  Number(localStorage.getItem("ordersCount") || 0);
 
-orders++;
+  orders++;
 
-localStorage.setItem("ordersCount", orders);
+  localStorage.setItem("ordersCount", orders);
 
-showSuccessPopup(orderId);
-showToast("رقم طلبك: " + orderId);
+  showSuccessPopup(orderId);
+  showToast("رقم طلبك: " + orderId);
 
 }catch(err){
 
-console.log(err);
-showToast("حدث خطأ أثناء الإرسال");
+  console.log(err);
+  showToast("حدث خطأ أثناء الإرسال");
 
 }
 
 btn.innerHTML = "إتمام الشراء";
 btn.disabled = false;
 btn.classList.remove("opacity-50","cursor-not-allowed");
+
 }
 
 
