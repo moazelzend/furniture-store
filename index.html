@@ -174,10 +174,7 @@ onclick="closeSuccessPopup()"
 class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
 إغلاق
 </button>
-    class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
-      إغلاق
-    </button>
-
+   
   </div>
 
 </div>
@@ -895,7 +892,7 @@ class="fixed bottom-6 left-6 bg-green-500 w-16 h-16 rounded-full flex items-cent
 <script>
 
 const scriptURL =
-"https://script.google.com/macros/s/AKfycbxpTYIPcRecDxMA3rS34HTp9e5m69FcG93zKXVfmeln1ePqV0FH7_kqMYWwFrp642kiww/exec";
+"https://script.google.com/macros/s/AKfycbxO-pvTB451KYuK7TmWRe5fO_vWfVyV4ln69lDN9h9ksksx_OqtPVTk2KLRPDBqBwGH1w/exec";
 
 const productsURL =
 "https://script.google.com/macros/s/AKfycbwVNEEOobM3H9I_4OVkEQG5EXjVxT_PaG2ExMupeJn1rMMXdjWJL1UIfPsCmAmEHukSIw/exec";
@@ -1932,14 +1929,16 @@ try{
 
 await fetch(scriptURL,{
   method:"POST",
-  mode:"no-cors",
+  headers:{
+    "Content-Type":"application/json"
+  },
   body: JSON.stringify({
-    orderId: orderId,
+    orderId,
     name: cleanName,
-    phone: phone,
+    phone,
     address: cleanAddress,
     products: productsText,
-    total: total,
+    total,
     status:"جديد"
   })
 });
