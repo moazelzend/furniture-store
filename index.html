@@ -142,7 +142,12 @@ class="fixed inset-0 bg-black/60 hidden z-[99999] flex items-center justify-cent
     <p class="text-gray-600 leading-8 mb-6">
       سنتواصل معك خلال 10 دقائق لتأكيد الطلب
     </p>
-
+    <p id="orderIdText"
+class="text-amber-700 font-black text-xl mb-6">
+</p>
+    <p id="deliveryTimeText"
+class="text-gray-500 text-lg mb-6">
+</p>
     <button
     onclick="closeSuccessPopup()"
     class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
@@ -1080,9 +1085,17 @@ loader.innerHTML = `
 /* =========================
    Toast
 ========================= */
-function showSuccessPopup(){
-  document.getElementById("successPopup")
-  .classList.remove("hidden");
+function showSuccessPopup(orderId){
+
+document.getElementById("orderIdText")
+.innerText = "رقم الطلب: " + orderId;
+
+document.getElementById("deliveryTimeText")
+.innerText = "موعد التسليم المتوقع: خلال 3 إلى 7 أيام عمل";
+
+document.getElementById("successPopup")
+.classList.remove("hidden");
+
 }
 
 function closeSuccessPopup(){
@@ -1614,7 +1627,8 @@ return;
 }
 
 items.innerHTML = "";
-
+const orderId =
+"EA" + Date.now();
 let total = 0;
 
 count.innerText =
@@ -1842,7 +1856,7 @@ btn.innerHTML =
 `<div class="loader"></div> جاري إرسال الطلب`;
 
 btn.disabled = true;
-
+btn.classList.add("opacity-50","cursor-not-allowed");
 let total = 0;
 let productsText = "";
 
@@ -1885,23 +1899,27 @@ headers:{
 "Content-Type":"application/json"
 },
 body: JSON.stringify({
+orderId: orderId,
 name: cleanName,
 phone: phone,
 address: cleanAddress,
 products: productsText,
-total: total
+total: total,
+status: "جديد"
 })
-});
 
-const whatsappURL =
-`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-window.open(whatsappURL,"_blank");
 
 cart = [];
 saveCart();
 updateCart();
+localStorage.removeItem("customerName");
+localStorage.removeItem("customerPhone");
+localStorage.removeItem("customerAddress");
 
+document.getElementById("customer-name").value = "";
+document.getElementById("customer-phone").value = "";
+document.getElementById("customer-address").value = "";
 let orders =
 Number(localStorage.getItem("ordersCount") || 0);
 
@@ -1909,8 +1927,8 @@ orders++;
 
 localStorage.setItem("ordersCount", orders);
 
-showSuccessPopup();
-showToast("تم إرسال الطلب بنجاح");
+showSuccessPopup(orderId);
+showToast("رقم طلبك: " + orderId);
 
 }catch(err){
 
@@ -1921,7 +1939,7 @@ showToast("حدث خطأ أثناء الإرسال");
 
 btn.innerHTML = "إتمام الشراء";
 btn.disabled = false;
-
+btn.classList.remove("opacity-50","cursor-not-allowed");
 }
 
 
