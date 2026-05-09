@@ -880,7 +880,7 @@ let filteredProducts = [];
 let currentCategory = "الكل";
 
 function safeParse(key){
-  const orderId = "EA" + Date.now();
+  
   try{
     return JSON.parse(localStorage.getItem(key)) || [];
   }catch{
@@ -1897,7 +1897,7 @@ ${cleanAddress}
 
 💰 الإجمالي:
 ${total} ج.م`;
-const orderId = "EA" + Date.now();
+
 try{
 
   await fetch(scriptURL,{
