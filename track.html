@@ -1,8 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تتبع الطلب | Era&Art</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="bg-white p-8 rounded-3xl shadow-xl w-full max-w-lg">
+
+    <h1 class="text-4xl font-black text-center mb-6">
+      تتبع الطلب
+    </h1>
+
+    <input
+      id="orderId"
+      type="text"
+      placeholder="رقم الطلب"
+      class="w-full border p-4 rounded-xl mb-4 text-center">
+
+    <button
+      onclick="trackOrder()"
+      class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
+      بحث
+    </button>
+
+    <div id="result" class="mt-6 text-center text-xl"></div>
+
+  </div>
+
 <script>
 const sheetURL =
 "https://script.google.com/macros/s/AKfycbxO-pvTB451KYuK7TmWRe5fO_vWfVyV4ln69lDN9h9ksksx_OqtPVTk2KLRPDBqBwGH1w/exec";
 
-window.onload = function(){
+/* بعد تحميل الصفحة */
+document.addEventListener("DOMContentLoaded", function () {
 
   const params =
     new URLSearchParams(window.location.search);
@@ -11,19 +46,27 @@ window.onload = function(){
     params.get("orderId");
 
   if(autoId){
-    document.getElementById("orderId").value = autoId;
-    setTimeout(trackOrder,300);
+    const input =
+      document.getElementById("orderId");
+
+    if(input){
+      input.value = autoId;
+      setTimeout(trackOrder, 300);
+    }
   }
 
-};
+});
 
 function trackOrder(){
 
-  const id =
-    document.getElementById("orderId").value.trim();
+  const input =
+    document.getElementById("orderId");
 
   const result =
     document.getElementById("result");
+
+  const id =
+    input.value.trim();
 
   if(!id){
     result.innerHTML =
@@ -31,7 +74,8 @@ function trackOrder(){
     return;
   }
 
-  result.innerHTML = "جاري البحث...";
+  result.innerHTML =
+    "جاري البحث...";
 
   const callbackName =
     "cb_" + Date.now();
@@ -39,22 +83,27 @@ function trackOrder(){
   window[callbackName] = function(data){
 
     if(data.result === "not_found"){
+
       result.innerHTML =
         "<p class='text-red-500'>الطلب غير موجود</p>";
-    }
-    else if(data.result === "found"){
+
+    } else if(data.result === "found"){
+
       result.innerHTML = `
-        <div class="bg-green-50 p-6 rounded-2xl">
-          <p class="mb-3">رقم الطلب: <b>${data.orderId}</b></p>
-          <p class="mb-3">الحالة: <b>${data.status}</b></p>
-          <p class="mb-3">الاسم: <b>${data.name}</b></p>
-          <p class="mb-3">المنتجات: <b>${data.products}</b></p>
-          <p>الإجمالي: <b>${data.total} ج.م</b></p>
+        <div class="bg-green-50 p-6 rounded-2xl text-right">
+          <p class="mb-3"><b>رقم الطلب:</b> ${data.orderId}</p>
+          <p class="mb-3"><b>الحالة:</b> ${data.status}</p>
+          <p class="mb-3"><b>الاسم:</b> ${data.name}</p>
+          <p class="mb-3"><b>المنتجات:</b> ${data.products}</p>
+          <p><b>الإجمالي:</b> ${data.total} ج.م</p>
         </div>
       `;
+
     } else {
+
       result.innerHTML =
         "<p class='text-red-500'>حدث خطأ</p>";
+
     }
 
     delete window[callbackName];
@@ -64,18 +113,19 @@ function trackOrder(){
   const script =
     document.createElement("script");
 
-  script.onerror = function(){
-    result.innerHTML =
-      "<p class='text-red-500'>فشل الاتصال بالسيرفر</p>";
-    delete window[callbackName];
-    script.remove();
-  };
-
   script.src =
     sheetURL +
     "?orderId=" + encodeURIComponent(id) +
     "&callback=" + callbackName;
 
+  script.onerror = function(){
+    result.innerHTML =
+      "<p class='text-red-500'>فشل الاتصال بالسيرفر</p>";
+  };
+
   document.body.appendChild(script);
 }
 </script>
+
+</body>
+</html>
