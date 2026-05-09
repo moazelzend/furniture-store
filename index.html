@@ -895,7 +895,7 @@ class="fixed bottom-6 left-6 bg-green-500 w-16 h-16 rounded-full flex items-cent
 <script>
 
 const scriptURL =
-"https://script.google.com/macros/s/AKfycbwlh80sYiERi81R76-9MCwduYoOm7C6c770mQh6aaW3HhK_qdTLxjAdj-UAnyjZNlAM8w/exec";
+"https://script.google.com/macros/s/AKfycbxpTYIPcRecDxMA3rS34HTp9e5m69FcG93zKXVfmeln1ePqV0FH7_kqMYWwFrp642kiww/exec";
 
 const productsURL =
 "https://script.google.com/macros/s/AKfycbwVNEEOobM3H9I_4OVkEQG5EXjVxT_PaG2ExMupeJn1rMMXdjWJL1UIfPsCmAmEHukSIw/exec";
@@ -1933,9 +1933,6 @@ try{
 await fetch(scriptURL,{
   method:"POST",
   mode:"no-cors",
-  headers:{
-    "Content-Type":"application/json"
-  },
   body: JSON.stringify({
     orderId: orderId,
     name: cleanName,
@@ -1943,7 +1940,7 @@ await fetch(scriptURL,{
     address: cleanAddress,
     products: productsText,
     total: total,
-    status: "جديد"
+    status:"جديد"
   })
 });
   cart = [];
