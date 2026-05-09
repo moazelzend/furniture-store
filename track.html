@@ -1,102 +1,77 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تتبع الطلب | Era&Art</title>
-
+<title>تتبع الطلب</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-
-<style>
-body{
-  font-family:'Tajawal',sans-serif;
-  background:#f8f6f2;
-}
-</style>
 </head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
-<body class="min-h-screen flex items-center justify-center p-6">
+<div class="bg-white p-8 rounded-3xl shadow-xl w-full max-w-lg">
 
-<div class="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-xl">
+<h1 class="text-4xl font-black text-center mb-6">
+تتبع الطلب
+</h1>
 
-  <h1 class="text-4xl font-black text-center mb-8">
-    تتبع الطلب
-  </h1>
+<input
+id="orderId"
+placeholder="رقم الطلب"
+class="w-full border p-4 rounded-xl mb-4 text-center">
 
-  <input
-    id="orderId"
-    type="text"
-    placeholder="أدخل رقم الطلب"
-    class="w-full border p-4 rounded-xl mb-5 text-center text-xl">
+<button
+onclick="trackOrder()"
+class="w-full bg-amber-700 text-white py-4 rounded-xl">
+بحث
+</button>
 
-  <button
-    onclick="trackOrder()"
-    class="w-full bg-amber-700 text-white py-4 rounded-xl font-black text-xl">
-    بحث
-  </button>
-
-  <div id="result" class="mt-8 text-center"></div>
+<div id="result" class="mt-6 text-center"></div>
 
 </div>
 
 <script>
 const sheetURL =
-"https://script.google.com/macros/s/AKfycbwlh80sYiERi81R76-9MCwduYoOm7C6c770mQh6aaW3HhK_qdTLxjAdj-UAnyjZNlAM8w/exec";
-
-function escapeHTML(str){
-  return String(str)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
-}
+"https://script.google.com/macros/s/رابطك/exec";
 
 function trackOrder(){
 
-  const orderId =
-  document.getElementById("orderId").value.trim();
+const id =
+document.getElementById("orderId").value;
 
-  const result =
-  document.getElementById("result");
+const result =
+document.getElementById("result");
 
-  if(!orderId){
-    alert("أدخل رقم الطلب");
-    return;
-  }
+result.innerHTML="جاري البحث...";
 
-  result.innerHTML =
-  '<p class="text-gray-500 text-xl">جاري البحث...</p>';
+const cb =
+"cb"+Date.now();
 
-  const callbackName = "cb" + Date.now();
+window[cb]=function(data){
 
-  window[callbackName] = function(data){
+if(data.result=="not_found"){
+result.innerHTML="الطلب غير موجود";
+}else{
+result.innerHTML=
+`
+<p>الحالة: ${data.status}</p>
+<p>الاسم: ${data.name}</p>
+<p>المنتجات: ${data.products}</p>
+<p>الإجمالي: ${data.total}</p>
+`;
+}
 
-    if(data.result === "not_found"){
-      result.innerHTML =
-      '<p class="text-red-500 text-2xl font-black">الطلب غير موجود</p>';
-    }else{
-      result.innerHTML =
-      '<div class="bg-gray-50 rounded-2xl p-6 text-right space-y-4">' +
-      '<h2 class="text-3xl font-black text-amber-700 text-center">' + escapeHTML(data.status) + '</h2>' +
-      '<p><b>الاسم:</b> ' + escapeHTML(data.name) + '</p>' +
-      '<p><b>المنتجات:</b> ' + escapeHTML(data.products) + '</p>' +
-      '<p><b>الإجمالي:</b> ' + escapeHTML(data.total) + ' ج.م</p>' +
-      '</div>';
-    }
+script.remove();
+};
 
-    script.remove();
-    delete window[callbackName];
-  };
+const script =
+document.createElement("script");
 
-  const script = document.createElement("script");
-  script.src =
-    sheetURL +
-    "?orderId=" + encodeURIComponent(orderId) +
-    "&callback=" + callbackName;
+script.src =
+sheetURL +
+"?orderId="+id+
+"&callback="+cb;
 
-  document.body.appendChild(script);
+document.body.appendChild(script);
+
 }
 </script>
 
