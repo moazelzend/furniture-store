@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تتبع الطلب | Era&Art</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+body{
+font-family:'Tajawal',sans-serif;
+background:#f8f6f2;
+}
+</style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-6">
+
+<div class="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-xl">
+
+<h1 class="text-4xl font-black text-center mb-8">
+تتبع الطلب
+</h1>
+
+<input
+id="orderId"
+type="text"
+placeholder="أدخل رقم الطلب"
+class="w-full border p-4 rounded-xl mb-5 text-center text-xl">
+
+<button
+onclick="trackOrder()"
+class="w-full bg-amber-700 text-white py-4 rounded-xl font-black text-xl">
+بحث
+</button>
+
+<div
+id="result"
+class="mt-8 text-center">
+</div>
+
+</div>
+
+<script>
+
+const sheetURL =
+"https://script.google.com/macros/s/AKfycbwGFDl89NZP3rtbloRgV2bnfxSM-cgpUHpIkRt8TbCj_pc4rDxPbhe0slC-9IhYgL5hqA/exec";
+
+async function trackOrder(){
+
+const orderId =
+document.getElementById("orderId").value.trim();
+
+if(!orderId){
+alert("أدخل رقم الطلب");
+return;
+}
+
+const res =
+await fetch(sheetURL + "?orderId=" + orderId);
+
+const data =
+await res.json();
+
+const result =
+document.getElementById("result");
+
+if(data.result === "not_found"){
+
+result.innerHTML =
+`<p class="text-red-500 text-2xl font-black">
+الطلب غير موجود
+</p>`;
+
+return;
+}
+
+result.innerHTML = `
+<h2 class="text-3xl font-black text-amber-700 mb-4">
+${data.status}
+</h2>
+
+<p class="mb-2">
+الاسم: ${data.name}
+</p>
+
+<p class="mb-2">
+المنتجات: ${data.products}
+</p>
+
+<p class="mb-2">
+الإجمالي: ${data.total} ج.م
+</p>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
