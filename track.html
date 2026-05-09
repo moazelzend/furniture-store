@@ -12,8 +12,8 @@
 
 <style>
 body{
-font-family:'Tajawal',sans-serif;
-background:#f8f6f2;
+  font-family:'Tajawal',sans-serif;
+  background:#f8f6f2;
 }
 </style>
 </head>
@@ -22,26 +22,23 @@ background:#f8f6f2;
 
 <div class="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-xl">
 
-<h1 class="text-4xl font-black text-center mb-8">
-تتبع الطلب
-</h1>
+  <h1 class="text-4xl font-black text-center mb-8">
+    تتبع الطلب
+  </h1>
 
-<input
-id="orderId"
-type="text"
-placeholder="أدخل رقم الطلب"
-class="w-full border p-4 rounded-xl mb-5 text-center text-xl">
+  <input
+    id="orderId"
+    type="text"
+    placeholder="أدخل رقم الطلب"
+    class="w-full border p-4 rounded-xl mb-5 text-center text-xl">
 
-<button
-onclick="trackOrder()"
-class="w-full bg-amber-700 text-white py-4 rounded-xl font-black text-xl">
-بحث
-</button>
+  <button
+    onclick="trackOrder()"
+    class="w-full bg-amber-700 text-white py-4 rounded-xl font-black text-xl hover:bg-amber-800 transition">
+    بحث
+  </button>
 
-<div
-id="result"
-class="mt-8 text-center">
-</div>
+  <div id="result" class="mt-8 text-center"></div>
 
 </div>
 
@@ -50,55 +47,76 @@ class="mt-8 text-center">
 const sheetURL =
 "https://script.google.com/macros/s/AKfycbwGFDl89NZP3rtbloRgV2bnfxSM-cgpUHpIkRt8TbCj_pc4rDxPbhe0slC-9IhYgL5hqA/exec";
 
+function escapeHTML(str){
+  return String(str)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
+}
+
 async function trackOrder(){
 
-const orderId =
-document.getElementById("orderId").value.trim();
+  const orderId =
+  document.getElementById("orderId").value.trim();
 
-if(!orderId){
-alert("أدخل رقم الطلب");
-return;
+  const result =
+  document.getElementById("result");
+
+  if(!orderId){
+    alert("أدخل رقم الطلب");
+    return;
+  }
+
+  result.innerHTML =
+  `<p class="text-gray-500 text-xl">جاري البحث...</p>`;
+
+  try{
+
+    const res =
+    await fetch(sheetURL + "?orderId=" + orderId);
+
+    const data =
+    await res.json();
+
+    if(data.result === "not_found"){
+
+      result.innerHTML =
+      `<p class="text-red-500 text-2xl font-black">
+      الطلب غير موجود
+      </p>`;
+
+      return;
+    }
+
+    result.innerHTML = `
+      <div class="bg-gray-50 rounded-2xl p-6 text-right space-y-4">
+
+        <h2 class="text-3xl font-black text-amber-700 text-center">
+          ${escapeHTML(data.status)}
+        </h2>
+
+        <p><b>رقم الطلب:</b> ${escapeHTML(orderId)}</p>
+
+        <p><b>الاسم:</b> ${escapeHTML(data.name)}</p>
+
+        <p><b>المنتجات:</b> ${escapeHTML(data.products)}</p>
+
+        <p><b>الإجمالي:</b> ${escapeHTML(data.total)} ج.م</p>
+
+      </div>
+    `;
+
+  }catch(error){
+
+    result.innerHTML =
+    `<p class="text-red-500 text-2xl font-black">
+      حدث خطأ أثناء الاتصال
+    </p>`;
+
+  }
+
 }
-
-const res =
-await fetch(sheetURL + "?orderId=" + orderId);
-
-const data =
-await res.json();
-
-const result =
-document.getElementById("result");
-
-if(data.result === "not_found"){
-
-result.innerHTML =
-`<p class="text-red-500 text-2xl font-black">
-الطلب غير موجود
-</p>`;
-
-return;
-}
-
-result.innerHTML = `
-<h2 class="text-3xl font-black text-amber-700 mb-4">
-${data.status}
-</h2>
-
-<p class="mb-2">
-الاسم: ${data.name}
-</p>
-
-<p class="mb-2">
-المنتجات: ${data.products}
-</p>
-
-<p class="mb-2">
-الإجمالي: ${data.total} ج.م
-</p>
-`;
-
-}
-
 </script>
 
 </body>
