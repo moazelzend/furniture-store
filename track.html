@@ -73,8 +73,10 @@ async function trackOrder(){
 
   try{
 
-    const res =
-    await fetch(sheetURL + "?orderId=" + orderId);
+   const res = await fetch(
+  sheetURL + "?orderId=" + orderId,
+  { method: "GET", mode: "cors" }
+);
 
     const data =
     await res.json();
