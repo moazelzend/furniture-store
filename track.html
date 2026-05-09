@@ -2,14 +2,20 @@
 const sheetURL =
 "https://script.google.com/macros/s/AKfycbxO-pvTB451KYuK7TmWRe5fO_vWfVyV4ln69lDN9h9ksksx_OqtPVTk2KLRPDBqBwGH1w/exec";
 
-/* قراءة رقم الطلب من الرابط تلقائياً */
-const params = new URLSearchParams(window.location.search);
-const autoId = params.get("orderId");
+window.onload = function(){
 
-if(autoId){
-  document.getElementById("orderId").value = autoId;
-  setTimeout(trackOrder,300);
-}
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const autoId =
+    params.get("orderId");
+
+  if(autoId){
+    document.getElementById("orderId").value = autoId;
+    setTimeout(trackOrder,300);
+  }
+
+};
 
 function trackOrder(){
 
