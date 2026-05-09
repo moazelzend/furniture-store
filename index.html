@@ -1621,7 +1621,8 @@ const items = document.getElementById("cart-items");
 const totalEl = document.getElementById("cart-total");
 
 const count = document.getElementById("cart-count");
-
+const checkoutBtn =
+document.getElementById("checkoutBtn");
 if(!items || !totalEl || !count){
 return;
 }
@@ -1696,7 +1697,13 @@ class="text-red-500 text-sm mt-3">
 });
 
 totalEl.innerText = total + " ج.م";
+checkoutBtn.disabled = cart.length === 0;
 
+if(cart.length === 0){
+  checkoutBtn.classList.add("opacity-50","cursor-not-allowed");
+}else{
+  checkoutBtn.classList.remove("opacity-50","cursor-not-allowed");
+}
 updateDashboard();
 
 }
