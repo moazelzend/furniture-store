@@ -1927,23 +1927,23 @@ ${total} ج.م`;
 
 try{
 
-  const formData = new FormData();
+const formData = new FormData();
 
-  formData.append("data", JSON.stringify({
-    orderId: orderId,
-    name: cleanName,
-    phone: phone,
-    address: cleanAddress,
-    products: productsText,
-    total: total,
-    status: "جديد"
-  }));
+formData.append("data", JSON.stringify({
+  orderId,
+  name: cleanName,
+  phone,
+  address: cleanAddress,
+  products: productsText,
+  total,
+  status:"جديد"
+}));
 
-  await fetch(scriptURL,{
-    method:"POST",
-    mode:"no-cors",
-    body: formData
-  });
+await fetch(scriptURL,{
+  method:"POST",
+  mode:"no-cors",
+  body: formData
+});
 
   cart = [];
   saveCart();
