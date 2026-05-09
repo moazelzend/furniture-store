@@ -163,8 +163,17 @@ class="text-amber-700 font-black text-xl mb-6">
     <p id="deliveryTimeText"
 class="text-gray-500 text-lg mb-6">
 </p>
-    <button
-    onclick="closeSuccessPopup()"
+   <a id="trackBtn"
+href="#"
+class="block bg-green-600 text-white px-8 py-3 rounded-xl font-black mb-3">
+تتبع الطلب
+</a>
+
+<button
+onclick="closeSuccessPopup()"
+class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
+إغلاق
+</button>
     class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
       إغلاق
     </button>
@@ -1111,13 +1120,15 @@ document.getElementById("orderIdText")
 .innerText = "رقم الطلب: " + orderId;
 
 document.getElementById("deliveryTimeText")
-.innerText = "موعد التسليم المتوقع: خلال 3 إلى 7 أيام عمل";
+.innerText =
+"موعد التسليم المتوقع: خلال 3 إلى 7 أيام عمل";
+
+document.getElementById("trackBtn").href =
+"track.html?orderId=" + orderId;
 
 document.getElementById("successPopup")
 .classList.remove("hidden");
-
 }
-
 function closeSuccessPopup(){
   document.getElementById("successPopup")
   .classList.add("hidden");
