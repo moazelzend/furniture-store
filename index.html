@@ -1930,7 +1930,8 @@ ${total} ج.م`;
 
 try{
 
- await fetch(scriptURL,{
+await fetch(scriptURL,{
+  mode:"no-cors",
   method:"POST",
   headers:{
     "Content-Type":"application/json"
@@ -1945,7 +1946,6 @@ try{
     status: "جديد"
   })
 });
-
   cart = [];
   saveCart();
   updateCart();
