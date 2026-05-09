@@ -7,7 +7,6 @@
 <title>تتبع الطلب | Era&Art</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -34,15 +33,13 @@ body{
 
   <button
     onclick="trackOrder()"
-    class="w-full bg-amber-700 text-white py-4 rounded-xl font-black text-xl hover:bg-amber-800 transition">
+    class="w-full bg-amber-700 text-white py-4 rounded-xl font-black text-xl">
     بحث
   </button>
 
   <div id="result" class="mt-8 text-center"></div>
 
 </div>
-
-<script>
 
 <script>
 const sheetURL =
@@ -72,9 +69,7 @@ function trackOrder(){
   result.innerHTML =
   '<p class="text-gray-500 text-xl">جاري البحث...</p>';
 
-  const callbackName = "jsonp_" + Date.now();
-
-  const script = document.createElement("script");
+  const callbackName = "cb" + Date.now();
 
   window[callbackName] = function(data){
 
@@ -91,10 +86,11 @@ function trackOrder(){
       '</div>';
     }
 
-    delete window[callbackName];
     script.remove();
+    delete window[callbackName];
   };
 
+  const script = document.createElement("script");
   script.src =
     sheetURL +
     "?orderId=" + encodeURIComponent(orderId) +
@@ -103,5 +99,6 @@ function trackOrder(){
   document.body.appendChild(script);
 }
 </script>
+
 </body>
 </html>
