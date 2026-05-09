@@ -1927,34 +1927,37 @@ ${total} ج.م`;
 
 try{
 
- await fetch(scriptURL,{
-   method:"POST",
-   mode:"no-cors",
-   body: JSON.stringify({
-     orderId,
-     name: cleanName,
-     phone,
-     address: cleanAddress,
-     products: productsText,
-     total,
-     status:"جديد"
-   })
- });
+  const formData = new FormData();
 
- cart = [];
- saveCart();
- updateCart();
+  formData.append("data", JSON.stringify({
+    orderId: orderId,
+    name: cleanName,
+    phone: phone,
+    address: cleanAddress,
+    products: productsText,
+    total: total,
+    status: "جديد"
+  }));
 
- showSuccessPopup(orderId);
- showToast("رقم طلبك: " + orderId);
+  await fetch(scriptURL,{
+    method:"POST",
+    mode:"no-cors",
+    body: formData
+  });
+
+  cart = [];
+  saveCart();
+  updateCart();
+
+  showSuccessPopup(orderId);
+  showToast("رقم طلبك: " + orderId);
 
 }catch(err){
 
- console.log(err);
- showToast("حدث خطأ أثناء الإرسال");
+  console.log(err);
+  showToast("حدث خطأ أثناء الإرسال");
 
 }
-
 
 
 btn.innerHTML = "إتمام الشراء";
