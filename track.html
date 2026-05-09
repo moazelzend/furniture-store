@@ -1,45 +1,14 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تتبع الطلب</title>
-<script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-
-<div class="bg-white p-8 rounded-3xl shadow-xl w-full max-w-lg">
-
-<h1 class="text-4xl font-black text-center mb-6">
-تتبع الطلب
-</h1>
-
-<input
-id="orderId"
-placeholder="رقم الطلب"
-class="w-full border p-4 rounded-xl mb-4 text-center">
-
-<button
-onclick="trackOrder()"
-class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
-بحث
-</button>
-
-<div id="result" class="mt-6 text-center text-xl"></div>
-
-</div>
-
 <script>
 const sheetURL =
 "https://script.google.com/macros/s/AKfycbxO-pvTB451KYuK7TmWRe5fO_vWfVyV4ln69lDN9h9ksksx_OqtPVTk2KLRPDBqBwGH1w/exec";
 
-/* لو داخل من زر تتبع الطلب */
+/* قراءة رقم الطلب من الرابط تلقائياً */
 const params = new URLSearchParams(window.location.search);
 const autoId = params.get("orderId");
 
 if(autoId){
   document.getElementById("orderId").value = autoId;
-  setTimeout(trackOrder, 300);
+  setTimeout(trackOrder,300);
 }
 
 function trackOrder(){
@@ -58,16 +27,16 @@ function trackOrder(){
 
   result.innerHTML = "جاري البحث...";
 
-  fetch(sheetURL + "?orderId=" + encodeURIComponent(id))
-    .then(res => res.json())
-    .then(data => {
+  const callbackName =
+    "cb_" + Date.now();
 
-      if(data.result === "not_found"){
-        result.innerHTML =
-          "<p class='text-red-500'>الطلب غير موجود</p>";
-        return;
-      }
+  window[callbackName] = function(data){
 
+    if(data.result === "not_found"){
+      result.innerHTML =
+        "<p class='text-red-500'>الطلب غير موجود</p>";
+    }
+    else if(data.result === "found"){
       result.innerHTML = `
         <div class="bg-green-50 p-6 rounded-2xl">
           <p class="mb-3">رقم الطلب: <b>${data.orderId}</b></p>
@@ -77,14 +46,30 @@ function trackOrder(){
           <p>الإجمالي: <b>${data.total} ج.م</b></p>
         </div>
       `;
-    })
-    .catch(err => {
-      console.log(err);
+    } else {
       result.innerHTML =
-        "<p class='text-red-500'>فشل الاتصال بالسيرفر</p>";
-    });
+        "<p class='text-red-500'>حدث خطأ</p>";
+    }
+
+    delete window[callbackName];
+    script.remove();
+  };
+
+  const script =
+    document.createElement("script");
+
+  script.onerror = function(){
+    result.innerHTML =
+      "<p class='text-red-500'>فشل الاتصال بالسيرفر</p>";
+    delete window[callbackName];
+    script.remove();
+  };
+
+  script.src =
+    sheetURL +
+    "?orderId=" + encodeURIComponent(id) +
+    "&callback=" + callbackName;
+
+  document.body.appendChild(script);
 }
 </script>
-
-</body>
-</html>
