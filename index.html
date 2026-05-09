@@ -226,7 +226,11 @@ class="md:hidden text-2xl">
 </div>
 
 </div>
-
+<button
+onclick="openAdmin()"
+class="fixed top-24 left-6 bg-slate-900 text-white px-5 py-3 rounded-xl z-50 shadow-xl hover:bg-amber-700 transition">
+🔒 لوحة التحكم
+</button>
 </header>
 <section class="bg-amber-700 text-white py-3 text-center font-black text-lg">
 🔥 خصم 20% على أول طلبية لفترة محدودة
@@ -2041,7 +2045,30 @@ ${product.price} ج.م
 container.innerHTML = html;
 
 }
+function openAdmin(){
 
+const password =
+prompt("أدخل كلمة مرور لوحة التحكم");
+
+if(password === "123456"){
+
+document.getElementById("adminPanel")
+.classList.remove("hidden");
+
+document.getElementById("adminPanel")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+showToast("تم فتح لوحة التحكم");
+
+}else if(password !== null){
+
+showToast("كلمة المرور غير صحيحة");
+
+}
+
+}
 window.onload = ()=>{
 
 loadProducts();
