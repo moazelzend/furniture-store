@@ -299,18 +299,14 @@ url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
 
 <div class="flex gap-8 mt-8 flex-wrap text-center">
   <div>
-    <h3 class="text-3xl font-black">+1200</h3>
-    <p class="text-gray-300">طلب مكتمل</p>
-  </div>
+   <h3 id="ordersCountText" class="text-3xl font-black">0</h3>
+<p class="text-gray-300">طلب مكتمل</p>
 
-  <div>
-    <h3 class="text-3xl font-black">+500</h3>
-    <p class="text-gray-300">عميل سعيد</p>
-  </div>
+<h3 id="customersCountText" class="text-3xl font-black">0</h3>
+<p class="text-gray-300">عميل سعيد</p>
 
-  <div>
-    <h3 class="text-3xl font-black">5★</h3>
-    <p class="text-gray-300">تقييم العملاء</p>
+<h3 id="ratingText" class="text-3xl font-black">0★</h3>
+<p class="text-gray-300">تقييم العملاء</p>
   </div>
 </div>
 
@@ -559,8 +555,12 @@ TESTIMONIALS
 آراء عملائنا
 </h2>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div
+id="realReviews"
+class="grid grid-cols-1 md:grid-cols-3 gap-8">
+</div>
 
+</section>
 <!-- CARD -->
 
 <div class="bg-white p-8 rounded-[30px] shadow-xl hover:-translate-y-2 transition duration-300">
@@ -820,7 +820,9 @@ const scriptURL =
 
 const productsURL =
 "https://script.google.com/macros/s/AKfycbwVNEEOobM3H9I_4OVkEQG5EXjVxT_PaG2ExMupeJn1rMMXdjWJL1UIfPsCmAmEHukSIw/exec";
-
+  
+const reviewsURL = "https://script.google.com/macros/s/AKfycbyKGKkyVPM69P26ce71Dh3ftL5Bc-6DptvwaMWvqDqdY3n6MJmK_ouU5xtKgV0K3RoW/exec";
+  
 const whatsappNumber = "201068130159";
 
 let products = [];
@@ -1885,6 +1887,15 @@ await fetch(scriptURL,{
   cart = [];
   saveCart();
   updateCart();
+  let orders =
+Number(localStorage.getItem("ordersCount") || 0);
+
+localStorage.setItem(
+"ordersCount",
+orders + 1
+);
+
+updateLiveStats();
 
   showSuccessPopup(orderId);
   showToast("رقم طلبك: " + orderId);
@@ -1992,7 +2003,27 @@ ${product.price} ج.م
 container.innerHTML = html;
 
 }
+function updateLiveStats(){
 
+const orders =
+Number(localStorage.getItem("ordersCount") || 0);
+
+const customers =
+Number(localStorage.getItem("ordersCount") || 0);
+
+const rating =
+Number(localStorage.getItem("rating") || 5);
+
+document.getElementById("ordersCountText").innerText =
+"+" + orders;
+
+document.getElementById("customersCountText").innerText =
+"+" + customers;
+
+document.getElementById("ratingText").innerText =
+rating + "★";
+
+}
 window.onload = ()=>{
 
 loadProducts();
@@ -2002,7 +2033,11 @@ updateCart();
 loadCustomerData();
 
 renderWishlist();
+  
+updateLiveStats();
 
+  loadReviews();
+  
 document.getElementById("wishlist-count").innerText =
 wishlist.length;
 
@@ -2014,6 +2049,82 @@ document.addEventListener("keydown",(e)=>{
     closeModal();
   }
 });
+
+  async function submitReview(){
+
+const name =
+document.getElementById("reviewName").value;
+
+const review =
+document.getElementById("reviewText").value;
+
+const stars =
+document.getElementById("reviewStars").value;
+
+if(!name || !review){
+  showToast("املأ البيانات");
+  return;
+}
+
+const formData = new FormData();
+
+formData.append("name", name);
+formData.append("review", review);
+formData.append("stars", stars);
+
+await fetch(reviewsURL,{
+  method:"POST",
+  mode:"no-cors",
+  body: formData
+});
+
+showToast("شكراً على تقييمك");
+loadReviews();
+}
+
+
+async function loadReviews(){
+
+const res = await fetch(reviewsURL);
+const data = await res.json();
+
+const container =
+document.getElementById("realReviews");
+
+let html = "";
+let totalStars = 0;
+
+data.reverse().forEach(item=>{
+
+totalStars += Number(item.stars);
+
+html += `
+<div class="bg-white p-8 rounded-[30px] shadow-xl">
+
+<h3 class="font-black text-xl mb-3">
+${item.name}
+</h3>
+
+<div class="text-amber-500 mb-4">
+${"⭐".repeat(item.stars)}
+</div>
+
+<p class="text-gray-600">
+${item.review}
+</p>
+
+</div>
+`;
+});
+
+container.innerHTML = html;
+
+const avg =
+(totalStars / data.length).toFixed(1);
+
+document.getElementById("ratingText").innerText =
+avg + "★";
+}
 </script>
 
 <!-- =========================
@@ -2162,6 +2273,43 @@ rel="noopener noreferrer"
   </div>
 
 </footer>
+  <section class="container mx-auto px-6 py-20">
+
+<h2 class="text-4xl font-black text-center mb-10">
+أضف تقييمك
+</h2>
+
+<div class="max-w-xl mx-auto bg-white p-8 rounded-3xl shadow-xl">
+
+<input
+id="reviewName"
+type="text"
+placeholder="اسمك"
+class="w-full border p-3 rounded-xl mb-4">
+
+<textarea
+id="reviewText"
+placeholder="اكتب تقييمك"
+class="w-full border p-3 rounded-xl h-32 mb-4"></textarea>
+
+<select
+id="reviewStars"
+class="w-full border p-3 rounded-xl mb-4">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
+
+<button
+onclick="submitReview()"
+class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
+إرسال التقييم
+</button>
+
+</div>
+</section>
 </body>
 </html>
 
