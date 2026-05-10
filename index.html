@@ -160,6 +160,31 @@ font-size:0 !important;
 .goog-logo-link{
 display:none !important;
 }
+  .goog-te-banner-frame,
+.goog-te-balloon-frame,
+.skiptranslate iframe,
+.goog-tooltip,
+.goog-tooltip:hover,
+#goog-gt-tt,
+.goog-text-highlight{
+display:none !important;
+visibility:hidden !important;
+}
+
+body{
+top:0 !important;
+}
+
+.goog-logo-link,
+.goog-te-gadget,
+.goog-te-spinner-pos{
+display:none !important;
+}
+
+font{
+background:transparent !important;
+box-shadow:none !important;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -2391,6 +2416,15 @@ let currentLang = "ar";
 
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
+    setInterval(() => {
+  const banner = document.querySelector(".goog-te-banner-frame");
+  const tooltip = document.getElementById("goog-gt-tt");
+
+  if (banner) banner.remove();
+  if (tooltip) tooltip.remove();
+
+  document.body.style.top = "0px";
+}, 500);
     pageLanguage: "ar",
     includedLanguages: "ar,en",
     autoDisplay: false
