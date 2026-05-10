@@ -207,6 +207,29 @@ body{
 .goog-te-gadget{
   display:none !important;
 }
+  .dark #cartDrawer .bg-gray-50{
+  background:#111827 !important;
+}
+
+.dark #cartDrawer input,
+.dark #cartDrawer textarea{
+  background:#1f2937 !important;
+  color:white !important;
+  border-color:#374151 !important;
+}
+
+.dark #cartDrawer input::placeholder,
+.dark #cartDrawer textarea::placeholder{
+  color:#d1d5db !important;
+}
+
+.dark #cart-items .border-b{
+  border-color:#374151 !important;
+}
+
+.dark #cart-items button{
+  color:white;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -319,8 +342,11 @@ class="bg-gray-200 w-10 h-10 rounded-full text-xl">
 🌙
 </button>
   
-<button onclick="toggleLanguage()" id="langBtn">
-  EN
+<button
+id="langBtn"
+onclick="toggleLanguage()"
+class="bg-slate-900 text-white px-4 py-2 rounded-xl font-bold">
+EN
 </button>
 
 <button
@@ -665,7 +691,7 @@ ADMIN DASHBOARD
 
 <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/50"></div>
 
-<div class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
+<div class="absolute left-0 top-0 h-full w-full max-w-md bg-white dark:bg-slate-900 text-black dark:text-white flex flex-col">
 
 <div class="bg-slate-900 text-white p-5 flex justify-between items-center">
 <h2 class="text-2xl font-black">سلة الشراء</h2>
@@ -2429,11 +2455,7 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 </button>
 
 </div>
-</section>
-<!-- Google Translate Hidden Container -->
-<div id="google_translate_element" style="display:none;"></div>
-
-<script>
+</section><script>
 let currentLang = "ar";
 
 function googleTranslateElementInit() {
@@ -2444,29 +2466,40 @@ function googleTranslateElementInit() {
   }, "google_translate_element");
 }
 
-function toggleLanguage() {
+function waitForGoogleTranslate(callback, retries = 20) {
   const combo = document.querySelector(".goog-te-combo");
 
-  if (!combo) {
-    alert("الترجمة تحمل...");
-    return;
-  }
-
-  if (currentLang === "ar") {
-    currentLang = "en";
-    combo.value = "en";
-    document.getElementById("langBtn").innerText = "AR";
+  if (combo) {
+    callback(combo);
+  } else if (retries > 0) {
+    setTimeout(() => {
+      waitForGoogleTranslate(callback, retries - 1);
+    }, 500);
   } else {
-    currentLang = "ar";
-    combo.value = "ar";
-    document.getElementById("langBtn").innerText = "EN";
+    showToast("فشل تحميل الترجمة");
   }
+}
 
-  combo.dispatchEvent(new Event("change"));
+function toggleLanguage() {
+  waitForGoogleTranslate((combo) => {
+    if (currentLang === "ar") {
+      currentLang = "en";
+      combo.value = "en";
+      document.getElementById("langBtn").innerText = "AR";
+      document.documentElement.lang = "en";
+      document.documentElement.dir = "ltr";
+    } else {
+      currentLang = "ar";
+      combo.value = "ar";
+      document.getElementById("langBtn").innerText = "EN";
+      document.documentElement.lang = "ar";
+      document.documentElement.dir = "rtl";
+    }
+
+    combo.dispatchEvent(new Event("change"));
+  });
 }
 </script>
-
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
