@@ -689,43 +689,45 @@ ADMIN DASHBOARD
 
 <div id="cartDrawer" class="fixed inset-0 hidden z-50">
 
-<div onclick="toggleCart(false)" class="absolute inset-0 bg-black/50"></div>
+  <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/50"></div>
 
-<div class="absolute left-0 top-0 h-full w-full max-w-md bg-white dark:bg-slate-900 text-black dark:text-white flex flex-col">
+  <div class="absolute left-0 top-0 h-full w-full max-w-md bg-white dark:bg-slate-900 text-slate-900 dark:text-white flex flex-col">
 
-<div class="bg-slate-900 text-white p-5 flex justify-between items-center">
-<h2 class="text-2xl font-black">سلة الشراء</h2>
+    <div class="bg-slate-900 dark:bg-black text-white p-5 flex justify-between items-center">
+      <h2 class="text-2xl font-black">سلة الشراء</h2>
 
-<button onclick="toggleCart(false)" class="text-3xl">
-×
-</button>
+      <button onclick="toggleCart(false)" class="text-3xl">
+        ×
+      </button>
+    </div>
 
-</div>
+    <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-5 dark:bg-slate-900"></div>
 
-<div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-5"></div>
+    <div class="border-t p-5 bg-gray-50 dark:bg-slate-800 space-y-4">
 
-<div class="border-t p-5 bg-gray-50 space-y-4">
+      <input
+      id="customer-name"
+      type="text"
+      placeholder="الاسم"
+      class="w-full border p-3 rounded-lg bg-white dark:bg-slate-700 dark:text-white">
 
-<input
-id="customer-name"
-type="text"
-placeholder="الاسم"
-class="w-full border p-3 rounded-lg">
+      <input
+      id="customer-phone"
+      type="text"
+      placeholder="رقم الهاتف"
+      class="w-full border p-3 rounded-lg bg-white dark:bg-slate-700 dark:text-white">
 
-<input
-id="customer-phone"
-type="text"
-placeholder="رقم الهاتف"
-class="w-full border p-3 rounded-lg">
+      <textarea
+      id="customer-address"
+      placeholder="العنوان"
+      class="w-full border p-3 rounded-lg h-24 bg-white dark:bg-slate-700 dark:text-white"></textarea>
 
-<textarea
-id="customer-address"
-placeholder="العنوان"
-class="w-full border p-3 rounded-lg h-24"></textarea>
-
-<div class="flex justify-between text-2xl font-black">
-<span>الإجمالي</span>
-<span id="cart-total">0 ج.م</span>
+      <div class="flex justify-between text-2xl font-black">
+        <span>الإجمالي</span>
+        <span id="cart-total">0 ج.م</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <button
@@ -2093,6 +2095,7 @@ rating + "★";
 window.onload = ()=>{
 
   loadTheme();
+  loadLanguage();
   loadProducts();
   updateCart();
   loadCustomerData();
@@ -2107,7 +2110,7 @@ window.onload = ()=>{
     wishCount.innerText = wishlist.length;
   }
 
-  document.getElementById("pageLoader").style.display = "none";
+  document.getElementById("pageLoader").style.display="none";
 };
 
   async function setProductRating(productId, stars){
@@ -2455,49 +2458,38 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 </button>
 
 </div>
-</section><script>
+<script>
 let currentLang = "ar";
 
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: "ar",
-    includedLanguages: "ar,en",
-    autoDisplay: false
-  }, "google_translate_element");
-}
+function toggleLanguage(){
 
-function waitForGoogleTranslate(callback, retries = 20) {
-  const combo = document.querySelector(".goog-te-combo");
+  currentLang =
+  currentLang === "ar" ? "en" : "ar";
 
-  if (combo) {
-    callback(combo);
-  } else if (retries > 0) {
-    setTimeout(() => {
-      waitForGoogleTranslate(callback, retries - 1);
-    }, 500);
-  } else {
-    showToast("فشل تحميل الترجمة");
-  }
-}
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir =
+  currentLang === "ar" ? "rtl" : "ltr";
 
-function toggleLanguage() {
-  waitForGoogleTranslate((combo) => {
-    if (currentLang === "ar") {
-      currentLang = "en";
-      combo.value = "en";
-      document.getElementById("langBtn").innerText = "AR";
-      document.documentElement.lang = "en";
-      document.documentElement.dir = "ltr";
-    } else {
-      currentLang = "ar";
-      combo.value = "ar";
-      document.getElementById("langBtn").innerText = "EN";
-      document.documentElement.lang = "ar";
-      document.documentElement.dir = "rtl";
-    }
+  document.getElementById("langBtn").innerText =
+  currentLang === "ar" ? "EN" : "AR";
 
-    combo.dispatchEvent(new Event("change"));
+  document.querySelectorAll("[data-ar]").forEach(el=>{
+    el.innerText =
+    currentLang === "ar"
+    ? el.dataset.ar
+    : el.dataset.en;
   });
+
+  localStorage.setItem("lang", currentLang);
+}
+
+function loadLanguage(){
+  const saved =
+  localStorage.getItem("lang");
+
+  if(saved === "en"){
+    toggleLanguage();
+  }
 }
 </script>
 
