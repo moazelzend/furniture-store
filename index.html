@@ -718,6 +718,50 @@ function safeParse(key){
 
 let cart = safeParse("cart");
 let wishlist = safeParse("wishlist");
+  function getProductRating(productId){
+  const ratings =
+  JSON.parse(localStorage.getItem("productRatings") || "{}");
+
+  return ratings[productId] || 0;
+}
+
+function setProductRating(productId, stars){
+
+  let ratings =
+  JSON.parse(localStorage.getItem("productRatings") || "{}");
+
+  ratings[productId] = stars;
+
+  localStorage.setItem(
+    "productRatings",
+    JSON.stringify(ratings)
+  );
+
+  renderProducts(filteredProducts);
+
+  showToast("شكراً على تقييمك ⭐");
+}
+
+function renderStars(productId){
+
+  const current =
+  getProductRating(productId);
+
+  let html = "";
+
+  for(let i=1;i<=5;i++){
+    html += `
+      <i onclick="setProductRating(${productId},${i})"
+      class="fa-star cursor-pointer ${
+        i <= current
+        ? 'fa-solid text-amber-400'
+        : 'fa-regular text-gray-300'
+      }"></i>
+    `;
+  }
+
+  return html;
+}
 /* =========================
 MOBILE MENU
 ========================= */
@@ -1116,14 +1160,8 @@ ${product.price} ج.م
 
 </div>
 
-<div class="text-amber-400 text-lg">
-
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star-half-stroke"></i>
-
+<div class="text-lg flex gap-1">
+  ${renderStars(product.id)}
 </div>
 
 </div>
