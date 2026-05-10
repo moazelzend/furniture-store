@@ -322,17 +322,23 @@ url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
 أفضل الأثاث الحديث لمنزلك بتصميمات راقية وخامات عالية الجودة.
 </p>
 
-<div class="flex gap-8 mt-8 flex-wrap text-center">
-  <div>
-   <h3 id="ordersCountText" class="text-3xl font-black">0</h3>
-<p class="text-gray-300">طلب مكتمل</p>
+<div class="grid grid-cols-3 gap-8 mt-8 text-center max-w-xl">
 
+<div>
+<h3 id="ordersCountText" class="text-3xl font-black">0</h3>
+<p class="text-gray-300">طلب مكتمل</p>
+</div>
+
+<div>
 <h3 id="customersCountText" class="text-3xl font-black">0</h3>
 <p class="text-gray-300">عميل سعيد</p>
+</div>
 
+<div>
 <h3 id="ratingText" class="text-3xl font-black">0★</h3>
 <p class="text-gray-300">تقييم العملاء</p>
-  </div>
+</div>
+
 </div>
 
 <div class="flex gap-4 mt-8 flex-wrap">
@@ -2001,10 +2007,7 @@ console.log("خطأ تحميل عدد الطلبات", error);
 }
 
 }
-
 async function loadReviews(){
-
-try{
 
 const res = await fetch(reviewsURL);
 const data = await res.json();
@@ -2014,38 +2017,36 @@ document.getElementById("realReviews");
 
 let html = "";
 let totalStars = 0;
+let validReviews = 0;
 
 data.reverse().forEach(item=>{
 
-totalStars += Number(item.stars);
+const stars = Number(item.stars) || 5;
+
+totalStars += stars;
+validReviews++;
 
 html += `
 <div class="bg-white p-8 rounded-[30px] shadow-xl min-h-[250px]">
-
-<h3 class="font-black text-xl mb-3">
-${item.name}
-</h3>
-
+<h3 class="font-black text-xl mb-3">${item.name}</h3>
 <div class="text-amber-500 mb-4">
-${"⭐".repeat(Number(item.stars))}
+${"⭐".repeat(stars)}
 </div>
-
-<p class="text-gray-600">
-${item.review}
-</p>
-
+<p class="text-gray-600">${item.review}</p>
 </div>
 `;
-
 });
 
 container.innerHTML = html;
 
 const avg =
-(totalStars / data.length).toFixed(1);
+(totalStars / validReviews).toFixed(1);
 
 document.getElementById("ratingText").innerText =
 avg + "★";
+}
+
+
 
 }catch(err){
 console.log(err);
