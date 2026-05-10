@@ -1010,7 +1010,7 @@ updateDashboard();
 
 }catch(error){
 
-console.log(error);
+console.error("خطأ تحميل المنتجات:", error);
 
 loader.innerHTML = `
 <div class="col-span-full text-center py-20">
