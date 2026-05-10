@@ -140,7 +140,8 @@ transform:scale(1.15);
   color:white !important;
 }
   /* اخفاء شريط جوجل */
-.goog-te-banner-frame.skiptranslate{
+.goog-te-banner-frame,
+.skiptranslate iframe{
 display:none !important;
 }
 
@@ -2385,36 +2386,38 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 
 </div>
 </section>
- <script>
+<script>
+let currentLang = "ar";
+
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: "ar",
     includedLanguages: "ar,en",
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
     autoDisplay: false
   }, "google_translate_element");
 }
 
-function toggleLanguage() {
-  const interval = setInterval(() => {
-    const combo = document.querySelector(".goog-te-combo");
+function changeGoogleTranslate(lang){
+  const select = document.querySelector(".goog-te-combo");
 
-    if (combo) {
-      clearInterval(interval);
+  if(select){
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
 
-      if (document.documentElement.lang === "ar") {
-        combo.value = "en";
-        document.documentElement.lang = "en";
-        document.getElementById("langBtn").innerText = "AR";
-      } else {
-        combo.value = "ar";
-        document.documentElement.lang = "ar";
-        document.getElementById("langBtn").innerText = "EN";
-      }
+function toggleLanguage(){
 
-      combo.dispatchEvent(new Event("change"));
-    }
-  }, 500);
+  if(currentLang === "ar"){
+    currentLang = "en";
+    document.getElementById("langBtn").innerText = "AR";
+    changeGoogleTranslate("en");
+  }else{
+    currentLang = "ar";
+    document.getElementById("langBtn").innerText = "EN";
+    changeGoogleTranslate("ar");
+  }
+
 }
 </script>
 
