@@ -319,11 +319,8 @@ class="bg-gray-200 w-10 h-10 rounded-full text-xl">
 🌙
 </button>
   
-<button
-onclick="toggleLanguage()"
-id="langBtn"
-class="bg-slate-900 text-white px-4 py-2 rounded-xl">
-EN
+<button onclick="toggleLanguage()" id="langBtn">
+  EN
 </button>
 
 <button
@@ -2445,36 +2442,13 @@ function googleTranslateElementInit() {
     includedLanguages: "ar,en",
     autoDisplay: false
   }, "google_translate_element");
-
-  const style = document.createElement("style");
-  style.innerHTML = `
-    .goog-te-banner-frame,
-    .goog-te-balloon-frame,
-    .goog-tooltip,
-    .goog-te-menu-frame,
-    .skiptranslate iframe,
-    #goog-gt-tt{
-      display:none !important;
-      visibility:hidden !important;
-    }
-
-    body{
-      top:0 !important;
-      position:static !important;
-    }
-
-    iframe{
-      display:none !important;
-    }
-  `;
-  document.head.appendChild(style);
 }
 
 function toggleLanguage() {
   const combo = document.querySelector(".goog-te-combo");
 
   if (!combo) {
-    showToast("الترجمة تحمل...");
+    alert("الترجمة تحمل...");
     return;
   }
 
