@@ -565,7 +565,7 @@ TESTIMONIALS
 </h2>
 
 <div id="realReviews"
-class="grid grid-cols-3 gap-8">
+class="grid grid-cols-1 md:grid-cols-3 gap-8">
 </div>
 </section>
 
@@ -2009,61 +2009,64 @@ console.log("خطأ تحميل عدد الطلبات", error);
 }
 async function loadReviews(){
 
-try{
+  try{
 
-const res = await fetch(reviewsURL);
-const data = await res.json();
+    const res = await fetch(reviewsURL);
+    const data = await res.json();
 
-const container =
-document.getElementById("realReviews");
+    const container =
+    document.getElementById("realReviews");
 
-let html = "";
-let totalStars = 0;
-let validReviews = 0;
+    let html = "";
+    let totalStars = 0;
+    let validReviews = 0;
 
-data
-.filter(item => item.name && item.name !== "name")
-.reverse()
-.forEach(item=>{
+    data
+    .filter(item => item.name && item.name !== "name")
+    .reverse()
+    .forEach(item=>{
 
-const stars = Number(item.stars) || 5;
+      const stars = Number(item.stars) || 5;
 
-totalStars += stars;
-validReviews++;
+      totalStars += stars;
+      validReviews++;
 
-html += `
-<div class="bg-white p-6 rounded-[30px] shadow-xl min-h-[250px] break-words overflow-hidden">
-  <h3 class="font-black text-xl mb-3">${item.name}</h3>
+      html += `
+      <div class="bg-white p-6 rounded-[30px] shadow-xl min-h-[250px] break-words overflow-hidden">
 
-  <div class="text-amber-500 mb-4 text-xl flex flex-wrap gap-1">
-    ${"⭐".repeat(stars)}
-  </div>
+        <h3 class="font-black text-xl mb-3">
+          ${item.name}
+        </h3>
 
-  <p class="text-gray-600">
-    ${item.review}
-  </p>
-</div>
-`;
+        <div class="text-amber-500 mb-4 text-xl flex flex-wrap gap-1 overflow-hidden">
+          ${"⭐".repeat(stars)}
+        </div>
 
-});
+        <p class="text-gray-600 break-words">
+          ${item.review}
+        </p>
 
-container.innerHTML = html;
+      </div>
+      `;
+    });
 
-const avg =
-validReviews ? (totalStars / validReviews).toFixed(1) : 5;
+    container.innerHTML = html;
 
-document.getElementById("ratingText").innerText =
-avg + "★";
+    const avg =
+    validReviews
+    ? (totalStars / validReviews).toFixed(1)
+    : 5;
 
-}catch(error){
+    document.getElementById("ratingText").innerText =
+    avg + "★";
 
-console.log(error);
+  } catch(error){
+
+    console.log("reviews error:", error);
+
+  }
 
 }
-
-
-
-
 </script>
 
 <!-- =========================
