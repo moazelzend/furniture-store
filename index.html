@@ -2033,11 +2033,15 @@ validReviews++;
 
 html += `
 <div class="bg-white p-6 rounded-[30px] shadow-xl min-h-[250px] break-words overflow-hidden">
-<h3 class="font-black text-xl mb-3">${item.name}</h3>
-<div class="text-amber-500 mb-4 text-xl flex flex-wrap gap-1">
-${"⭐".repeat(stars)}
-</div>
-<p class="text-gray-600">${item.review}</p>
+  <h3 class="font-black text-xl mb-3">${item.name}</h3>
+
+  <div class="text-amber-500 mb-4 text-xl flex flex-wrap gap-1">
+    ${"⭐".repeat(stars)}
+  </div>
+
+  <p class="text-gray-600">
+    ${item.review}
+  </p>
 </div>
 `;
 
@@ -2045,7 +2049,8 @@ ${"⭐".repeat(stars)}
 
 container.innerHTML = html;
 
-const avg = (totalStars / validReviews).toFixed(1);
+const avg =
+validReviews ? (totalStars / validReviews).toFixed(1) : 5;
 
 document.getElementById("ratingText").innerText =
 avg + "★";
@@ -2055,6 +2060,8 @@ avg + "★";
 console.log(error);
 
 }
+
+
 
 
 </script>
