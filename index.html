@@ -984,19 +984,12 @@ const response = await fetch(productsURL);
 products = await response.json();
 
 products = products.map(product => ({
-
-id: Number(product.id),
-
-name: product.name,
-
-price: Number(product.price),
-
-image: product.image,
-
-desc: product.desc,
-
-category: product.category
-
+  id: Number(product.id),
+  name: product.name,
+  price: Number(product.price),
+  image: product.image,
+  desc: product.desc,
+  category: product.category
 }));
 
 filteredProducts = [...products];
@@ -1013,23 +1006,20 @@ loader.style.display = "none";
 renderProducts(filteredProducts);
 renderBestProducts();
 updateDashboard();
+
 }catch(error){
 
 console.error("خطأ تحميل المنتجات:", error);
 
 loader.innerHTML = `
 <div class="col-span-full text-center py-20">
-
 <i class="fa-solid fa-triangle-exclamation text-6xl text-red-400 mb-5"></i>
-
 <h3 class="text-3xl font-black text-red-500">
 فشل تحميل المنتجات
 </h3>
-
 <p class="text-gray-500 mt-3">
 تأكد من اتصال الإنترنت
 </p>
-
 </div>
 `;
 
