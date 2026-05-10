@@ -116,6 +116,24 @@ transform:scale(1.15);
 <!-- Google Analytics -->
 <script async
 src="https://www.googletagmanager.com/gtag/js?id=G-BTZGTJPGH7">
+
+  async function loadOrdersCount(){
+
+const res =
+await fetch(scriptURL);
+
+const data =
+await res.json();
+
+document.getElementById("ordersCountText")
+.innerText =
+"+" + data.orders;
+
+document.getElementById("customersCountText")
+.innerText =
+"+" + data.orders;
+
+}
 </script>
 
 <script>
@@ -2034,7 +2052,7 @@ loadCustomerData();
 
 renderWishlist();
   
-updateLiveStats();
+loadOrdersCount();
 
   loadReviews();
   
