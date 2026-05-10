@@ -159,6 +159,7 @@ gtag('config', 'G-BTZGTJPGH7');
 </head>
 
 <body>
+  <div id="google_translate_element" style="display:none;"></div>
 <div id="pageLoader"
 class="fixed inset-0 bg-white z-[99999] flex items-center justify-center">
 
@@ -2364,28 +2365,38 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 
 </div>
 </section>
- <script>
-let currentLang = "ar";
+  <script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'ar',
+    includedLanguages: 'ar,en',
+    autoDisplay: false
+  }, 'google_translate_element');
+}
 
-function toggleLanguage(){
+function toggleLanguage() {
+  const combo = document.querySelector(".goog-te-combo");
 
-  currentLang = currentLang === "ar" ? "en" : "ar";
+  if (!combo) {
+    alert("انتظر تحميل الترجمة ثم حاول مرة أخرى");
+    return;
+  }
 
-  document.documentElement.lang = currentLang;
-  document.documentElement.dir =
-  currentLang === "ar" ? "rtl" : "ltr";
+  if (document.documentElement.lang === "ar") {
+    combo.value = "en";
+    document.documentElement.lang = "en";
+    document.getElementById("langBtn").innerText = "AR";
+  } else {
+    combo.value = "ar";
+    document.documentElement.lang = "ar";
+    document.getElementById("langBtn").innerText = "EN";
+  }
 
-  document.querySelectorAll("[data-ar]").forEach(el=>{
-    el.innerText =
-    currentLang === "ar"
-    ? el.dataset.ar
-    : el.dataset.en;
-  });
-
-  document.getElementById("langBtn").innerText =
-  currentLang === "ar" ? "EN" : "AR";
+  combo.dispatchEvent(new Event("change"));
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
 
