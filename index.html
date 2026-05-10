@@ -2424,8 +2424,7 @@ function googleTranslateElementInit() {
     autoDisplay: false
   }, "google_translate_element");
 
-  // إخفاء شريط جوجل بالكامل
-  setInterval(() => {
+  setInterval(function () {
     const banner = document.querySelector(".goog-te-banner-frame");
     const tooltip = document.getElementById("goog-gt-tt");
     const frame = document.querySelector(".goog-te-balloon-frame");
