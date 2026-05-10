@@ -115,33 +115,8 @@ transform:scale(1.15);
 </style>
 <!-- Google Analytics -->
 <script async
-src="https://www.googletagmanager.com/gtag/js?id=G-BTZGTJPGH7">
+src="https://www.googletagmanager.com/gtag/js?id=G-BTZGTJPGH7"></script>
 
-async function loadOrdersCount(){
-
-try{
-
-const res =
-await fetch(scriptURL);
-
-const data =
-await res.json();
-
-document.getElementById("ordersCountText")
-.innerText =
-"+" + data.length;
-
-document.getElementById("customersCountText")
-.innerText =
-"+" + data.length;
-
-}catch(error){
-
-console.log(error);
-
-}
-}
-</script>
 
 <script>
 window.dataLayer = window.dataLayer || [];
