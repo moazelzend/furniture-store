@@ -135,6 +135,10 @@ transform:scale(1.15);
 .dark .bg-gray-50{
   background:#374151 !important;
 }
+  .dark .product-category{
+  background:#374151 !important;
+  color:white !important;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -221,8 +225,16 @@ data-ar="الرئيسية"
 data-en="Home">
 الرئيسية
 </a>
-<a href="#features" class="hover:text-amber-700 transition">لماذا نحن</a>
-<a href="#best" class="hover:text-amber-700 transition">الأكثر مبيعًا</a>
+<a href="#features"
+data-ar="لماذا نحن"
+data-en="Why Us">
+لماذا نحن
+</a>
+<a href="#best"
+data-ar="الأكثر مبيعًا"
+data-en="Best Sellers">
+الأكثر مبيعًا
+</a>
 <a href="#products"
 data-ar="المنتجات"
 data-en="Products">
@@ -369,7 +381,9 @@ class="bg-slate-900 text-white px-8 py-4 rounded-xl font-black hover:scale-105 t
 
 <section id="features" class="container mx-auto px-6 py-20">
 
-<h2 class="text-5xl font-black text-center mb-16">
+<h2
+data-ar="لماذا تختار Era&Art ؟"
+data-en="Why Choose Era&Art?">
 لماذا تختار Era&Art ؟
 </h2>
 
@@ -415,7 +429,9 @@ CUSTOMER REVIEWS
 ========================= -->
 
 
-<h2 class="text-5xl font-black text-center mb-16">
+<h2
+data-ar="🔥 الأكثر مبيعًا"
+data-en="🔥 Best Sellers">
 🔥 الأكثر مبيعًا
 </h2>
 
@@ -560,7 +576,9 @@ TESTIMONIALS
 
 <section class="container mx-auto px-6 py-20">
 
-<h2 class="text-5xl font-black text-center mb-16">
+<h2
+data-ar="آراء عملائنا"
+data-en="Customer Reviews">
 آراء عملائنا
 </h2>
 
@@ -1155,7 +1173,7 @@ class="w-full h-72 object-cover group-hover:scale-110 transition duration-700 cu
 
 <!-- CATEGORY -->
 
-<div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-sm font-black shadow">
+<div class="product-category absolute top-4 left-4 bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-sm font-black shadow">
 
 ${escapeHTML(product.category)}
 
@@ -1216,10 +1234,8 @@ ${product.price} ج.م
 
 <button
 onclick="openModal(${product.id})"
-class="flex-1 bg-gray-100 hover:bg-gray-200 text-slate-900 py-4 rounded-2xl font-black transition">
-
+class="flex-1 bg-gray-100 dark:bg-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 py-4 rounded-2xl font-black transition">
 التفاصيل
-
 </button>
 
 <button
@@ -2311,7 +2327,9 @@ rel="noopener noreferrer"
 </footer>
   <section class="container mx-auto px-6 py-20">
 
-<h2 class="text-4xl font-black text-center mb-10">
+<h2
+data-ar="أضف تقييمك"
+data-en="Add Your Review">
 أضف تقييمك
 </h2>
 
@@ -2346,28 +2364,26 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 
 </div>
 </section>
-  <script>
+ <script>
+let currentLang = "ar";
+
 function toggleLanguage(){
 
-let isArabic =
-document.documentElement.lang !== "en";
+  currentLang = currentLang === "ar" ? "en" : "ar";
 
-document.documentElement.lang =
-isArabic ? "en" : "ar";
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir =
+  currentLang === "ar" ? "rtl" : "ltr";
 
-document.documentElement.dir =
-isArabic ? "ltr" : "rtl";
+  document.querySelectorAll("[data-ar]").forEach(el=>{
+    el.innerText =
+    currentLang === "ar"
+    ? el.dataset.ar
+    : el.dataset.en;
+  });
 
-document.querySelectorAll("[data-ar]")
-.forEach(el=>{
-el.innerText =
-isArabic
-? el.dataset.en
-: el.dataset.ar;
-});
-
-document.getElementById("langBtn").innerText =
-isArabic ? "AR" : "EN";
+  document.getElementById("langBtn").innerText =
+  currentLang === "ar" ? "EN" : "AR";
 }
 </script>
 </body>
