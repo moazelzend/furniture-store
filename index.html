@@ -2411,25 +2411,7 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 
 </div>
 </section>
-<script>
-let currentLang = "ar";
-
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    setInterval(() => {
-  const banner = document.querySelector(".goog-te-banner-frame");
-  const tooltip = document.getElementById("goog-gt-tt");
-
-  if (banner) banner.remove();
-  if (tooltip) tooltip.remove();
-
-  document.body.style.top = "0px";
-}, 500);
-    pageLanguage: "ar",
-    includedLanguages: "ar,en",
-    autoDisplay: false
-  }, "google_translate_element");
-}
+<!-- Google Translate Hidden Container -->
 <div id="google_translate_element" style="display:none;"></div>
 
 <script>
@@ -2442,7 +2424,7 @@ function googleTranslateElementInit() {
     autoDisplay: false
   }, "google_translate_element");
 
-  // اخفاء شريط جوجل نهائياً
+  // إخفاء شريط جوجل بالكامل
   setInterval(() => {
     const banner = document.querySelector(".goog-te-banner-frame");
     const tooltip = document.getElementById("goog-gt-tt");
