@@ -2099,7 +2099,31 @@ await fetch(reviewsURL,{
 showToast("شكراً على تقييمك");
 loadReviews();
 }
+async function loadOrdersCount(){
 
+try{
+
+const res =
+await fetch(scriptURL);
+
+const data =
+await res.json();
+
+document.getElementById("ordersCountText")
+.innerText =
+"+" + data.orders;
+
+document.getElementById("customersCountText")
+.innerText =
+"+" + data.orders;
+
+}catch(error){
+
+console.log("خطأ تحميل عدد الطلبات", error);
+
+}
+
+}
 
 async function loadReviews(){
 
