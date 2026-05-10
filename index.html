@@ -1000,14 +1000,19 @@ category: product.category
 }));
 
 filteredProducts = [...products];
-document.getElementById("adminProducts").innerText =
-products.length;
+
+const adminProducts =
+document.getElementById("adminProducts");
+
+if(adminProducts){
+  adminProducts.innerText = products.length;
+}
+
 loader.style.display = "none";
 
 renderProducts(filteredProducts);
 renderBestProducts();
 updateDashboard();
-
 }catch(error){
 
 console.error("خطأ تحميل المنتجات:", error);
