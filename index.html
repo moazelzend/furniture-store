@@ -2009,6 +2009,8 @@ console.log("خطأ تحميل عدد الطلبات", error);
 }
 async function loadReviews(){
 
+try{
+
 const res = await fetch(reviewsURL);
 const data = await res.json();
 
@@ -2035,22 +2037,22 @@ ${"⭐".repeat(stars)}
 <p class="text-gray-600">${item.review}</p>
 </div>
 `;
+
 });
 
 container.innerHTML = html;
 
-const avg =
-(totalStars / validReviews).toFixed(1);
+const avg = (totalStars / validReviews).toFixed(1);
 
 document.getElementById("ratingText").innerText =
 avg + "★";
+
+}catch(error){
+
+console.log(error);
+
 }
 
-
-
-}catch(err){
-console.log(err);
-}
 }
 </script>
 
