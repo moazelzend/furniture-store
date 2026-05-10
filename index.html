@@ -200,6 +200,7 @@ Era&Art
 </nav>
 
 <div class="flex items-center gap-4">
+  <div class="flex items-center gap-4">
 <!-- WISHLIST BUTTON -->
 
 <button
@@ -718,6 +719,28 @@ function safeParse(key){
 
 let cart = safeParse("cart");
 let wishlist = safeParse("wishlist");
+  function toggleDarkMode(){
+
+  document.documentElement.classList.toggle("dark");
+
+  if(document.documentElement.classList.contains("dark")){
+    localStorage.setItem("theme","dark");
+  }else{
+    localStorage.setItem("theme","light");
+  }
+
+}
+
+function loadTheme(){
+
+  const theme =
+  localStorage.getItem("theme");
+
+  if(theme === "dark"){
+    document.documentElement.classList.add("dark");
+  }
+
+}
   function getProductRating(productId){
   const ratings =
   JSON.parse(localStorage.getItem("productRatings") || "{}");
