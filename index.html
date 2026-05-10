@@ -117,7 +117,9 @@ transform:scale(1.15);
 <script async
 src="https://www.googletagmanager.com/gtag/js?id=G-BTZGTJPGH7">
 
-  async function loadOrdersCount(){
+async function loadOrdersCount(){
+
+try{
 
 const res =
 await fetch(scriptURL);
@@ -127,12 +129,17 @@ await res.json();
 
 document.getElementById("ordersCountText")
 .innerText =
-"+" + data.orders;
+"+" + data.length;
 
 document.getElementById("customersCountText")
 .innerText =
-"+" + data.orders;
+"+" + data.length;
 
+}catch(error){
+
+console.log(error);
+
+}
 }
 </script>
 
@@ -579,112 +586,6 @@ class="grid grid-cols-1 md:grid-cols-3 gap-8">
 </div>
 
 </section>
-<!-- CARD -->
-
-<div class="bg-white p-8 rounded-[30px] shadow-xl hover:-translate-y-2 transition duration-300">
-
-<div class="flex items-center gap-4 mb-6">
-
-<img
-src="https://randomuser.me/api/portraits/women/44.jpg"
-loading="lazy"
-class="w-16 h-16 rounded-full object-cover">
-
-<div>
-
-<h3 class="font-black text-xl">
-سارة أحمد
-</h3>
-
-<div class="text-amber-500">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-</div>
-
-</div>
-
-</div>
-
-<p class="text-gray-600 leading-8">
-الخامات ممتازة جدًا والتشطيب فوق الممتاز، والتوصيل كان سريع جدًا.
-</p>
-
-</div>
-
-<!-- CARD -->
-
-<div class="bg-white p-8 rounded-[30px] shadow-xl hover:-translate-y-2 transition duration-300">
-
-<div class="flex items-center gap-4 mb-6">
-
-<img
-src="https://randomuser.me/api/portraits/men/32.jpg"
-loading="lazy"
-class="w-16 h-16 rounded-full object-cover">
-
-<div>
-
-<h3 class="font-black text-xl">
-محمد خالد
-</h3>
-
-<div class="text-amber-500">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-</div>
-
-</div>
-
-</div>
-
-<p class="text-gray-600 leading-8">
-التصميمات شيك جدًا والسعر مناسب مقارنة بالجودة.
-</p>
-
-</div>
-
-<!-- CARD -->
-
-<div class="bg-white p-8 rounded-[30px] shadow-xl hover:-translate-y-2 transition duration-300">
-
-<div class="flex items-center gap-4 mb-6">
-
-<img
-src="https://randomuser.me/api/portraits/women/68.jpg"
-loading="lazy"
-class="w-16 h-16 rounded-full object-cover">
-
-<div>
-
-<h3 class="font-black text-xl">
-منة الله
-</h3>
-
-<div class="text-amber-500">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-</div>
-
-</div>
-
-</div>
-
-<p class="text-gray-600 leading-8">
-تجربة ممتازة من أول الطلب لحد الاستلام، وأنصح بالمكان جدًا.
-</p>
-
-</div>
-
-</div>
 
 </section> 
 <!-- =========================
@@ -2051,11 +1952,11 @@ updateCart();
 loadCustomerData();
 
 renderWishlist();
-  
+
 loadOrdersCount();
 
-  loadReviews();
-  
+loadReviews();
+
 document.getElementById("wishlist-count").innerText =
 wishlist.length;
 
@@ -2127,6 +2028,8 @@ console.log("خطأ تحميل عدد الطلبات", error);
 
 async function loadReviews(){
 
+try{
+
 const res = await fetch(reviewsURL);
 const data = await res.json();
 
@@ -2148,7 +2051,7 @@ ${item.name}
 </h3>
 
 <div class="text-amber-500 mb-4">
-${"⭐".repeat(item.stars)}
+${"⭐".repeat(Number(item.stars))}
 </div>
 
 <p class="text-gray-600">
@@ -2157,6 +2060,7 @@ ${item.review}
 
 </div>
 `;
+
 });
 
 container.innerHTML = html;
@@ -2166,6 +2070,10 @@ const avg =
 
 document.getElementById("ratingText").innerText =
 avg + "★";
+
+}catch(err){
+console.log(err);
+}
 }
 </script>
 
