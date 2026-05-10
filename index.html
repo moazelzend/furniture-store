@@ -1983,35 +1983,24 @@ rating + "★";
 
 }
 window.onload = ()=>{
-  
-loadTheme();
-loadProducts();
 
-updateCart();
+  loadTheme();
+  loadProducts();
+  updateCart();
+  loadCustomerData();
+  renderWishlist();
+  loadOrdersCount();
+  loadReviews();
 
-loadCustomerData();
+  const wishCount =
+  document.getElementById("wishlist-count");
 
-renderWishlist();
-
-loadOrdersCount();
-
-loadReviews();
-
-const wish =
-document.getElementById("wishlist-count");
-
-if(wish){
-wish.innerText = wishlist.length;
-}
-
-document.getElementById("pageLoader").style.display = "none";
-
-};
-document.addEventListener("keydown",(e)=>{
-  if(e.key === "Escape"){
-    closeModal();
+  if(wishCount){
+    wishCount.innerText = wishlist.length;
   }
-});
+
+  document.getElementById("pageLoader").style.display = "none";
+};
 
   async function setProductRating(productId, stars){
 
