@@ -744,19 +744,16 @@ function setProductRating(productId, stars){
 
 function renderStars(productId){
 
-  const current =
-  getProductRating(productId);
-
   let html = "";
 
   for(let i=1;i<=5;i++){
+
     html += `
-      <i onclick="setProductRating(${productId},${i})"
-      class="fa-star cursor-pointer ${
-        i <= current
-        ? 'fa-solid text-amber-400'
-        : 'fa-regular text-gray-300'
-      }"></i>
+      <span
+      onclick="setProductRating(${productId},${i})"
+      style="cursor:pointer;font-size:22px">
+      ⭐
+      </span>
     `;
   }
 
@@ -1964,6 +1961,21 @@ document.addEventListener("keydown",(e)=>{
   }
 });
 
+  async function setProductRating(productId, stars){
+
+  const formData = new FormData();
+
+  formData.append("productId", productId);
+  formData.append("productStars", stars);
+
+  await fetch(reviewsURL,{
+    method:"POST",
+    mode:"no-cors",
+    body: formData
+  });
+
+  showToast("شكراً على تقييمك ⭐");
+}
   async function submitReview(){
 
 const name =
@@ -2020,6 +2032,19 @@ console.log("خطأ تحميل عدد الطلبات", error);
 }
 
 }
+
+  let productRatings = {};
+
+function getProductRating(productId){
+
+  const arr = productRatings[productId] || [];
+
+  if(arr.length === 0) return 0;
+
+  return Math.round(
+    arr.reduce((a,b)=>a+b,0) / arr.length
+  );
+}
 async function loadReviews(){
 
   try{
@@ -2029,11 +2054,25 @@ async function loadReviews(){
 
     const container =
     document.getElementById("realReviews");
+    productRatings = {};
 
     let html = "";
     let totalStars = 0;
     let validReviews = 0;
 
+    data.forEach(item=>{
+
+  if(item.productId && item.productStars){
+
+    if(!productRatings[item.productId]){
+      productRatings[item.productId] = [];
+    }
+
+    productRatings[item.productId]
+    .push(Number(item.productStars));
+  }
+
+});
     data
     .filter(item => item.name && item.name !== "name")
     .reverse()
@@ -2072,6 +2111,7 @@ async function loadReviews(){
 
     document.getElementById("ratingText").innerText =
     avg + "★";
+    renderProducts(filteredProducts);
 
   } catch(error){
 
