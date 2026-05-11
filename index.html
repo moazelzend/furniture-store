@@ -1980,15 +1980,19 @@ document.getElementById("ratingText").innerText =
 rating + "★";
 
 }
-window.onload = ()=>{
-  loadProducts();
-  updateCart();
-  renderWishlist();
-  loadOrdersCount();
-  loadReviews();
-  loadCustomerData();
-}
-
+window.onload = async () => {
+    console.log("الموقع بدأ التحميل...");
+    try {
+        // بنحاول نجيب البيانات
+        await loadProducts(); 
+    } catch (error) {
+        console.error("فشل في جلب البيانات بسبب CORS أو مشكلة شبكة:", error);
+        // ممكن هنا تحط بيانات "وهمية" عشان الموقع ما يبقاش فاضي
+    } finally {
+        // السطر ده هو اللي بيشيل الشاشة البيضاء (اللودر) مهما حصل
+        hideLoader(); 
+    }
+};
   async function setProductRating(productId, stars){
 
   const formData = new FormData();
