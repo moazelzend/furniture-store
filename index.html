@@ -2480,7 +2480,50 @@ window.onload = async () => {
         hideLoader(); // سيتم استدعاؤها الآن بدون خطأ
     }
 };
-</script>    
+</script> 
+ <script>
+// 1. تعريف الدالة في البداية خالص عشان المتصفح يشوفها (Global Scope)
+window.hideLoader = function() {
+    console.log("محاولة إخفاء اللودر...");
+    const loader = document.getElementById("pageLoader");
+    if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(() => {
+            loader.style.display = "none";
+            console.log("تم إخفاء اللودر بنجاح.");
+        }, 500);
+    }
+};
+
+// 2. تايمر أمان (Safety Timeout) 
+// لو حصل أي خطأ في الكود أو جوجل سكريبت، اللودر هيختفي بعد 5 ثواني مهما حصل
+setTimeout(() => {
+    if (document.getElementById("pageLoader") && document.getElementById("pageLoader").style.display !== "none") {
+        console.warn("إخفاء إجباري لللودر بسبب تأخر الاستجابة");
+        window.hideLoader();
+    }
+}, 5000);
+
+// 3. تشغيل الموقع
+window.onload = async () => {
+    console.log("الموقع بدأ التحميل...");
+    
+    try {
+        // تأكد إن الدالة دي موجودة عندك في الكود فوق
+        if (typeof loadProducts === "function") {
+            await loadProducts();
+        }
+    } catch (error) {
+        console.error("فشل تحميل البيانات، لكن الموقع سيفتح:", error);
+    } finally {
+        // استدعاء الدالة اللي عرفناها فوق
+        window.hideLoader();
+        
+        if (typeof updateCart === "function") updateCart();
+        if (typeof loadCustomerData === "function") loadCustomerData();
+    }
+};
+</script>   
 </body>
 </html>
 
