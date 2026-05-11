@@ -2398,7 +2398,43 @@ async function checkout() {
 }
 
 // 4. تأكد من إغلاق الوسم
+// دالة إخفاء اللودر
+function hideLoader() {
+    const loader = document.getElementById("pageLoader");
+    if (loader) {
+        loader.style.transition = "opacity 0.5s";
+        loader.style.opacity = "0";
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
+    }
+}
+
+// تشغيل الموقع بالكامل
+window.addEventListener('DOMContentLoaded', async () => {
+    console.log("بدء تشغيل العمليات...");
+    try {
+        // محاولة تحميل المنتجات
+        if (typeof loadProducts === "function") {
+            await loadProducts();
+        }
+        
+        // تحديث السلة والبيانات
+        if (typeof updateCart === "function") updateCart();
+        if (typeof loadCustomerData === "function") loadCustomerData();
+
+    } catch (error) {
+        console.error("حدث خطأ أثناء تحميل البيانات:", error);
+    } finally {
+        // إخفاء الشاشة البيضاء في كل الحالات (حتى لو فشل التحميل)
+        hideLoader();
+    }
+});
+
+// أضف هذا السطر كأمان إضافي إذا تعطل الـ JavaScript لأي سبب
+setTimeout(hideLoader, 5000);    
 </script>
+    
 </body>
 </html>
 
