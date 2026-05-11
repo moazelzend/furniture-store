@@ -1,742 +1,2257 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Era&Art | أثاث عصري فاخر</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2553/2553691.png">
+<title>Era&Art | أثاث عصري فاخر</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2553/2553691.png">
+<meta name="description"
+content="Era&Art أثاث عصري فاخر بأفضل الأسعار في مصر، غرف معيشة وغرف نوم وطاولات وديكور بجودة عالية">
 
-  <meta name="description"
-    content="Era&Art أثاث عصري فاخر بأفضل الأسعار في مصر، غرف معيشة وغرف نوم وطاولات وديكور بجودة عالية">
+<meta name="keywords"
+content="أثاث, furniture, غرف نوم, غرف معيشة, ديكور, Era&Art">
 
-  <meta name="keywords"
-    content="أثاث, furniture, غرف نوم, غرف معيشة, ديكور, Era&Art">
+<meta name="author"
+content="Era&Art">
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <meta name="author" content="Era&Art">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
+rel="stylesheet">
 
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<style>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
-    rel="stylesheet">
+html{
+scroll-behavior:smooth;
+}
 
-  <style>
-    html{
-      scroll-behavior:smooth;
-    }
+body{
+font-family:'Tajawal',sans-serif;
+background:#f8f6f2;
+}
 
-    body{
-      font-family:'Tajawal',sans-serif;
-      background:#f8f6f2;
-    }
+.loader{
+width:22px;
+height:22px;
+border:3px solid #fff;
+border-top:3px solid transparent;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
 
-    #cartDrawer .bg-slate-900{
-      background:#0f172a !important;
-      color:white !important;
-    }
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
 
-    #cartDrawer input,
-    #cartDrawer textarea{
-      background:#1e293b !important;
-      color:white !important;
-      border:1px solid #475569 !important;
-    }
+.fade-up{
+animation:fadeUp .7s ease;
+}
 
-    #cartDrawer input::placeholder,
-    #cartDrawer textarea::placeholder{
-      color:#cbd5e1 !important;
-    }
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
 
-    #cartDrawer #cart-items h3,
-    #cartDrawer #cart-total,
-    #cartDrawer span,
-    #cartDrawer p{
-      color:white !important;
-    }
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+.product-card{
+  transition:.3s;
+}
 
-    .loader{
-      width:22px;
-      height:22px;
-      border:3px solid #fff;
-      border-top:3px solid transparent;
-      border-radius:50%;
-      animation:spin 1s linear infinite;
-    }
+.product-card:hover{
+  transform:translateY(-8px);
+}
+/* =========================
+TOAST ANIMATION
+========================= */
 
-    @keyframes spin{
-      100%{
-        transform:rotate(360deg);
-      }
-    }
+#toast{
+animation:toastSlide .4s ease;
+}
 
-    .fade-up{
-      animation:fadeUp .7s ease;
-    }
+@keyframes toastSlide{
 
-    @keyframes fadeUp{
-      from{
-        opacity:0;
-        transform:translateY(30px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
+from{
+opacity:0;
+transform:translateX(100px);
+}
 
-    .product-card{
-      transition:.3s;
-    }
+to{
+opacity:1;
+transform:translateX(0);
+}
 
-    .product-card:hover{
-      transform:translateY(-8px);
-    }
+}
 
-    #toast{
-      animation:toastSlide .4s ease;
-    }
+footer a{
+transition:all .3s ease;
+}
 
-    @keyframes toastSlide{
-      from{
-        opacity:0;
-        transform:translateX(100px);
-      }
-      to{
-        opacity:1;
-        transform:translateX(0);
-      }
-    }
+footer a:hover{
+transform:translateY(-4px);
+}
 
-    footer a{
-      transition:all .3s ease;
-    }
+footer .fa-brands,
+footer .fa-solid{
+transition:all .3s ease;
+}
 
-    footer a:hover{
-      transform:translateY(-4px);
-    }
-  </style>
+footer a:hover i{
+transform:scale(1.15);
+}
+</style>
+<!-- Google Analytics -->
+<script async
+src="https://www.googletagmanager.com/gtag/js?id=G-BTZGTJPGH7">
+</script>
 
-  <!-- Google Analytics -->
-  <script async
-    src="https://www.googletagmanager.com/gtag/js?id=G-BTZGTJPGH7">
-  </script>
+<script>
+window.dataLayer = window.dataLayer || [];
 
-  <script>
-    window.dataLayer = window.dataLayer || [];
+function gtag(){
+dataLayer.push(arguments);
+}
 
-    function gtag(){
-      dataLayer.push(arguments);
-    }
+gtag('js', new Date());
 
-    gtag('js', new Date());
-    gtag('config', 'G-BTZGTJPGH7');
-  </script>
+gtag('config', 'G-BTZGTJPGH7');
+</script>
 </head>
 
 <body>
+<div id="pageLoader"
+class="fixed inset-0 bg-white z-[99999] flex items-center justify-center">
 
-  <!-- PAGE LOADER -->
-  <div id="pageLoader"
-    class="fixed inset-0 bg-white z-[99999] flex items-center justify-center">
-    <div class="w-16 h-16 border-4 border-amber-700 border-t-transparent rounded-full animate-spin"></div>
-  </div>
+  <div class="w-16 h-16 border-4 border-amber-700 border-t-transparent rounded-full animate-spin"></div>
 
-  <!-- TOAST -->
-  <div id="toast"
-    class="fixed top-6 right-6 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl hidden z-[9999]">
-    تمت العملية بنجاح
-  </div>
+</div>
 
-  <!-- SUCCESS POPUP -->
-  <div id="successPopup"
-    class="fixed inset-0 bg-black/60 hidden z-[99999] flex items-center justify-center p-6">
+<div id="toast"
+class="fixed top-6 right-6 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl hidden z-[9999]">
+تمت العملية بنجاح
+</div>
+<div id="successPopup"
+class="fixed inset-0 bg-black/60 hidden z-[99999] flex items-center justify-center p-6">
 
-    <div class="bg-white rounded-3xl p-10 max-w-md w-full text-center">
+  <div class="bg-white rounded-3xl p-10 max-w-md w-full text-center">
 
-      <div class="text-6xl mb-5">✅</div>
+    <div class="text-6xl mb-5">✅</div>
 
-      <h2 class="text-3xl font-black mb-4">
-        تم استلام طلبك
-      </h2>
-
-      <p class="text-gray-600 leading-8 mb-6">
-        سنتواصل معك خلال 10 دقائق لتأكيد الطلب
-      </p>
-
-      <p id="orderIdText"
-        class="text-amber-700 font-black text-xl mb-6"></p>
-
-      <p id="deliveryTimeText"
-        class="text-gray-500 text-lg mb-6"></p>
-
-      <a id="trackBtn"
-        href="#"
-        class="block bg-green-600 text-white px-8 py-3 rounded-xl font-black mb-3">
-        تتبع الطلب
-      </a>
-
-      <button onclick="closeSuccessPopup()"
-        class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
-        إغلاق
-      </button>
-
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header class="bg-white shadow sticky top-0 z-50">
-
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-
-      <div class="flex items-center gap-3">
-        <i class="fa-solid fa-couch text-3xl text-amber-700"></i>
-        <h1 class="text-3xl font-black">Era&Art</h1>
-      </div>
-
-      <nav class="hidden md:flex gap-8 font-bold text-slate-700">
-        <a href="#home">الرئيسية</a>
-        <a href="#features">لماذا نحن</a>
-        <a href="#best">الأكثر مبيعًا</a>
-        <a href="#products">المنتجات</a>
-      </nav>
-
-      <div class="flex items-center gap-4">
-
-        <button id="menuBtn"
-          class="md:hidden bg-slate-900 text-white w-10 h-10 rounded-full">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <button
-          onclick="document.getElementById('wishlist-container').scrollIntoView({behavior:'smooth'})"
-          class="relative p-2">
-          <i class="fa-solid fa-heart text-2xl text-red-500"></i>
-          <span id="wishlist-count"
-            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-            0
-          </span>
-        </button>
-
-        <button onclick="toggleCart(true)"
-          class="relative p-2">
-          <i class="fa-solid fa-bag-shopping text-2xl text-slate-900"></i>
-          <span id="cart-count"
-            class="absolute -top-1 -right-1 bg-amber-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-            0
-          </span>
-        </button>
-
-      </div>
-    </div>
-  </header>
-
-  <!-- OFFER BAR -->
-  <section class="bg-amber-700 text-white py-3 text-center font-black text-lg">
-    🔥 خصم 20% على أول طلبية لفترة محدودة
-  </section>
-
-  <!-- MOBILE MENU -->
-  <div id="mobileMenu"
-    class="hidden fixed top-[72px] right-0 w-64 bg-white px-6 py-5 space-y-4 font-bold shadow-2xl z-[9999] rounded-bl-2xl">
-    <a href="#home" class="block hover:text-amber-700">الرئيسية</a>
-    <a href="#features" class="block hover:text-amber-700">لماذا نحن</a>
-    <a href="#best" class="block hover:text-amber-700">الأكثر مبيعًا</a>
-    <a href="#products" class="block hover:text-amber-700">المنتجات</a>
-  </div>
-
-  <!-- HERO -->
-  <section id="home"
-    class="min-h-[650px] md:h-[550px] bg-cover bg-center flex items-center text-white"
-    style="background-image:
-    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-    url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
-
-    <div class="container mx-auto px-6 fade-up">
-
-      <h1 class="text-4xl md:text-6xl font-black leading-tight">
-        أثاث فاخر <br> بتصميم عصري
-      </h1>
-
-      <p class="mt-5 text-lg md:text-xl text-gray-200 leading-8 max-w-2xl">
-        أفضل الأثاث الحديث لمنزلك بتصميمات راقية وخامات عالية الجودة.
-      </p>
-
-      <div class="grid grid-cols-3 gap-8 mt-8 text-center max-w-xl">
-        <div>
-          <h3 id="ordersCountText" class="text-3xl font-black">0</h3>
-          <p class="text-gray-300">طلب مكتمل</p>
-        </div>
-
-        <div>
-          <h3 id="customersCountText" class="text-3xl font-black">0</h3>
-          <p class="text-gray-300">عميل سعيد</p>
-        </div>
-
-        <div>
-          <h3 id="ratingText" class="text-3xl font-black">0★</h3>
-          <p class="text-gray-300">تقييم العملاء</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section id="features" class="container mx-auto px-6 py-20">
-
-    <h2 class="text-5xl font-black text-center mb-16">
-      لماذا تختار Era&Art ؟
+    <h2 class="text-3xl font-black mb-4">
+      تم استلام طلبك
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-10 rounded-3xl shadow-xl text-center">
-        <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <i class="fa-solid fa-gem text-4xl text-amber-700"></i>
-        </div>
-        <h3 class="text-2xl font-black mb-4">خامات فاخرة</h3>
-        <p class="text-gray-500 leading-8">
-          نستخدم أفضل أنواع الخامات الحديثة لضمان الجودة والفخامة.
-        </p>
-      </div>
+    <p class="text-gray-600 leading-8 mb-6">
+      سنتواصل معك خلال 10 دقائق لتأكيد الطلب
+    </p>
+    <p id="orderIdText"
+class="text-amber-700 font-black text-xl mb-6">
+</p>
+    <p id="deliveryTimeText"
+class="text-gray-500 text-lg mb-6">
+</p>
+    <button
+    onclick="closeSuccessPopup()"
+    class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
+      إغلاق
+    </button>
 
-      <div class="bg-white p-10 rounded-3xl shadow-xl text-center">
-        <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <i class="fa-solid fa-truck-fast text-4xl text-amber-700"></i>
-        </div>
-        <h3 class="text-2xl font-black mb-4">شحن سريع</h3>
-        <p class="text-gray-500 leading-8">
-          توصيل سريع وآمن لجميع المحافظات بأفضل خدمة ممكنة.
-        </p>
-      </div>
-
-      <div class="bg-white p-10 rounded-3xl shadow-xl text-center">
-        <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <i class="fa-solid fa-headset text-4xl text-amber-700"></i>
-        </div>
-        <h3 class="text-2xl font-black mb-4">دعم مستمر</h3>
-        <p class="text-gray-500 leading-8">
-          فريق دعم جاهز دائمًا للرد على جميع استفسارات العملاء.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- BEST SELLERS -->
-  <section id="best" class="container mx-auto px-6 py-20">
-
-    <h2 class="text-5xl font-black text-center mb-16">
-      🔥 الأكثر مبيعًا
-    </h2>
-
-    <div id="best-products"
-      class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    </div>
-
-  </section>
-
-  <!-- PRODUCTS -->
-  <section id="products" class="container mx-auto px-6 py-20">
-
-    <div class="mb-14">
-
-      <div class="flex flex-col md:flex-row gap-5 justify-between items-center">
-
-        <div class="relative w-full md:w-[420px]">
-
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="ابحث عن منتج..."
-            class="w-full bg-white border-2 border-transparent focus:border-amber-600 outline-none rounded-2xl px-5 py-4 pr-14 shadow-lg text-lg">
-
-          <i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></i>
-        </div>
-
-        <select
-          id="priceFilter"
-          class="bg-white px-6 py-4 rounded-2xl shadow-lg outline-none font-bold">
-          <option value="all">كل الأسعار</option>
-          <option value="5000">أقل من 5000 ج.م</option>
-          <option value="15000">أقل من 15000 ج.م</option>
-          <option value="20000">أكثر من 20000 ج.م</option>
-        </select>
-
-      </div>
-
-      <div class="flex flex-wrap gap-3 justify-center mt-8">
-
-        <button
-          onclick="filterProducts('الكل',event)"
-          class="category-btn bg-slate-900 text-white px-6 py-3 rounded-xl font-bold">
-          الكل
-        </button>
-
-        <button
-          onclick="filterProducts('غرف معيشة',event)"
-          class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
-          غرف معيشة
-        </button>
-
-        <button
-          onclick="filterProducts('غرف نوم',event)"
-          class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
-          غرف نوم
-        </button>
-
-        <button
-          onclick="filterProducts('طاولات',event)"
-          class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
-          طاولات
-        </button>
-
-        <button
-          onclick="filterProducts('ديكور',event)"
-          class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
-          ديكور
-        </button>
-
-      </div>
-    </div>
-
-    <div id="productsLoader"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-      <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
-      <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
-      <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
-      <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
-
-    </div>
-
-    <div id="products-container"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    </div>
-
-  </section>
-
-  <!-- WISHLIST -->
-  <section class="container mx-auto px-6 py-20">
-
-    <h2 class="text-5xl font-black text-center mb-16">
-      ❤️ المفضلة
-    </h2>
-
-    <div id="wishlist-container"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    </div>
-
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="container mx-auto px-6 py-20">
-
-    <h2 class="text-5xl font-black text-center mb-16">
-      آراء عملائنا
-    </h2>
-
-    <div id="realReviews"
-      class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    </div>
-
-  </section>
-
-  <!-- CART -->
-  <div id="cartDrawer" class="fixed inset-0 hidden z-50">
-
-    <div onclick="toggleCart(false)"
-      class="absolute inset-0 bg-black/50"></div>
-
-    <div class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col shadow-2xl">
-
-      <div class="bg-slate-900 text-white p-5 flex justify-between items-center">
-        <h2 class="text-2xl font-black">سلة الشراء</h2>
-        <button onclick="toggleCart(false)" class="text-3xl">×</button>
-      </div>
-
-      <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-5"></div>
-
-      <div class="border-t p-5 bg-white space-y-4">
-
-        <input
-          id="customer-name"
-          type="text"
-          placeholder="الاسم"
-          class="w-full border-2 border-gray-200 p-3 rounded-xl">
-
-        <input
-          id="customer-phone"
-          type="text"
-          placeholder="رقم الهاتف"
-          class="w-full border-2 border-gray-200 p-3 rounded-xl">
-
-        <textarea
-          id="customer-address"
-          placeholder="العنوان"
-          class="w-full border-2 border-gray-200 p-3 rounded-xl h-24"></textarea>
-
-        <div class="flex justify-between text-2xl font-black">
-          <span>الإجمالي</span>
-          <span id="cart-total">0 ج.م</span>
-        </div>
-
-        <button
-          onclick="clearCart()"
-          class="w-full bg-red-500 text-white py-4 rounded-xl font-black">
-          إلغاء الطلب
-        </button>
-
-        <button
-          id="checkoutBtn"
-          onclick="checkout()"
-          class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
-          إتمام الشراء
-        </button>
-
-      </div>
-    </div>
-  </div>
-    <!-- PRODUCT MODAL -->
-  <div id="productModal"
-    class="fixed inset-0 bg-black/70 hidden z-[9999] flex items-center justify-center p-4">
-
-    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
-
-      <button onclick="closeModal()"
-        class="absolute top-4 left-4 text-4xl z-10 text-black">
-        ×
-      </button>
-
-      <div class="flex flex-col md:flex-row">
-
-        <img id="modalImage"
-          class="w-full md:w-1/2 h-72 md:h-auto object-cover">
-
-        <div class="p-8 md:w-1/2">
-
-          <h2 id="modalName"
-            class="text-4xl font-black mb-5"></h2>
-
-          <div id="modalDesc"
-            class="text-gray-600 leading-8 text-lg mb-6"></div>
-
-          <div id="modalPrice"
-            class="text-amber-700 text-4xl font-black mb-8"></div>
-
-          <button id="modalAddBtn"
-            class="bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl w-full font-black">
-            أضف للسلة
-          </button>
-
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- FLOATING WHATSAPP -->
-  <a href="https://wa.me/201068130159"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="fixed bottom-6 left-6 bg-green-500 w-16 h-16 rounded-full flex items-center justify-center text-white text-4xl shadow-2xl z-50">
-    <i class="fa-brands fa-whatsapp"></i>
+</div>
+<header class="bg-white shadow sticky top-0 z-50">
+
+<div class="container mx-auto px-6 py-4 flex justify-between items-center">
+
+<div class="flex items-center gap-3">
+
+<i class="fa-solid fa-couch text-3xl text-amber-700"></i>
+
+<h1 class="text-3xl font-black">
+Era&Art
+</h1>
+
+</div>
+
+<nav class="hidden md:flex gap-8 font-bold text-slate-700">
+<a href="#home" class="hover:text-amber-700 transition">الرئيسية</a>
+<a href="#features" class="hover:text-amber-700 transition">لماذا نحن</a>
+<a href="#best" class="hover:text-amber-700 transition">الأكثر مبيعًا</a>
+<a href="#products" class="hover:text-amber-700 transition">المنتجات</a>
+</nav>
+
+<div class="flex items-center gap-4">
+<!-- WISHLIST BUTTON -->
+
+<button
+onclick="document.getElementById('wishlist-container').scrollIntoView({behavior:'smooth'})"
+aria-label="فتح المفضلة"
+class="relative">
+
+<i class="fa-solid fa-heart text-2xl text-red-500"></i>
+
+<span
+id="wishlist-count"
+class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+0
+</span>
+
+</button>
+<button
+onclick="toggleCart(true)"
+aria-label="فتح سلة الشراء"
+class="relative">
+
+<i class="fa-solid fa-bag-shopping text-2xl"></i>
+
+<span
+id="cart-count"
+class="absolute -top-2 -right-2 bg-amber-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+0
+</span>
+
+</button>
+
+<!-- =========================
+MOBILE MENU BUTTON
+========================= -->
+
+<button
+id="menuBtn"
+aria-label="فتح القائمة"
+class="md:hidden text-2xl">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+</div>
+
+</div>
+<button
+onclick="openAdmin()"
+class="fixed top-24 left-6 bg-slate-900 text-white px-5 py-3 rounded-xl z-50 shadow-xl hover:bg-amber-700 transition">
+🔒 لوحة التحكم
+</button>
+</header>
+<section class="bg-amber-700 text-white py-3 text-center font-black text-lg">
+🔥 خصم 20% على أول طلبية لفترة محدودة
+</section>
+<!-- =========================
+MOBILE MENU
+========================= -->
+
+<div
+id="mobileMenu"
+class="hidden fixed top-[72px] right-0 w-64 bg-white px-6 py-5 space-y-4 font-bold shadow-2xl z-[9999] rounded-bl-2xl">
+
+<a href="#home" onclick="mobileMenu.classList.add('hidden')" class="block hover:text-amber-700">
+الرئيسية
+</a>
+
+<a href="#features" onclick="mobileMenu.classList.add('hidden')" class="block hover:text-amber-700">
+لماذا نحن
+</a>
+
+<a href="#best" onclick="mobileMenu.classList.add('hidden')" class="block hover:text-amber-700">
+الأكثر مبيعًا
+</a>
+
+<a href="#products" onclick="mobileMenu.classList.add('hidden')" class="block hover:text-amber-700">
+المنتجات
+</a>
+
+</div>
+
+<section
+id="home"
+class="min-h-[650px] md:h-[550px] bg-cover bg-center flex items-center text-white"
+style="background-image:
+linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
+
+<div class="container mx-auto px-6 fade-up">
+
+<h1 class="text-4xl md:text-6xl font-black leading-tight">
+أثاث فاخر
+<br>
+بتصميم عصري
+</h1>
+
+<p class="mt-5 text-lg md:text-xl text-gray-200 leading-8 md:leading-9 max-w-2xl">
+أفضل الأثاث الحديث لمنزلك بتصميمات راقية وخامات عالية الجودة.
+</p>
+
+<div class="flex gap-8 mt-8 flex-wrap text-center">
+  <div>
+    <h3 class="text-3xl font-black">+1200</h3>
+    <p class="text-gray-300">طلب مكتمل</p>
+  </div>
+
+  <div>
+    <h3 class="text-3xl font-black">+500</h3>
+    <p class="text-gray-300">عميل سعيد</p>
+  </div>
+
+  <div>
+    <h3 class="text-3xl font-black">5★</h3>
+    <p class="text-gray-300">تقييم العملاء</p>
+  </div>
+</div>
+
+<div class="flex gap-4 mt-8 flex-wrap">
+  <a href="#products"
+  class="bg-amber-700 hover:bg-amber-800 transition px-8 py-4 rounded-xl font-black">
+  تصفح المنتجات
   </a>
 
-  <!-- SCROLL TOP -->
-  <button id="scrollTopBtn"
-    aria-label="العودة للأعلى"
-    class="fixed bottom-6 right-6 bg-slate-900 text-white w-14 h-14 rounded-full shadow-2xl hidden z-50">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
+  <a href="https://wa.me/201068130159"
+  target="_blank" rel="noopener noreferrer"
+  class="bg-white text-slate-900 px-8 py-4 rounded-xl font-black">
+  تواصل واتساب
+  </a>
+  <a href="tel:201068130159"
+class="bg-slate-900 text-white px-8 py-4 rounded-xl font-black hover:scale-105 transition">
+اتصل الآن
+</a>
+</div>
 
-  <!-- FOOTER -->
-  <footer class="bg-slate-950 text-white mt-20 border-t-4 border-amber-600">
+<div class="flex flex-wrap gap-4 mt-8">
+  <div class="bg-white/10 backdrop-blur px-5 py-3 rounded-xl">🚚 شحن سريع</div>
+  <div class="bg-white/10 backdrop-blur px-5 py-3 rounded-xl">💳 دفع عند الاستلام</div>
+  <div class="bg-white/10 backdrop-blur px-5 py-3 rounded-xl">✅ ضمان جودة</div>
+</div>
 
-    <div class="container mx-auto px-6 py-16">
+</div>
+</section>
+<section class="container mx-auto px-6 py-16">
 
-      <div class="text-center">
-        <h2 class="text-3xl font-black mb-4">Era&Art</h2>
-        <p class="text-gray-400">
-          © 2026 جميع الحقوق محفوظة
-        </p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+
+<div class="bg-white p-10 rounded-3xl shadow-xl">
+<h3 class="text-5xl font-black text-amber-700 mb-4">+500</h3>
+<p class="text-xl text-gray-600">عميل سعيد</p>
+</div>
+
+<div class="bg-white p-10 rounded-3xl shadow-xl">
+<h3 class="text-5xl font-black text-amber-700 mb-4">+1200</h3>
+<p class="text-xl text-gray-600">طلب مكتمل</p>
+</div>
+
+<div class="bg-white p-10 rounded-3xl shadow-xl">
+<h3 class="text-5xl font-black text-amber-700 mb-4">5★</h3>
+<p class="text-xl text-gray-600">تقييم العملاء</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="features" class="container mx-auto px-6 py-20">
+
+<h2 class="text-5xl font-black text-center mb-16">
+لماذا تختار Era&Art ؟
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+<div class="bg-white p-10 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition duration-300">
+<div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+<i class="fa-solid fa-gem text-4xl text-amber-700"></i>
+</div>
+<h3 class="text-2xl font-black mb-4">خامات فاخرة</h3>
+<p class="text-gray-500 leading-8">
+نستخدم أفضل أنواع الخامات الحديثة لضمان الجودة والفخامة.
+</p>
+</div>
+
+<div class="bg-white p-10 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition duration-300">
+<div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+<i class="fa-solid fa-truck-fast text-4xl text-amber-700"></i>
+</div>
+<h3 class="text-2xl font-black mb-4">شحن سريع</h3>
+<p class="text-gray-500 leading-8">
+توصيل سريع وآمن لجميع المحافظات بأفضل خدمة ممكنة.
+</p>
+</div>
+
+<div class="bg-white p-10 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition duration-300">
+<div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+<i class="fa-solid fa-headset text-4xl text-amber-700"></i>
+</div>
+<h3 class="text-2xl font-black mb-4">دعم مستمر</h3>
+<p class="text-gray-500 leading-8">
+فريق دعم جاهز دائمًا للرد على جميع استفسارات العملاء.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="best" class="container mx-auto px-6 py-10">
+<!-- =========================
+CUSTOMER REVIEWS
+========================= -->
+
+
+<h2 class="text-5xl font-black text-center mb-16">
+🔥 الأكثر مبيعًا
+</h2>
+
+<div
+id="best-products"
+class="grid grid-cols-1 md:grid-cols-3 gap-8">
+</div>
+
+</section>
+
+<section id="products" class="container mx-auto px-6 py-20">
+<!-- =========================
+   Search + Categories
+========================= -->
+
+<div class="mb-14">
+
+ 
+<!-- =========================
+SEARCH + PRICE FILTER
+========================= -->
+
+<div class="flex flex-col md:flex-row gap-5 justify-between items-center">
+
+<div class="relative w-full md:w-[420px]">
+
+<input
+id="searchInput"
+type="text"
+placeholder="ابحث عن منتج..."
+class="w-full bg-white border-2 border-transparent focus:border-amber-600 outline-none rounded-2xl px-5 py-4 pr-14 shadow-lg text-lg">
+
+<i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></i>
+
+</div>
+
+<!-- PRICE FILTER -->
+
+<select
+id="priceFilter"
+class="bg-white px-6 py-4 rounded-2xl shadow-lg outline-none font-bold">
+
+<option value="all">
+كل الأسعار
+</option>
+
+<option value="5000">
+أقل من 5000 ج.م
+</option>
+
+<option value="15000">
+أقل من 15000 ج.م
+</option>
+
+<option value="20000">
+أكثر من 20000 ج.م
+</option>
+
+</select>
+
+<div class="flex flex-wrap gap-3 justify-center">
+
+<button
+onclick="filterProducts('الكل',event)"
+class="category-btn bg-slate-900 text-white px-6 py-3 rounded-xl font-bold">
+الكل
+</button>
+
+<button
+onclick="filterProducts('غرف معيشة',event)"
+class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
+غرف معيشة
+</button>
+
+<button
+onclick="filterProducts('غرف نوم',event)"
+class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
+غرف نوم
+</button>
+
+<button
+onclick="filterProducts('طاولات',event)"
+class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
+طاولات
+</button>
+
+<button
+onclick="filterProducts('ديكور',event)"
+class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
+ديكور
+</button>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+   Products
+========================= -->
+<div
+id="productsLoader"
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+<div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
+<div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
+<div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
+<div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
+
+</div>
+<div
+id="products-container"
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+</div>
+</div>
+<!-- =========================
+WISHLIST
+========================= -->
+
+<section class="container mx-auto px-6 py-20">
+
+<h2 class="text-5xl font-black text-center mb-16">
+❤️ المفضلة
+</h2>
+
+<div
+id="wishlist-container"
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+</div>
+
+</section>
+</section>
+<!-- =========================
+TESTIMONIALS
+========================= -->
+
+<section class="container mx-auto px-6 py-20">
+
+<h2 class="text-5xl font-black text-center mb-16">
+آراء عملائنا
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+<!-- CARD -->
+
+<div class="bg-white p-8 rounded-[30px] shadow-xl hover:-translate-y-2 transition duration-300">
+
+<div class="flex items-center gap-4 mb-6">
+
+<img
+src="https://randomuser.me/api/portraits/women/44.jpg"
+loading="lazy"
+class="w-16 h-16 rounded-full object-cover">
+
+<div>
+
+<h3 class="font-black text-xl">
+سارة أحمد
+</h3>
+
+<div class="text-amber-500">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</div>
+
+</div>
+
+</div>
+
+<p class="text-gray-600 leading-8">
+الخامات ممتازة جدًا والتشطيب فوق الممتاز، والتوصيل كان سريع جدًا.
+</p>
+
+</div>
+
+<!-- CARD -->
+
+<div class="bg-white p-8 rounded-[30px] shadow-xl hover:-translate-y-2 transition duration-300">
+
+<div class="flex items-center gap-4 mb-6">
+
+<img
+src="https://randomuser.me/api/portraits/men/32.jpg"
+loading="lazy"
+class="w-16 h-16 rounded-full object-cover">
+
+<div>
+
+<h3 class="font-black text-xl">
+محمد خالد
+</h3>
+
+<div class="text-amber-500">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</div>
+
+</div>
+
+</div>
+
+<p class="text-gray-600 leading-8">
+التصميمات شيك جدًا والسعر مناسب مقارنة بالجودة.
+</p>
+
+</div>
+
+<!-- CARD -->
+
+<div class="bg-white p-8 rounded-[30px] shadow-xl hover:-translate-y-2 transition duration-300">
+
+<div class="flex items-center gap-4 mb-6">
+
+<img
+src="https://randomuser.me/api/portraits/women/68.jpg"
+loading="lazy"
+class="w-16 h-16 rounded-full object-cover">
+
+<div>
+
+<h3 class="font-black text-xl">
+منة الله
+</h3>
+
+<div class="text-amber-500">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</div>
+
+</div>
+
+</div>
+
+<p class="text-gray-600 leading-8">
+تجربة ممتازة من أول الطلب لحد الاستلام، وأنصح بالمكان جدًا.
+</p>
+
+</div>
+
+</div>
+
+</section> 
+<!-- =========================
+ADMIN DASHBOARD
+========================= -->
+
+<section
+id="adminPanel"
+class="container mx-auto px-6 py-20 hidden">
+
+<div class="bg-slate-900 text-white rounded-[35px] p-10">
+
+<h2 class="text-4xl font-black mb-10">
+لوحة التحكم
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+<div class="bg-white/10 p-6 rounded-2xl">
+
+<h3 class="text-xl mb-3">
+عدد المنتجات
+</h3>
+
+<p
+id="adminProducts"
+class="text-5xl font-black">
+0
+</p>
+
+</div>
+
+<div class="bg-white/10 p-6 rounded-2xl">
+
+<h3 class="text-xl mb-3">
+عدد الطلبات
+</h3>
+
+<p
+id="adminOrders"
+class="text-5xl font-black">
+0
+</p>
+
+</div>
+
+<div class="bg-white/10 p-6 rounded-2xl">
+
+<h3 class="text-xl mb-3">
+منتجات بالسلة
+</h3>
+
+<p
+id="adminCart"
+class="text-5xl font-black">
+0
+</p>
+
+</div>
+
+<div class="bg-white/10 p-6 rounded-2xl">
+
+<h3 class="text-xl mb-3">
+إجمالي السلة
+</h3>
+
+<p
+id="adminTotal"
+class="text-3xl font-black">
+0 ج.م
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div id="cartDrawer" class="fixed inset-0 hidden z-50">
+
+<div onclick="toggleCart(false)" class="absolute inset-0 bg-black/50"></div>
+
+<div class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
+
+<div class="bg-slate-900 text-white p-5 flex justify-between items-center">
+<h2 class="text-2xl font-black">سلة الشراء</h2>
+
+<button onclick="toggleCart(false)" class="text-3xl">
+×
+</button>
+
+</div>
+
+<div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-5"></div>
+
+<div class="border-t p-5 bg-gray-50 space-y-4">
+
+<input
+id="customer-name"
+type="text"
+placeholder="الاسم"
+class="w-full border p-3 rounded-lg">
+
+<input
+id="customer-phone"
+type="text"
+placeholder="رقم الهاتف"
+class="w-full border p-3 rounded-lg">
+
+<textarea
+id="customer-address"
+placeholder="العنوان"
+class="w-full border p-3 rounded-lg h-24"></textarea>
+
+<div class="flex justify-between text-2xl font-black">
+<span>الإجمالي</span>
+<span id="cart-total">0 ج.م</span>
+</div>
+
+<button
+onclick="clearCart()"
+class="w-full bg-red-500 text-white py-3 rounded-lg font-black">
+إلغاء الطلب
+</button>
+
+<button
+id="checkoutBtn"
+onclick="checkout()"
+class="w-full bg-amber-700 text-white py-4 rounded-lg font-black flex justify-center items-center gap-3">
+إتمام الشراء
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+PRODUCT DETAILS MODAL
+========================= -->
+
+<!-- =========================
+PRODUCT DETAILS MODAL
+========================= -->
+
+<div
+id="productModal"
+class="fixed inset-0 bg-black/70 hidden z-[9999] flex items-center justify-center p-4">
+
+  <div
+  class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+
+    <button
+    onclick="closeModal()"
+    class="absolute top-4 left-4 text-4xl z-10 text-black">
+      ×
+    </button>
+
+    <div class="flex flex-col md:flex-row">
+
+     <img
+id="modalImage"
+loading="lazy"
+decoding="async"
+class="w-full md:w-1/2 h-72 md:h-auto object-cover">
+      <div class="p-6 md:p-8 flex flex-col justify-center md:w-1/2">
+
+        <h2
+        id="modalName"
+        class="text-3xl md:text-5xl font-black mb-5">
+        </h2>
+
+        <div
+        id="modalDesc"
+        class="text-gray-600 leading-8 text-lg mb-6 bg-gray-50 p-5 rounded-2xl">
+        </div>
+
+        <div
+        id="modalPrice"
+        class="text-amber-700 text-4xl md:text-5xl font-black mb-8">
+        </div>
+
+        <button
+        id="modalAddBtn"
+        class="bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition text-xl">
+          أضف للسلة
+        </button>
+
       </div>
 
     </div>
-  </footer>
 
-  <!-- REVIEW FORM -->
-  <section class="container mx-auto px-6 py-20">
+  </div>
 
-    <h2 class="text-5xl font-black text-center mb-16">
-      أضف تقييمك
+</div>
+
+
+
+<!-- =========================
+FLOATING WHATSAPP
+========================= -->
+
+<a
+href="https://wa.me/201068130159"
+target="_blank" rel="noopener noreferrer"
+class="fixed bottom-6 left-6 bg-green-500 w-16 h-16 rounded-full flex items-center justify-center text-white text-4xl shadow-2xl z-50 hover:scale-110 transition animate-bounce">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+
+
+<script>
+
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbwGFDl89NZP3rtbloRgV2bnfxSM-cgpUHpIkRt8TbCj_pc4rDxPbhe0slC-9IhYgL5hqA/exec";
+
+const productsURL =
+"https://script.google.com/macros/s/AKfycbwVNEEOobM3H9I_4OVkEQG5EXjVxT_PaG2ExMupeJn1rMMXdjWJL1UIfPsCmAmEHukSIw/exec";
+
+const whatsappNumber = "201068130159";
+
+let products = [];
+
+let filteredProducts = [];
+
+let currentCategory = "الكل";
+
+function safeParse(key){
+  
+  try{
+    return JSON.parse(localStorage.getItem(key)) || [];
+  }catch{
+    return [];
+  }
+}
+
+let cart = safeParse("cart");
+let wishlist = safeParse("wishlist");
+/* =========================
+MOBILE MENU
+========================= */
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const mobileMenu =
+document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click",()=>{
+
+mobileMenu.classList.toggle("hidden");
+
+});
+document.addEventListener("click",(e)=>{
+
+if(
+!mobileMenu.contains(e.target)
+&&
+!menuBtn.contains(e.target)
+){
+mobileMenu.classList.add("hidden");
+}
+
+});
+
+/* =========================
+PRODUCT MODAL
+========================= */
+
+function openModal(id){
+
+const product =
+products.find(p => p.id === id);
+
+if(!product) return;
+
+document.getElementById("modalImage").src =
+product.image;
+
+document.getElementById("modalName").innerText =
+product.name;
+
+document.getElementById("modalDesc").innerHTML =
+`
+<h3 class="text-2xl font-black mb-4">تفاصيل المنتج</h3>
+<p>${product.desc}</p>
+`;
+
+document.getElementById("modalPrice").innerText =
+product.price + " ج.م";
+
+document.getElementById("modalAddBtn").onclick =
+()=>{
+
+addToCart(product.id);
+
+closeModal();
+
+};
+
+document.getElementById("productModal")
+.classList.remove("hidden");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("productModal")
+.classList.add("hidden");
+
+}
+
+
+/* =========================
+CLOSE MODAL OUTSIDE CLICK
+========================= */
+
+document.getElementById("productModal")
+.addEventListener("click",(e)=>{
+
+if(e.target.id === "productModal"){
+
+closeModal();
+
+}
+
+});
+
+
+/* =========================
+VALIDATION + SECURITY
+========================= */
+
+function validatePhone(phone){
+
+const regex = /^01[0125][0-9]{8}$/;
+
+return regex.test(phone);
+
+}
+
+
+function sanitizeInput(value){
+
+return value
+.replace(/</g,"")
+.replace(/>/g,"")
+.replace(/script/gi,"");
+
+}
+
+function escapeHTML(str){
+
+if(!str) return "";
+
+return String(str)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   تحميل المنتجات
+========================= */
+
+async function loadProducts(){
+
+const loader =
+document.getElementById("productsLoader");
+
+try{
+
+const response = await fetch(productsURL);
+
+products = await response.json();
+
+products = products.map(product => ({
+
+id: Number(product.id),
+
+name: product.name,
+
+price: Number(product.price),
+
+image: product.image,
+
+desc: product.desc,
+
+category: product.category
+
+}));
+
+filteredProducts = [...products];
+document.getElementById("adminProducts").innerText =
+products.length;
+loader.style.display = "none";
+
+renderProducts(filteredProducts);
+renderBestProducts();
+updateDashboard();
+
+}catch(error){
+
+console.log(error);
+
+loader.innerHTML = `
+<div class="col-span-full text-center py-20">
+
+<i class="fa-solid fa-triangle-exclamation text-6xl text-red-400 mb-5"></i>
+
+<h3 class="text-3xl font-black text-red-500">
+فشل تحميل المنتجات
+</h3>
+
+<p class="text-gray-500 mt-3">
+تأكد من اتصال الإنترنت
+</p>
+
+</div>
+`;
+
+}
+}
+
+
+/* =========================
+   Toast
+========================= */
+function showSuccessPopup(orderId){
+
+document.getElementById("orderIdText")
+.innerText = "رقم الطلب: " + orderId;
+
+document.getElementById("deliveryTimeText")
+.innerText = "موعد التسليم المتوقع: خلال 3 إلى 7 أيام عمل";
+
+document.getElementById("successPopup")
+.classList.remove("hidden");
+
+}
+
+function closeSuccessPopup(){
+  document.getElementById("successPopup")
+  .classList.add("hidden");
+}
+function showToast(text){
+
+const toast = document.getElementById("toast");
+
+toast.innerText = text;
+
+toast.classList.remove("hidden");
+
+setTimeout(()=>{
+
+toast.classList.add("hidden");
+
+},3000);
+
+}
+
+
+/* =========================
+   حفظ السلة
+========================= */
+
+function saveCart(){
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+}
+
+/* =========================
+SAVE CUSTOMER DATA
+========================= */
+
+function saveCustomerData(){
+
+localStorage.setItem(
+"customerName",
+document.getElementById("customer-name").value
+);
+
+localStorage.setItem(
+"customerPhone",
+document.getElementById("customer-phone").value
+);
+
+localStorage.setItem(
+"customerAddress",
+document.getElementById("customer-address").value
+);
+
+}
+
+
+function loadCustomerData(){
+
+document.getElementById("customer-name").value =
+localStorage.getItem("customerName") || "";
+
+document.getElementById("customer-phone").value =
+localStorage.getItem("customerPhone") || "";
+
+document.getElementById("customer-address").value =
+localStorage.getItem("customerAddress") || "";
+
+}
+
+
+
+/* =========================
+   فتح وغلق السلة
+========================= */
+
+function toggleCart(show){
+
+const drawer = document.getElementById("cartDrawer");
+
+if(show){
+
+drawer.classList.remove("hidden");
+
+}else{
+
+drawer.classList.add("hidden");
+
+}
+
+}
+
+
+/* =========================
+   عرض المنتجات
+========================= */
+
+function renderProducts(data){
+
+const container =
+document.getElementById("products-container");
+
+if(data.length === 0){
+
+container.innerHTML = `
+<div class="col-span-full text-center py-20">
+
+<i class="fa-solid fa-box-open text-6xl text-gray-300 mb-5"></i>
+
+<h3 class="text-3xl font-black text-gray-400">
+لا توجد منتجات
+</h3>
+
+<p class="text-gray-500 mt-3">
+جرّب البحث بكلمة أخرى
+</p>
+
+</div>
+`;
+
+return;
+
+}
+
+let html = "";
+
+data.forEach(product=>{
+
+html += `
+
+<div
+class="bg-white rounded-[32px] overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 group relative border border-gray-100 fade-up product-card">
+
+<!-- IMAGE -->
+
+<div class="overflow-hidden relative">
+
+<img
+onclick="openModal(${product.id})"
+src="${product.image}"
+loading="lazy"
+decoding="async"
+class="w-full h-72 object-cover group-hover:scale-110 transition duration-700 cursor-pointer">
+
+<!-- CATEGORY -->
+
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-sm font-black shadow">
+
+${escapeHTML(product.category)}
+
+</div>
+
+<!-- FAVORITE -->
+
+<button
+onclick="toggleWishlist(${product.id})"
+class="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur flex items-center justify-center transition shadow">
+
+<i class="${wishlist.includes(product.id)
+? 'fa-solid text-red-500'
+: 'fa-regular text-slate-700'} fa-heart"></i>
+
+</button>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="p-6">
+
+<h3
+onclick="openModal(${product.id})"
+class="text-2xl font-black mb-6 min-h-[70px] cursor-pointer hover:text-amber-700 transition">
+
+${escapeHTML(product.name)}
+
+</h3>
+
+
+<!-- PRICE + RATING -->
+
+<div class="flex items-center justify-between mb-6">
+
+<div>
+
+<p class="text-gray-400 text-sm mb-1">
+السعر
+</p>
+
+<span class="text-amber-700 text-3xl font-black">
+${product.price} ج.م
+</span>
+
+</div>
+
+<div class="text-amber-400 text-lg">
+
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="flex gap-3">
+
+<button
+onclick="openModal(${product.id})"
+class="flex-1 bg-gray-100 hover:bg-gray-200 text-slate-900 py-4 rounded-2xl font-black transition">
+
+التفاصيل
+
+</button>
+
+<button
+onclick="addToCart(${product.id})"
+class="flex-1 bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black transition duration-300 hover:scale-[1.03] flex items-center justify-center gap-2">
+
+<i class="fa-solid fa-cart-plus"></i>
+
+أضف للسلة
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+});
+
+container.innerHTML = html;
+
+}
+/* =========================
+RENDER WISHLIST
+========================= */
+function renderWishlist(){
+
+const container =
+document.getElementById("wishlist-container");
+
+if(!container) return;
+
+const wishlistProducts =
+products.filter(product =>
+wishlist.includes(product.id)
+);
+
+if(wishlistProducts.length === 0){
+
+container.innerHTML = `
+<div class="col-span-full text-center py-20">
+<i class="fa-regular fa-heart text-6xl text-gray-300 mb-5"></i>
+<h3 class="text-3xl font-black text-gray-400">
+لا توجد منتجات بالمفضلة
+</h3>
+</div>
+`;
+return;
+
+}
+
+let html = "";
+
+wishlistProducts.forEach(product=>{
+
+html += `
+<div class="bg-white rounded-[30px] overflow-hidden shadow-xl p-4">
+
+<img
+src="${product.image}"
+loading="lazy"
+decoding="async"
+class="w-full h-64 object-cover rounded-2xl mb-4">
+
+<h3 class="text-2xl font-black mb-3">
+${product.name}
+</h3>
+
+<p class="text-amber-700 text-3xl font-black mb-5">
+${product.price} ج.م
+</p>
+
+<div class="flex gap-3">
+
+<button
+onclick="addToCart(${product.id})"
+class="flex-1 bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-black">
+أضف للسلة
+</button>
+
+<button
+onclick="toggleWishlist(${product.id})"
+class="w-14 bg-red-500 hover:bg-red-600 text-white rounded-2xl">
+<i class="fa-solid fa-trash"></i>
+</button>
+
+</div>
+</div>
+`;
+
+});
+
+container.innerHTML = html;
+
+}
+
+/* =========================
+BETTER SEARCH + FILTER
+========================= */
+
+document.addEventListener("input", function(e){
+
+if(
+e.target.id === "searchInput"
+||
+e.target.id === "priceFilter"
+){
+
+applyFilters();
+
+}
+
+});
+
+
+function applyFilters(){
+
+const search =
+document.getElementById("searchInput")
+.value.toLowerCase();
+
+const price =
+document.getElementById("priceFilter")
+.value;
+
+filteredProducts = products.filter(product => {
+
+const matchName =
+product.name.toLowerCase().includes(search);
+
+const matchCategory =
+currentCategory === "الكل"
+||
+product.category === currentCategory;
+
+let matchPrice = true;
+
+if(price === "5000"){
+
+matchPrice = product.price < 5000;
+
+}
+
+else if(price === "15000"){
+
+matchPrice = product.price < 15000;
+
+}
+
+else if(price === "20000"){
+
+matchPrice = product.price > 20000;
+
+}
+
+return (
+matchName
+&&
+matchCategory
+&&
+matchPrice
+);
+
+});
+
+renderProducts(filteredProducts);
+
+}
+
+
+
+
+/* =========================
+   التصنيفات
+========================= */
+
+ 
+/* =========================
+IMPROVED FILTER PRODUCTS
+========================= */
+
+function filterProducts(category,event){
+
+currentCategory = category;
+
+document.querySelectorAll(".category-btn")
+.forEach(btn=>{
+
+btn.classList.remove(
+"bg-slate-900",
+"text-white"
+);
+
+btn.classList.add("bg-white");
+
+});
+
+event.target.classList.remove("bg-white");
+
+event.target.classList.add(
+"bg-slate-900",
+"text-white"
+);
+
+applyFilters();
+
+}
+
+
+
+
+/* =========================
+   إضافة للسلة
+========================= */
+function toggleWishlist(id){
+
+if(wishlist.includes(id)){
+
+wishlist =
+wishlist.filter(item => item !== id);
+
+showToast("تمت إزالة المنتج من المفضلة");
+
+}else{
+
+wishlist.push(id);
+
+showToast("تمت إضافة المنتج للمفضلة");
+
+}
+
+localStorage.setItem(
+"wishlist",
+JSON.stringify(wishlist)
+);
+
+/* تحديث عداد المفضلة */
+
+const wishlistCount =
+document.getElementById("wishlist-count");
+
+if(wishlistCount){
+
+wishlistCount.innerText =
+wishlist.length;
+
+}
+
+/* إعادة رسم المنتجات والمفضلة */
+
+renderProducts(filteredProducts);
+
+renderWishlist();
+
+}
+
+
+function addToCart(id){
+
+const product =
+products.find(p => Number(p.id) === Number(id));
+
+if(!product){
+
+showToast("المنتج غير موجود");
+
+return;
+
+}
+
+const existing =
+cart.find(p => Number(p.id) === Number(id));
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cart.push({
+...product,
+qty:1
+});
+
+}
+
+saveCart();
+
+updateCart();
+
+showToast("تمت إضافة المنتج للسلة");
+
+}
+
+
+/* =========================
+   تحديث السلة
+========================= */
+
+function updateCart(){
+
+const items = document.getElementById("cart-items");
+
+const totalEl = document.getElementById("cart-total");
+
+const count = document.getElementById("cart-count");
+const checkoutBtn =
+document.getElementById("checkoutBtn");
+if(!items || !totalEl || !count){
+return;
+}
+
+items.innerHTML = "";
+
+let total = 0;
+
+count.innerText =
+cart.reduce((sum,item)=>sum + item.qty,0);
+
+if(cart.length === 0){
+
+items.innerHTML =
+`<p class="text-center text-gray-500">السلة فارغة</p>`;
+
+}
+
+cart.forEach(item=>{
+
+total += item.price * item.qty;
+
+items.innerHTML += `
+
+<div class="border-b pb-4 flex gap-4">
+
+<img
+src="${item.image}"
+loading="lazy"
+decoding="async"
+class="w-24 h-24 object-cover rounded-lg">
+
+<div class="flex-1">
+
+<h3 class="font-black">${item.name}</h3>
+
+<p class="text-amber-700 mt-2">
+${item.price} ج.م
+</p>
+
+<div class="flex items-center gap-2 mt-3">
+
+<button
+onclick="decreaseQty(${item.id})"
+class="bg-gray-200 w-8 h-8 rounded">
+-
+</button>
+
+<span>${item.qty}</span>
+
+<button
+onclick="increaseQty(${item.id})"
+class="bg-gray-200 w-8 h-8 rounded">
++
+</button>
+
+</div>
+
+<button
+onclick="removeItem(${item.id})"
+class="text-red-500 text-sm mt-3">
+حذف المنتج
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+totalEl.innerText = total + " ج.م";
+checkoutBtn.disabled = cart.length === 0;
+
+if(cart.length === 0){
+  checkoutBtn.classList.add("opacity-50","cursor-not-allowed");
+}else{
+  checkoutBtn.classList.remove("opacity-50","cursor-not-allowed");
+}
+updateDashboard();
+
+}
+
+function updateDashboard(){
+
+const total =
+cart.reduce((sum,item)=>
+sum + (item.price * item.qty)
+,0);
+
+document.getElementById("adminProducts")
+.innerText = products.length;
+
+document.getElementById("adminOrders")
+.innerText =
+localStorage.getItem("ordersCount") || 0;
+
+document.getElementById("adminCart")
+.innerText =
+cart.reduce((sum,item)=>sum + item.qty,0);
+
+document.getElementById("adminTotal")
+.innerText =
+total + " ج.م";
+
+}
+
+/* =========================
+   تقليل الكمية
+========================= */
+
+function decreaseQty(id){
+
+const item = cart.find(p=>p.id===id);
+
+item.qty--;
+
+if(item.qty <= 0){
+
+cart = cart.filter(p=>p.id !== id);
+
+}
+
+saveCart();
+
+updateCart();
+
+}
+
+/* =========================
+   زيادة الكمية
+========================= */
+
+function increaseQty(id){
+
+const item = cart.find(p => p.id === id);
+
+if(item){
+
+item.qty++;
+
+saveCart();
+
+updateCart();
+
+}
+
+}
+/* =========================
+   حذف منتج
+========================= */
+
+function removeItem(id){
+
+cart = cart.filter(p=>p.id !== id);
+
+saveCart();
+
+updateCart();
+
+showToast("تم حذف المنتج");
+
+}
+
+
+/* =========================
+   تفريغ السلة
+========================= */
+
+function clearCart(){
+
+if(!confirm("هل تريد إلغاء الطلب؟")){
+return;
+}
+
+cart = [];
+
+saveCart();
+
+updateCart();
+
+showToast("تم إلغاء الطلب");
+
+}
+
+
+/* =========================
+   إتمام الطلب
+========================= */
+
+async function checkout(){
+
+if(cart.length === 0){
+showToast("السلة فارغة");
+return;
+}
+
+const name =
+document.getElementById("customer-name").value;
+
+const phone =
+document.getElementById("customer-phone").value;
+
+const address =
+document.getElementById("customer-address").value;
+
+saveCustomerData();
+
+if(!name || !phone || !address){
+showToast("املأ جميع البيانات");
+return;
+}
+
+if(name.length < 3){
+showToast("الاسم يجب أن يكون 3 أحرف على الأقل");
+return;
+}
+
+if(address.length < 10){
+showToast("العنوان غير كامل");
+return;
+}
+
+if(!validatePhone(phone)){
+showToast("رقم الهاتف غير صحيح");
+return;
+}
+
+const cleanName = sanitizeInput(name);
+const cleanAddress = sanitizeInput(address);
+const orderId = "EA" + Date.now();
+
+const btn =
+document.getElementById("checkoutBtn");
+
+btn.innerHTML =
+`<div class="loader"></div> جاري إرسال الطلب`;
+
+btn.disabled = true;
+btn.classList.add("opacity-50","cursor-not-allowed");
+let total = 0;
+let productsText = "";
+
+let message =
+`🛋️ طلب جديد من Era&Art\n\n`;
+
+cart.forEach(item=>{
+
+total += item.price * item.qty;
+
+productsText +=
+`${item.name} × ${item.qty} | `;
+
+message +=
+`📦 ${item.name}
+الكمية: ${item.qty}
+السعر: ${item.price} ج.م
+
+`;
+
+});
+
+message += `
+👤 الاسم: ${cleanName}
+
+📞 الهاتف: ${phone}
+
+📍 العنوان:
+${cleanAddress}
+
+💰 الإجمالي:
+${total} ج.م`;
+
+try{
+
+  await fetch(scriptURL,{
+    mode:"no-cors",
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      orderId: orderId,
+      name: cleanName,
+      phone: phone,
+      address: cleanAddress,
+      products: productsText,
+      total: total,
+      status: "جديد"
+    })
+  });
+
+  cart = [];
+  saveCart();
+  updateCart();
+
+  localStorage.removeItem("customerName");
+  localStorage.removeItem("customerPhone");
+  localStorage.removeItem("customerAddress");
+
+  document.getElementById("customer-name").value = "";
+  document.getElementById("customer-phone").value = "";
+  document.getElementById("customer-address").value = "";
+
+  let orders =
+  Number(localStorage.getItem("ordersCount") || 0);
+
+  orders++;
+
+  localStorage.setItem("ordersCount", orders);
+
+  showSuccessPopup(orderId);
+  showToast("رقم طلبك: " + orderId);
+
+}catch(err){
+
+  console.log(err);
+  showToast("حدث خطأ أثناء الإرسال");
+
+}
+
+btn.innerHTML = "إتمام الشراء";
+btn.disabled = false;
+btn.classList.remove("opacity-50","cursor-not-allowed");
+
+}
+
+
+/* =========================
+   تشغيل الموقع
+========================= */
+
+/* =========================
+SCROLL TO TOP
+========================= */
+
+const scrollBtn =
+document.getElementById("scrollTopBtn");
+
+if(scrollBtn){
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY > 300){
+
+scrollBtn.classList.remove("hidden");
+
+}else{
+
+scrollBtn.classList.add("hidden");
+
+}
+
+});
+
+scrollBtn.addEventListener("click",()=>{
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+});
+
+}
+
+
+/* =========================
+BEST PRODUCTS
+========================= */
+
+function renderBestProducts(){
+
+const container =
+document.getElementById("best-products");
+
+if(!container) return;
+
+const best = products.slice(0,3);
+
+let html = "";
+
+best.forEach(product=>{
+
+html += `
+<div class="bg-white rounded-3xl overflow-hidden shadow-2xl">
+
+<img
+src="${product.image}"
+loading="lazy"
+decoding="async"
+class="w-full h-80 object-cover">
+
+<div class="p-6">
+
+<h3 class="text-2xl font-black mb-3">
+${product.name}
+</h3>
+
+<p class="text-gray-500 mb-5">
+${product.desc}
+</p>
+
+<span class="text-amber-700 text-3xl font-black">
+${product.price} ج.م
+</span>
+
+</div>
+</div>
+`;
+
+});
+
+container.innerHTML = html;
+
+}
+function openAdmin(){
+
+const password =
+prompt("أدخل كلمة مرور لوحة التحكم");
+
+if(password === "123456"){
+
+document.getElementById("adminPanel")
+.classList.remove("hidden");
+
+document.getElementById("adminPanel")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+showToast("تم فتح لوحة التحكم");
+
+}else if(password !== null){
+
+showToast("كلمة المرور غير صحيحة");
+
+}
+
+}
+window.onload = ()=>{
+
+loadProducts();
+
+updateCart();
+
+loadCustomerData();
+
+renderWishlist();
+
+document.getElementById("wishlist-count").innerText =
+wishlist.length;
+
+document.getElementById("pageLoader").style.display = "none";
+
+};
+document.addEventListener("keydown",(e)=>{
+  if(e.key === "Escape"){
+    closeModal();
+  }
+});
+</script>
+
+<!-- =========================
+SCROLL TO TOP
+========================= -->
+
+<button
+id="scrollTopBtn"
+aria-label="العودة للأعلى"
+class="fixed bottom-6 right-6 bg-slate-900 text-white w-14 h-14 rounded-full shadow-2xl hidden z-50 hover:bg-amber-700 transition">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+<!-- CTA BEFORE FOOTER -->
+
+<section class="container mx-auto px-6 mb-[-70px] relative z-10">
+
+  <div class="bg-gradient-to-r from-amber-600 to-amber-700 rounded-[35px] p-10 md:p-14 text-center text-white shadow-2xl">
+
+    <h2 class="text-3xl md:text-5xl font-black mb-5">
+      جاهز لتجديد منزلك؟
     </h2>
 
-    <div class="max-w-xl mx-auto bg-white p-8 rounded-3xl shadow-xl">
+    <p class="text-lg text-white/90 mb-8">
+      اطلب الآن واستفد من خصوماتنا الحصرية
+    </p>
 
-      <input
-        id="reviewName"
-        type="text"
-        placeholder="اسمك"
-        class="w-full border p-3 rounded-xl mb-4">
+    <a href="#products"
+       class="inline-block bg-white text-slate-900 px-10 py-4 rounded-2xl font-black hover:scale-105 transition">
+       تصفح المنتجات
+    </a>
 
-      <textarea
-        id="reviewText"
-        placeholder="اكتب تقييمك"
-        class="w-full border p-3 rounded-xl h-32 mb-4"></textarea>
+  </div>
 
-      <select
-        id="reviewStars"
-        class="w-full border p-3 rounded-xl mb-4">
-        <option value="5">⭐⭐⭐⭐⭐</option>
-        <option value="4">⭐⭐⭐⭐</option>
-        <option value="3">⭐⭐⭐</option>
-        <option value="2">⭐⭐</option>
-        <option value="1">⭐</option>
-      </select>
+</section>
+<footer class="bg-slate-950 text-white mt-20 border-t-4 border-amber-600">
 
-      <button
-        onclick="submitReview()"
-        class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
-        إرسال التقييم
-      </button>
+  <div class="container mx-auto px-6 py-16">
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+      <!-- Logo -->
+      <div>
+        <div class="flex items-center gap-3 mb-5">
+          <i class="fa-solid fa-couch text-4xl text-amber-500"></i>
+          <h2 class="text-3xl font-black">Era&Art</h2>
+        </div>
+
+        <p class="text-gray-400 leading-8">
+          أثاث عصري فاخر بتصميمات حديثة وخامات ممتازة تناسب كل بيت.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-2xl font-black mb-5">روابط سريعة</h3>
+
+        <div class="space-y-3 text-gray-300">
+          <a href="#home" class="block hover:text-amber-400 transition">
+            الرئيسية
+          </a>
+
+          <a href="#products" class="block hover:text-amber-400 transition">
+            المنتجات
+          </a>
+
+          <a href="#features" class="block hover:text-amber-400 transition">
+            لماذا نحن
+          </a>
+
+          <a href="#best" class="block hover:text-amber-400 transition">
+            الأكثر مبيعًا
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-2xl font-black mb-5">تواصل معنا</h3>
+
+        <div class="space-y-4 text-gray-300">
+
+          <a href="https://wa.me/201068130159"
+             target="_blank" rel="noopener noreferrer"
+             class="flex items-center gap-3 hover:text-green-400 transition">
+
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+            واتساب
+
+          </a>
+
+          <a href="tel:201068130159"
+             class="flex items-center gap-3 hover:text-amber-400 transition">
+
+            <i class="fa-solid fa-phone"></i>
+            01068130159
+
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Social -->
+      <div>
+        <h3 class="text-2xl font-black mb-5">تابعنا</h3>
+
+        <div class="flex gap-4 text-xl">
+
+          <a href="https://www.facebook.com/share/17Qd1yQXLa/?mibextid=wwXIfr"
+target="_blank"
+rel="noopener noreferrer"
+             class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-600 transition">
+
+            <i class="fa-brands fa-facebook-f"></i>
+
+          </a>
+
+         <a href="https://www.instagram.com/..."
+target="_blank"
+rel="noopener noreferrer"
+             class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-pink-500 transition">
+
+            <i class="fa-brands fa-instagram"></i>
+
+          </a>
+
+          <a href="https://www.tiktok.com/..."
+target="_blank"
+rel="noopener noreferrer"
+             class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-500 transition">
+
+            <i class="fa-brands fa-tiktok"></i>
+
+          </a>
+
+        </div>
+      </div>
 
     </div>
-  </section>
 
-  <script>
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbxO-pvTB451KYuK7TmWRe5fO_vWfVyV4ln69lDN9h9ksksx_OqtPVTk2KLRPDBqBwGH1w/exec";
+    <div class="border-t border-white/10 mt-12 pt-6 text-center text-gray-500">
+      © 2026 Era&Art — جميع الحقوق محفوظة
+    </div>
 
-    const productsURL =
-      "https://script.google.com/macros/s/AKfycbwVNEEOobM3H9I_4OVkEQG5EXjVxT_PaG2ExMupeJn1rMMXdjWJL1UIfPsCmAmEHukSIw/exec";
+  </div>
 
-    const reviewsURL =
-      "https://script.google.com/macros/s/AKfycbyKGKkyVPM69P26ce71Dh3ftL5Bc-6DptvwaMWvqDqdY3n6MJmK_ouU5xtKgV0K3RoW/exec";
-
-    let products = [];
-    let filteredProducts = [];
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    let currentCategory = "الكل";
-
-    function hideLoader(){
-      const loader=document.getElementById("pageLoader");
-      if(!loader) return;
-
-      loader.style.opacity="0";
-
-      setTimeout(()=>{
-        loader.style.display="none";
-      },500);
-    }
-
-    function showToast(text){
-      const toast=document.getElementById("toast");
-      toast.innerText=text;
-      toast.classList.remove("hidden");
-
-      setTimeout(()=>{
-        toast.classList.add("hidden");
-      },3000);
-    }
-
-    function toggleCart(show){
-      const drawer=document.getElementById("cartDrawer");
-
-      if(show){
-        drawer.classList.remove("hidden");
-      }else{
-        drawer.classList.add("hidden");
-      }
-    }
-
-    function saveCart(){
-      localStorage.setItem("cart",JSON.stringify(cart));
-    }
-
-    function updateCart(){
-      document.getElementById("cart-count").innerText =
-        cart.reduce((a,b)=>a+b.qty,0);
-    }
-
-    function addToCart(id){
-      const product=products.find(p=>p.id===id);
-
-      if(!product) return;
-
-      const existing=cart.find(p=>p.id===id);
-
-      if(existing){
-        existing.qty++;
-      }else{
-        cart.push({...product,qty:1});
-      }
-
-      saveCart();
-      updateCart();
-      showToast("تمت إضافة المنتج للسلة");
-    }
-
-    function clearCart(){
-      cart=[];
-      saveCart();
-      updateCart();
-      showToast("تم إلغاء الطلب");
-    }
-
-    async function checkout(){
-      if(cart.length===0){
-        showToast("السلة فارغة");
-        return;
-      }
-
-      showToast("تم إرسال الطلب");
-      clearCart();
-      toggleCart(false);
-    }
-
-    async function loadProducts(){
-      try{
-        const res=await fetch(productsURL);
-        products=await res.json();
-        filteredProducts=[...products];
-      }catch(e){
-        console.error(e);
-      }
-    }
-
-    async function loadReviews(){
-      try{
-        await fetch(reviewsURL);
-      }catch(e){
-        console.error(e);
-      }
-    }
-
-    async function submitReview(){
-      showToast("شكراً على تقييمك ⭐");
-    }
-
-    window.addEventListener("DOMContentLoaded", async()=>{
-
-      try{
-        await loadProducts();
-        await loadReviews();
-        updateCart();
-      }catch(e){
-        console.error(e);
-      }finally{
-        hideLoader();
-      }
-
-    });
-
-    setTimeout(hideLoader,5000);
-  </script>
-
+</footer>
 </body>
 </html>
