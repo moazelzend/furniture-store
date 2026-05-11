@@ -8,7 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Era&Art | أثاث عصري فاخر</title>
+
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2553/2553691.png">
+
 <meta name="description"
 content="Era&Art أثاث عصري فاخر بأفضل الأسعار في مصر، غرف معيشة وغرف نوم وطاولات وديكور بجودة عالية">
 
@@ -17,6 +19,7 @@ content="أثاث, furniture, غرف نوم, غرف معيشة, ديكور, Era&
 
 <meta name="author"
 content="Era&Art">
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 <link rel="stylesheet"
@@ -25,6 +28,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 <link
 href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
 rel="stylesheet">
+
+<style>
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Tajawal',sans-serif;
+background:#f8f6f2;
+}
+
 /* CART DARK FIX */
 #cartDrawer .bg-slate-900{
   background:#0f172a !important;
@@ -53,16 +68,6 @@ rel="stylesheet">
 #cartDrawer button{
   opacity:1 !important;
 }
-<style>
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-font-family:'Tajawal',sans-serif;
-background:#f8f6f2;
-}
 
 .loader{
 width:22px;
@@ -88,39 +93,33 @@ from{
 opacity:0;
 transform:translateY(30px);
 }
-
 to{
 opacity:1;
 transform:translateY(0);
 }
 }
+
 .product-card{
-  transition:.3s;
+transition:.3s;
 }
 
 .product-card:hover{
-  transform:translateY(-8px);
+transform:translateY(-8px);
 }
-/* =========================
-TOAST ANIMATION
-========================= */
 
 #toast{
 animation:toastSlide .4s ease;
 }
 
 @keyframes toastSlide{
-
 from{
 opacity:0;
 transform:translateX(100px);
 }
-
 to{
 opacity:1;
 transform:translateX(0);
 }
-
 }
 
 footer a{
