@@ -699,9 +699,10 @@ class="w-full border p-3 rounded-lg">
 
 <input
 id="customer-phone"
-type="text"
-placeholder="رقم الهاتف"
-class="w-full border p-3 rounded-lg">
+type="tel"
+placeholder="+201068130159"
+class="w-full border p-3 rounded-lg"
+dir="ltr">
 
 <textarea
 id="customer-address"
@@ -934,7 +935,8 @@ VALIDATION + SECURITY
 
 function validatePhone(phone){
 
-const regex = /^01[0125][0-9]{8}$/;
+// مثال صحيح: +201068130159 أو +966501234567
+const regex = /^\+[1-9][0-9]{7,14}$/;
 
 return regex.test(phone);
 
@@ -1771,7 +1773,7 @@ return;
 }
 
 if(!validatePhone(phone)){
-showToast("رقم الهاتف غير صحيح");
+showToast("اكتب الرقم بصيغة دولية مثل +201068130159");
 return;
 }
 
