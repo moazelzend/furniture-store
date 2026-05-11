@@ -2335,7 +2335,66 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 
 </div>
 
+/* تابع لكود الـ JavaScript السابق - ضعه في النهاية */
 
+// 1. تشغيل الموقع عند التحميل
+window.addEventListener('load', async () => {
+    console.log("الموقع بدأ في التحميل...");
+    try {
+        // إخفاء اللودر فوراً إذا تأخرت المنتجات
+        setTimeout(hideLoader, 3000); 
+        
+        await loadProducts(); // جلب البيانات من جوجل
+        updateCart();        // تحديث السلة
+        loadCustomerData();  // استعادة بيانات العميل
+    } catch (e) {
+        console.error("خطأ في التشغيل:", e);
+    } finally {
+        hideLoader();
+    }
+});
+
+// 2. دالة إخفاء الشاشة البيضاء
+function hideLoader() {
+    const loader = document.getElementById("pageLoader");
+    if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(() => loader.style.display = "none", 500);
+    }
+}
+
+// 3. دالة إتمام الشراء (Checkout) لربط السلة بالواتساب
+async function checkout() {
+    const name = document.getElementById('customer-name').value;
+    const phone = document.getElementById('customer-phone').value;
+    const address = document.getElementById('customer-address').value;
+
+    if (!name || !phone || !address) {
+        alert("برجاء ملء كافة البيانات");
+        return;
+    }
+
+    let message = `طلب جديد من: ${name}%0Aالهاتف: ${phone}%0Aالعنوان: ${address}%0A%0Aالمنتجات:%0A`;
+    
+    cart.forEach(item => {
+        message += `- ${item.name} (الكمية: ${item.qty})%0A`;
+    });
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    message += `%0Aالإجمالي: ${total} ج.م`;
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    
+    // إفراغ السلة بعد الطلب
+    cart = [];
+    saveCart();
+    updateCart();
+    toggleCart(false);
+    showSuccessPopup(Math.floor(Math.random() * 10000));
+}
+
+// 4. تأكد من إغلاق الوسم
+</script>
 </body>
 </html>
 
