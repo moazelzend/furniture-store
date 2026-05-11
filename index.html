@@ -1028,17 +1028,31 @@ document.getElementById("customer-address").value
 
 function loadCustomerData(){
 
-document.getElementById("customer-name").value =
-localStorage.getItem("customerName") || "";
+const nameInput =
+document.getElementById("customer-name");
 
-document.getElementById("customer-phone").value =
-localStorage.getItem("customerPhone") || "";
+const phoneInput =
+document.getElementById("customer-phone");
 
-document.getElementById("customer-address").value =
-localStorage.getItem("customerAddress") || "";
+const addressInput =
+document.getElementById("customer-address");
 
+if(nameInput){
+  nameInput.value =
+  localStorage.getItem("customerName") || "";
 }
 
+if(phoneInput){
+  phoneInput.value =
+  localStorage.getItem("customerPhone") || "";
+}
+
+if(addressInput){
+  addressInput.value =
+  localStorage.getItem("customerAddress") || "";
+}
+
+}
 
 
 /* =========================
