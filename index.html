@@ -2434,7 +2434,53 @@ window.addEventListener('DOMContentLoaded', async () => {
 // أضف هذا السطر كأمان إضافي إذا تعطل الـ JavaScript لأي سبب
 setTimeout(hideLoader, 5000);    
 </script>
+<script>
+// 1. تعريف الدالة أولاً لضمان وجودها
+function hideLoader() {
+    const loader = document.getElementById("pageLoader");
+    if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
+    }
+    console.log("تم إخفاء شاشة التحميل");
+}
+
+// 2. تحديث دالة تحميل المنتجات للتعامل مع أخطاء السيرفر
+async function loadProducts() {
+    const loader = document.getElementById("productsLoader");
+    try {
+        const response = await fetch(productsURL);
+        if (!response.ok) throw new Error('استجابة السيرفر غير سليمة');
+        
+        products = await response.json();
+        // ... باقي كود معالجة البيانات ...
+        renderProducts(products);
+    } catch (error) {
+        console.error("خطأ تحميل المنتجات:", error);
+        if(loader) loader.innerHTML = "<p class='text-center text-red-500'>عذراً، فشل الاتصال بقاعدة البيانات</p>";
+    }
+}
+
+// 3. المحرك الأساسي للموقع
+window.onload = async () => {
+    console.log("الموقع بدأ التحميل...");
     
+    // أمان إضافي: لو السيرفر اتأخر أكثر من 6 ثواني، اخفي الشاشة البيضاء فوراً
+    const backupTimeout = setTimeout(hideLoader, 6000);
+
+    try {
+        await loadProducts();
+        if (typeof updateCart === "function") updateCart();
+    } catch (e) {
+        console.error("فشل التشغيل المبدئي:", e);
+    } finally {
+        clearTimeout(backupTimeout);
+        hideLoader(); // سيتم استدعاؤها الآن بدون خطأ
+    }
+};
+</script>    
 </body>
 </html>
 
