@@ -113,147 +113,45 @@ footer a:hover i{
 transform:scale(1.15);
 }
   .dark body{
-  background:#111827;
-  color:white;
+background:#111827;
+color:white;
 }
 
 .dark .bg-white{
-  background:#1f2937 !important;
-  color:white !important;
+background:#1f2937 !important;
+color:white !important;
 }
 
-.dark .text-slate-900{
-  color:white !important;
-}
-
-.dark .text-gray-500,
-.dark .text-gray-600,
-.dark .text-gray-400{
-  color:#d1d5db !important;
+.dark .text-slate-900,
+.dark .fa-bag-shopping{
+color:white !important;
 }
 
 .dark .bg-gray-50{
-  background:#374151 !important;
-}
-  .dark .product-category{
-  background:#374151 !important;
-  color:white !important;
-}
-  /* اخفاء شريط جوجل */
-.goog-te-banner-frame,
-.skiptranslate iframe{
-display:none !important;
+background:#374151 !important;
 }
 
-body{
-top:0 !important;
+.dark .product-category{
+background:#374151 !important;
+color:white !important;
 }
 
-.skiptranslate iframe{
-display:none !important;
+.dark input,
+.dark textarea,
+.dark select{
+background:#334155 !important;
+color:white !important;
+border-color:#475569 !important;
 }
 
-.goog-te-gadget{
-font-size:0 !important;
-}
-
-.goog-logo-link{
-display:none !important;
-}
-  .goog-te-banner-frame,
-.goog-te-balloon-frame,
-.skiptranslate iframe,
-.goog-tooltip,
-.goog-tooltip:hover,
-#goog-gt-tt,
-.goog-text-highlight{
-display:none !important;
-visibility:hidden !important;
-}
-
-body{
-top:0 !important;
-}
-
-.goog-logo-link,
-.goog-te-gadget,
-.goog-te-spinner-pos{
-display:none !important;
-}
-
-font{
-background:transparent !important;
-box-shadow:none !important;
-}
-  .goog-te-banner-frame,
-.goog-te-balloon-frame,
-.goog-tooltip,
-.goog-te-menu-frame,
-.skiptranslate iframe {
-  display:none !important;
-  visibility:hidden !important;
-}
-
-body{
-  top:0 !important;
-  position:static !important;
-}
-
-#goog-gt-tt{
-  display:none !important;
-}
-
-.goog-logo-link,
-.goog-te-gadget{
-  display:none !important;
-}
-  .dark #cartDrawer .bg-gray-50{
-  background:#111827 !important;
-}
-
-.dark #cartDrawer input,
-.dark #cartDrawer textarea{
-  background:#1f2937 !important;
-  color:white !important;
-  border-color:#374151 !important;
-}
-
-.dark #cartDrawer input::placeholder,
-.dark #cartDrawer textarea::placeholder{
-  color:#d1d5db !important;
-}
-
-.dark #cart-items .border-b{
-  border-color:#374151 !important;
+.dark input::placeholder,
+.dark textarea::placeholder{
+color:#cbd5e1 !important;
 }
 
 .dark #cart-items button{
-  color:white;
-}
-  /* DARK MODE CART FIX */
-.dark #cartDrawer .absolute.left-0{
-  background:#0f172a !important;
-  color:white !important;
-}
-
-.dark #cartDrawer #cart-items{
-  background:#0f172a !important;
-}
-
-.dark #cartDrawer .bg-gray-50{
-  background:#1e293b !important;
-}
-
-.dark #cartDrawer input,
-.dark #cartDrawer textarea{
-  background:#334155 !important;
-  color:white !important;
-  border-color:#475569 !important;
-}
-
-.dark #cartDrawer input::placeholder,
-.dark #cartDrawer textarea::placeholder{
-  color:#cbd5e1 !important;
+background:#475569 !important;
+color:white !important;
 }
 </style>
 <!-- Google Analytics -->
@@ -360,7 +258,11 @@ data-en="Products">
 </nav>
 
 <div class="flex items-center gap-2 md:gap-4 flex-wrap">
-
+<button
+id="menuBtn"
+class="md:hidden bg-slate-900 text-white w-10 h-10 rounded-full">
+<i class="fa-solid fa-bars"></i>
+</button>
 <button
 onclick="toggleDarkMode()"
 class="bg-gray-200 w-10 h-10 rounded-full text-xl">
@@ -749,22 +651,7 @@ ADMIN DASHBOARD
         <span id="cart-total">0 ج.م</span>
       </div>
 
-      <button
-        onclick="clearCart()"
-        class="w-full bg-red-500 text-white py-3 rounded-lg font-black">
-        إلغاء الطلب
-      </button>
-
-      <button
-        id="checkoutBtn"
-        onclick="checkout()"
-        class="w-full bg-amber-700 text-white py-4 rounded-lg font-black flex justify-center items-center gap-3">
-        إتمام الشراء
-      </button>
-
-    </div>
-  </div>
-</div>
+     
 <button
 onclick="clearCart()"
 class="w-full bg-red-500 text-white py-3 rounded-lg font-black">
@@ -1717,14 +1604,14 @@ ${item.price} ج.م
 
 <button
 onclick="decreaseQty(${item.id})"
-class="bg-gray-200 dark:bg-slate-600 dark:text-white w-8 h-8 rounded font-black">
+class="w-9 h-9 rounded-full bg-amber-700 text-white font-black"
 -
 </button>
 <span>${item.qty}</span>
 
 <button
 onclick="increaseQty(${item.id})"
-class="bg-gray-200 dark:bg-slate-600 dark:text-white w-8 h-8 rounded font-black">
+class="w-9 h-9 rounded-full bg-green-600 text-white font-black"
 +
 </button>
 
@@ -2488,35 +2375,46 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 
 </div>
 <script>
-let currentLang = localStorage.getItem("lang") || "ar";
+let currentLang =
+localStorage.getItem("lang") || "ar";
 
-function applyLanguage() {
+function applyLanguage(){
 
-  document.documentElement.lang = currentLang;
-  document.documentElement.dir =
-    currentLang === "ar" ? "rtl" : "ltr";
+document.documentElement.lang =
+currentLang;
 
-  document.getElementById("langBtn").innerText =
-    currentLang === "ar" ? "EN" : "AR";
+document.documentElement.dir =
+currentLang === "ar" ? "rtl" : "ltr";
 
-  document.querySelectorAll("[data-ar][data-en]").forEach(el => {
-    el.textContent =
-      currentLang === "ar"
-      ? el.getAttribute("data-ar")
-      : el.getAttribute("data-en");
-  });
+document.getElementById("langBtn").innerText =
+currentLang === "ar" ? "EN" : "AR";
+
+document.querySelectorAll("[data-ar][data-en]")
+.forEach(el=>{
+
+el.innerText =
+currentLang === "ar"
+? el.dataset.ar
+: el.dataset.en;
+
+});
+
 }
 
-function toggleLanguage() {
-  currentLang =
-    currentLang === "ar" ? "en" : "ar";
+function toggleLanguage(){
 
-  localStorage.setItem("lang", currentLang);
-  applyLanguage();
+currentLang =
+currentLang === "ar"
+? "en"
+: "ar";
+
+localStorage.setItem("lang", currentLang);
+
+applyLanguage();
 }
 
-function loadLanguage() {
-  applyLanguage();
+function loadLanguage(){
+applyLanguage();
 }
 </script>
 
