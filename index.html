@@ -112,47 +112,7 @@ transition:all .3s ease;
 footer a:hover i{
 transform:scale(1.15);
 }
-  .dark body{
-background:#111827;
-color:white;
-}
 
-.dark .bg-white{
-background:#1f2937 !important;
-color:white !important;
-}
-
-.dark .text-slate-900,
-.dark .fa-bag-shopping{
-color:white !important;
-}
-
-.dark .bg-gray-50{
-background:#374151 !important;
-}
-
-.dark .product-category{
-background:#374151 !important;
-color:white !important;
-}
-
-.dark input,
-.dark textarea,
-.dark select{
-background:#334155 !important;
-color:white !important;
-border-color:#475569 !important;
-}
-
-.dark input::placeholder,
-.dark textarea::placeholder{
-color:#cbd5e1 !important;
-}
-
-.dark #cart-items button{
-background:#475569 !important;
-color:white !important;
-}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -262,18 +222,8 @@ id="menuBtn"
 class="md:hidden bg-slate-900 text-white w-10 h-10 rounded-full">
 <i class="fa-solid fa-bars"></i>
 </button>
-<button
-onclick="toggleDarkMode()"
-class="bg-gray-200 w-9 h-9 rounded-full text-lg"
-🌙
-</button>
+
   
-<button
-id="langBtn"
-onclick="toggleLanguage()"
-class="bg-slate-900 text-white px-3 py-2 rounded-xl font-bold text-sm"
-EN
-</button>
 
 <button
 onclick="document.getElementById('wishlist-container').scrollIntoView({behavior:'smooth'})"
@@ -774,28 +724,9 @@ function safeParse(key){
 
 let cart = safeParse("cart");
 let wishlist = safeParse("wishlist");
-  function toggleDarkMode(){
 
-  document.documentElement.classList.toggle("dark");
 
-  if(document.documentElement.classList.contains("dark")){
-    localStorage.setItem("theme","dark");
-  }else{
-    localStorage.setItem("theme","light");
-  }
 
-}
-
-function loadTheme(){
-
-  const theme =
-  localStorage.getItem("theme");
-
-  if(theme === "dark"){
-    document.documentElement.classList.add("dark");
-  }
-
-}
   function getProductRating(productId){
   const ratings =
   JSON.parse(localStorage.getItem("productRatings") || "{}");
@@ -2016,7 +1947,7 @@ rating + "★";
 }
 window.onload = ()=>{
 
-  loadTheme();
+
 
   if(typeof loadLanguage === "function"){
   
@@ -2380,37 +2311,11 @@ class="w-full bg-amber-700 text-white py-4 rounded-xl font-black">
 
 
 <script>
-function googleTranslateElementInit(){
-new google.translate.TranslateElement({
-pageLanguage:'ar',
-includedLanguages:'ar,en'
-},'google_translate_element');
-}
 
-function toggleLanguage(){
-
-const langBtn =
-document.getElementById("langBtn");
-
-const frame =
-document.querySelector(".goog-te-combo");
-
-if(!frame) return;
-
-if(langBtn.innerText === "EN"){
-frame.value = "en";
-langBtn.innerText = "AR";
-}else{
-frame.value = "ar";
-langBtn.innerText = "EN";
-}
 
 frame.dispatchEvent(new Event("change"));
 }
 </script>
-
-<script>
-function loadLanguage(){}
 </script>
 </body>
 </html>
