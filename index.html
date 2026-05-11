@@ -241,11 +241,7 @@ class="md:hidden text-2xl">
 </div>
 
 </div>
-<button
-onclick="openAdmin()"
-class="fixed top-24 left-6 bg-slate-900 text-white px-5 py-3 rounded-xl z-50 shadow-xl hover:bg-amber-700 transition">
-🔒 لوحة التحكم
-</button>
+
 </header>
 <section class="bg-amber-700 text-white py-3 text-center font-black text-lg">
 🔥 خصم 20% على أول طلبية لفترة محدودة
@@ -671,79 +667,9 @@ class="w-16 h-16 rounded-full object-cover">
 ADMIN DASHBOARD
 ========================= -->
 
-<section
-id="adminPanel"
-class="container mx-auto px-6 py-20 hidden">
 
-<div class="bg-slate-900 text-white rounded-[35px] p-10">
 
-<h2 class="text-4xl font-black mb-10">
-لوحة التحكم
-</h2>
 
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-
-<div class="bg-white/10 p-6 rounded-2xl">
-
-<h3 class="text-xl mb-3">
-عدد المنتجات
-</h3>
-
-<p
-id="adminProducts"
-class="text-5xl font-black">
-0
-</p>
-
-</div>
-
-<div class="bg-white/10 p-6 rounded-2xl">
-
-<h3 class="text-xl mb-3">
-عدد الطلبات
-</h3>
-
-<p
-id="adminOrders"
-class="text-5xl font-black">
-0
-</p>
-
-</div>
-
-<div class="bg-white/10 p-6 rounded-2xl">
-
-<h3 class="text-xl mb-3">
-منتجات بالسلة
-</h3>
-
-<p
-id="adminCart"
-class="text-5xl font-black">
-0
-</p>
-
-</div>
-
-<div class="bg-white/10 p-6 rounded-2xl">
-
-<h3 class="text-xl mb-3">
-إجمالي السلة
-</h3>
-
-<p
-id="adminTotal"
-class="text-3xl font-black">
-0 ج.م
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
 
 
 <div id="cartDrawer" class="fixed inset-0 hidden z-50">
@@ -1070,13 +996,12 @@ category: product.category
 }));
 
 filteredProducts = [...products];
-document.getElementById("adminProducts").innerText =
-products.length;
+
 loader.style.display = "none";
 
 renderProducts(filteredProducts);
 renderBestProducts();
-updateDashboard();
+
 
 }catch(error){
 
@@ -1723,33 +1648,11 @@ if(cart.length === 0){
 }else{
   checkoutBtn.classList.remove("opacity-50","cursor-not-allowed");
 }
-updateDashboard();
+
 
 }
 
-function updateDashboard(){
 
-const total =
-cart.reduce((sum,item)=>
-sum + (item.price * item.qty)
-,0);
-
-document.getElementById("adminProducts")
-.innerText = products.length;
-
-document.getElementById("adminOrders")
-.innerText =
-localStorage.getItem("ordersCount") || 0;
-
-document.getElementById("adminCart")
-.innerText =
-cart.reduce((sum,item)=>sum + item.qty,0);
-
-document.getElementById("adminTotal")
-.innerText =
-total + " ج.م";
-
-}
 
 /* =========================
    تقليل الكمية
@@ -2060,30 +1963,7 @@ ${product.price} ج.م
 container.innerHTML = html;
 
 }
-function openAdmin(){
 
-const password =
-prompt("أدخل كلمة مرور لوحة التحكم");
-
-if(password === "123456"){
-
-document.getElementById("adminPanel")
-.classList.remove("hidden");
-
-document.getElementById("adminPanel")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-showToast("تم فتح لوحة التحكم");
-
-}else if(password !== null){
-
-showToast("كلمة المرور غير صحيحة");
-
-}
-
-}
 window.onload = ()=>{
 
 loadProducts();
