@@ -1025,7 +1025,6 @@ document.getElementById("customer-address").value
 
 }
 
-
 function loadCustomerData(){
 
 const nameInput =
@@ -1038,18 +1037,18 @@ const addressInput =
 document.getElementById("customer-address");
 
 if(nameInput){
-  nameInput.value =
-  localStorage.getItem("customerName") || "";
+nameInput.value =
+localStorage.getItem("customerName") || "";
 }
 
 if(phoneInput){
-  phoneInput.value =
-  localStorage.getItem("customerPhone") || "";
+phoneInput.value =
+localStorage.getItem("customerPhone") || "";
 }
 
 if(addressInput){
-  addressInput.value =
-  localStorage.getItem("customerAddress") || "";
+addressInput.value =
+localStorage.getItem("customerAddress") || "";
 }
 
 }
@@ -1960,12 +1959,10 @@ rating + "★";
 window.onload = ()=>{
   loadProducts();
   updateCart();
-  loadCustomerData();
   renderWishlist();
   loadOrdersCount();
   loadReviews();
-  document.getElementById("pageLoader").style.display = "none";
-};
+}
 
   async function setProductRating(productId, stars){
 
