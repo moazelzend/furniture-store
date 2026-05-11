@@ -1858,9 +1858,13 @@ try{
 
   localStorage.setItem("ordersCount", orders);
 
-  showSuccessPopup(orderId);
-  showToast("رقم طلبك: " + orderId);
+ showSuccessPopup(orderId);
+showToast("رقم طلبك: " + orderId);
 
+setTimeout(() => {
+  window.location.href =
+  "./track.html?orderId=" + encodeURIComponent(orderId);
+}, 2000);
 }catch(err){
 
   console.log(err);
