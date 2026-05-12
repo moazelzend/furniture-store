@@ -2465,83 +2465,76 @@ rel="noopener noreferrer"
 
 </footer>
 <script>
-let translateLoaded = false;
+let translateReady = false;
 
-function googleTranslateElementInit(){
-  if(translateLoaded) return;
-
+function googleTranslateElementInit() {
   new google.translate.TranslateElement({
-    pageLanguage:'ar',
-    autoDisplay:false,
-    includedLanguages:'ar,en,fr,de',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
+    pageLanguage: "ar",
+    includedLanguages: "ar,en,fr,de",
+    autoDisplay: false
+  }, "google_translate_element");
 
-  translateLoaded = true;
+  translateReady = true;
 
   const savedLang = localStorage.getItem("siteLang");
-
-  if(savedLang && savedLang !== "ar"){
-    setTimeout(()=>{
-      applyGoogleTranslate(savedLang);
-      document.getElementById("langSwitcher").value = savedLang;
-    },1000);
+  if (savedLang && savedLang !== "ar") {
+    setTimeout(() => translatePage(savedLang), 1500);
   }
 }
 
-function applyGoogleTranslate(lang){
+function translatePage(lang) {
   const select = document.querySelector(".goog-te-combo");
 
-  if(select){
-    select.value = lang;
-    select.dispatchEvent(new Event("change"));
+  if (!select) {
+    console.log("Google Translate not ready");
+    return;
   }
+
+  select.value = lang;
+  select.dispatchEvent(new Event("change"));
 }
 
-function changeLanguage(lang){
+function changeLanguage(lang) {
   localStorage.setItem("siteLang", lang);
 
-  if(lang === "ar"){
+  if (lang === "ar") {
     location.reload();
     return;
   }
 
-  let tries = 0;
+  let count = 0;
 
-  const timer = setInterval(()=>{
+  const wait = setInterval(() => {
     const select = document.querySelector(".goog-te-combo");
 
-    if(select){
-      select.value = lang;
-      select.dispatchEvent(new Event("change"));
-      clearInterval(timer);
-      return;
+    if (select) {
+      clearInterval(wait);
+      translatePage(lang);
     }
 
-    tries++;
+    count++;
 
-    if(tries > 20){
-      clearInterval(timer);
-      alert("تعذر تحميل الترجمة");
+    if (count > 20) {
+      clearInterval(wait);
+      alert("فشل تحميل الترجمة");
     }
-  },500);
+  }, 500);
 }
 
-function toggleDarkMode(){
+function toggleDarkMode() {
   document.body.classList.toggle("dark");
 
-  if(document.body.classList.contains("dark")){
-    localStorage.setItem("theme","dark");
-  } else {
-    localStorage.setItem("theme","light");
-  }
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("dark") ? "dark" : "light"
+  );
 }
 
-if(localStorage.getItem("theme")==="dark"){
+if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
 }
 </script>
 
-<script async src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
