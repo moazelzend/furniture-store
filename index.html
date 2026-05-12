@@ -123,6 +123,21 @@ display:none !important;
 body{
 top:0 !important;
 }
+  .dark{
+background:#0f172a !important;
+color:white !important;
+}
+
+.dark .bg-white{
+background:#1e293b !important;
+color:white !important;
+}
+
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-400{
+color:#cbd5e1 !important;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -217,6 +232,12 @@ class="bg-white px-3 py-2 rounded-xl shadow font-bold">
 </select>
 
 <div id="google_translate_element" style="display:none"></div>
+  <button
+onclick="toggleDarkMode()"
+class="text-2xl"
+aria-label="Dark Mode">
+🌙
+</button>
 <!-- WISHLIST BUTTON -->
 
 <button
@@ -2201,5 +2222,21 @@ function changeLanguage(lang){
 </script>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark");
+
+if(document.body.classList.contains("dark")){
+localStorage.setItem("theme","dark");
+}else{
+localStorage.setItem("theme","light");
+}
+}
+
+if(localStorage.getItem("theme")==="dark"){
+document.body.classList.add("dark");
+}
+</script>
 </body>
 </html>
