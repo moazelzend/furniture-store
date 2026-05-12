@@ -2485,9 +2485,26 @@ function changeLanguage(lang){
   document.cookie = "googtrans=/ar/" + lang + "; path=/";
   location.reload();
 }
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
 
+  const btn =
+  document.querySelector('[aria-label="Dark Mode"]');
+
+  if(document.body.classList.contains("dark")){
+    localStorage.setItem("darkMode","true");
+    btn.innerText = "☀️";
+  }else{
+    localStorage.setItem("darkMode","false");
+    btn.innerText = "🌙";
+  }
+}
+  
 window.addEventListener("load", function () {
-
+if(localStorage.getItem("darkMode")==="true"){
+  document.body.classList.add("dark");
+  document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
+}
   const saved = localStorage.getItem("siteLang") || "ar";
   document.getElementById("langSwitcher").value = saved;
 
