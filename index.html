@@ -391,6 +391,7 @@ gtag('config', 'G-BTZGTJPGH7');
 </head>
 
 <body>
+  <div id="google_translate_element" style="display:none;"></div>
 <div id="pageLoader"
 class="fixed inset-0 bg-white z-[99999] flex items-center justify-center">
 
@@ -2471,52 +2472,13 @@ document.body.classList.add("dark");
 }
 </script>
   <script>
-async function changeLanguage(lang){
-
-  localStorage.setItem("siteLang", lang);
-
-  if(lang === "ar"){
-    location.reload();
-    return;
-  }
-
-  const elements = document.querySelectorAll(
-    "h1,h2,h3,p,a,button,span"
-  );
-
-  for(const el of elements){
-
-    const original =
-      el.getAttribute("data-original") || el.innerText;
-
-    if(!el.getAttribute("data-original")){
-      el.setAttribute("data-original", original);
-    }
-
-    try{
-      const res = await fetch("https://translate.astian.org/translate",{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body: JSON.stringify({
-          q: original,
-          source: "ar",
-          target: lang,
-          format: "text"
-        })
-      });
-
-      const data = await res.json();
-
-      if(data.translatedText){
-        el.innerText = data.translatedText;
-      }
-
-    }catch(err){
-      console.log(err);
-    }
-  }
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'ar'
+  }, 'google_translate_element');
 }
+</script>
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
