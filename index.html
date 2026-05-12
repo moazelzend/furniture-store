@@ -1527,7 +1527,7 @@ ${escapeHTML(product.category)}
 <!-- FAVORITE -->
 
 <button
-onclick="toggleWishlist(${product.id})"
+onclick="event.stopPropagation();toggleWishlist(${product.id})"
 class="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur flex items-center justify-center transition shadow">
 
 <i class="${wishlist.includes(product.id)
@@ -1672,7 +1672,7 @@ class="flex-1 bg-slate-900 hover:bg-amber-700 text-white py-4 rounded-2xl font-b
 </button>
 
 <button
-onclick="toggleWishlist(${product.id})"
+onclick="event.stopPropagation();toggleWishlist(${product.id})"
 class="w-14 bg-red-500 hover:bg-red-600 text-white rounded-2xl">
 <i class="fa-solid fa-trash"></i>
 </button>
@@ -1807,44 +1807,40 @@ applyFilters();
 ========================= */
 function toggleWishlist(id){
 
-if(wishlist.includes(id)){
+  id = Number(id);
 
-wishlist =
-wishlist.filter(item => item !== id);
+  if(wishlist.includes(id)){
 
-showToast("تمت إزالة المنتج من المفضلة");
+    wishlist = wishlist.filter(item => item !== id);
 
-}else{
+    showToast("تمت إزالة المنتج من المفضلة");
 
-wishlist.push(id);
+  }else{
 
-showToast("تمت إضافة المنتج للمفضلة");
+    wishlist.push(id);
 
-}
+    showToast("تمت إضافة المنتج للمفضلة");
 
-localStorage.setItem(
-"wishlist",
-JSON.stringify(wishlist)
-);
+  }
 
-/* تحديث عداد المفضلة */
+  localStorage.setItem(
+    "wishlist",
+    JSON.stringify(wishlist)
+  );
 
-const wishlistCount =
-document.getElementById("wishlist-count");
+  const wishlistCount =
+  document.getElementById("wishlist-count");
 
-if(wishlistCount){
+  if(wishlistCount){
+    wishlistCount.innerText = wishlist.length;
+  }
 
-wishlistCount.innerText =
-wishlist.length;
+  // تحديث كل الواجهات
+  filteredProducts = [...filteredProducts];
 
-}
-
-/* إعادة رسم المنتجات والمفضلة */
-
-renderProducts(filteredProducts);
-
-renderWishlist();
-
+  renderProducts(filteredProducts);
+  renderWishlist();
+  renderBestProducts();
 }
 
 
