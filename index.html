@@ -112,6 +112,17 @@ transition:all .3s ease;
 footer a:hover i{
 transform:scale(1.15);
 }
+  .goog-te-banner-frame,
+.goog-te-gadget,
+.goog-logo-link,
+.goog-te-balloon-frame,
+.skiptranslate{
+display:none !important;
+}
+
+body{
+top:0 !important;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -194,6 +205,18 @@ Era&Art
 </nav>
 
 <div class="flex items-center gap-4">
+  <select id="langSwitcher"
+onchange="changeLanguage(this.value)"
+class="bg-white px-3 py-2 rounded-xl shadow font-bold">
+
+  <option value="ar">العربية</option>
+  <option value="en">English</option>
+  <option value="fr">Français</option>
+  <option value="de">Deutsch</option>
+
+</select>
+
+<div id="google_translate_element" style="display:none"></div>
 <!-- WISHLIST BUTTON -->
 
 <button
@@ -2139,5 +2162,32 @@ rel="noopener noreferrer"
   </div>
 
 </footer>
+  <script>
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({
+    pageLanguage:'ar',
+    autoDisplay:false
+  }, 'google_translate_element');
+}
+
+function changeLanguage(lang){
+
+  const interval = setInterval(()=>{
+
+    const select =
+    document.querySelector(".goog-te-combo");
+
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+
+  },500);
+
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
