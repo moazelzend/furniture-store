@@ -19,12 +19,12 @@ content="أثاث, furniture, غرف نوم, غرف معيشة, ديكور, Era&
 content="Era&Art">
 <script src="https://cdn.tailwindcss.com"></script>
 
-<link rel="stylesheet"
+<link rel="sheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <link
 href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
-rel="stylesheet">
+rel="sheet">
 
 <style>
 
@@ -340,6 +340,25 @@ CART DARK MODE FIX
   background:#334155 !important;
   color:white !important;
 }
+  /* أزرار + و - في السلة */
+.dark #cart-items button.bg-gray-200{
+  background:#475569 !important;
+  color:white !important;
+  border:1px solid #64748b !important;
+}
+
+.dark #cart-items button.bg-gray-200:hover{
+  background:#64748b !important;
+}
+  #discountBanner{
+  padding: 6px 12px !important;
+}
+
+@media (max-width:640px){
+  #discountBanner{
+    padding: 4px 10px !important;
+  }
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -490,7 +509,7 @@ class="md:hidden text-2xl">
 
 </header>
 <section
-class="bg-amber-700 text-white py-1 md:py-1 text-center font-black text-sm md:text-lg px-3">
+<section id="discountBanner" class="bg-amber-700 text-white text-center font-black text-sm md:text-lg px-3">
 🔥 خصم 20% على أول طلبية لفترة محدودة
 </section>
 <!-- =========================
