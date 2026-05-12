@@ -19,7 +19,7 @@ content="أثاث, furniture, غرف نوم, غرف معيشة, ديكور, Era&
 content="Era&Art">
 <script src="https://cdn.tailwindcss.com"></script>
 
-<link rel="sheet"
+<link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <link
@@ -359,6 +359,18 @@ CART DARK MODE FIX
     padding: 4px 10px !important;
   }
 }
+  .dark header{
+  background:#1e293b !important;
+  color:white !important;
+}
+
+.dark footer{
+  background:#020617 !important;
+}
+
+.dark nav a{
+  color:white !important;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -508,8 +520,7 @@ class="md:hidden text-2xl">
 </div>
 
 </header>
-<section
-<section id="discountBanner" class="bg-amber-700 text-white text-center font-black text-sm md:text-lg px-3">
+<section id="discountBanner" class="bg-amber-700 text-white text-center font-black text-lg md:text-2xl py-3">
 🔥 خصم 20% على أول طلبية لفترة محدودة
 </section>
 <!-- =========================
@@ -2507,19 +2518,5 @@ async function changeLanguage(lang){
     }
   }
 }
-
-/* حفظ اللغة */
-window.onload = ()=>{
-  const savedLang =
-    localStorage.getItem("siteLang") || "ar";
-
-  document.getElementById("langSwitcher").value =
-    savedLang;
-
-  if(savedLang !== "ar"){
-    changeLanguage(savedLang);
-  }
-};
-</script>
 </body>
 </html>
