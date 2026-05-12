@@ -138,6 +138,114 @@ color:white !important;
 .dark .text-gray-400{
 color:#cbd5e1 !important;
 }
+  /* =========================
+RESPONSIVE FIXES
+========================= */
+
+/* الصور */
+img{
+  max-width:100%;
+  height:auto;
+}
+
+/* يمنع السكرول الأفقي */
+html,body{
+  overflow-x:hidden;
+}
+
+/* موبايل */
+@media (max-width:640px){
+
+  h1{
+    font-size:2rem !important;
+    line-height:1.3 !important;
+  }
+
+  h2{
+    font-size:1.8rem !important;
+  }
+
+  .container{
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
+
+  section{
+    padding-top:60px !important;
+    padding-bottom:60px !important;
+  }
+
+  #mobileMenu{
+    width:100%;
+    right:0;
+    border-radius:0;
+  }
+
+  #cartDrawer > div:last-child{
+    max-width:100% !important;
+  }
+
+  #productModal .bg-white{
+    max-height:95vh;
+    margin:10px;
+  }
+
+  .text-5xl{
+    font-size:2rem !important;
+  }
+
+  .text-6xl{
+    font-size:2.5rem !important;
+  }
+
+  .h-72{
+    height:220px !important;
+  }
+
+  .w-16{
+    width:56px !important;
+    height:56px !important;
+  }
+
+  .fixed.bottom-6.left-6{
+    width:55px;
+    height:55px;
+    font-size:28px;
+  }
+}
+
+/* تابلت */
+@media (min-width:641px) and (max-width:1024px){
+
+  h1{
+    font-size:3rem !important;
+  }
+
+  h2{
+    font-size:2.5rem !important;
+  }
+
+  .container{
+    padding-left:24px !important;
+    padding-right:24px !important;
+  }
+
+  #products-container,
+  #wishlist-container{
+    grid-template-columns:repeat(2,1fr)!important;
+  }
+
+  #best-products{
+    grid-template-columns:repeat(2,1fr)!important;
+  }
+}
+
+/* لابتوب */
+@media (min-width:1025px) and (max-width:1280px){
+  #products-container{
+    grid-template-columns:repeat(3,1fr)!important;
+  }
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -206,7 +314,7 @@ class="text-gray-500 text-lg mb-6">
 
 <i class="fa-solid fa-couch text-3xl text-amber-700"></i>
 
-<h1 class="text-3xl font-black">
+<h1 class="text-2xl md:text-3xl font-black">
 Era&Art
 </h1>
 
@@ -318,7 +426,7 @@ class="hidden fixed top-[72px] right-0 w-64 bg-white px-6 py-5 space-y-4 font-bo
 
 <section
 id="home"
-class="min-h-[650px] md:h-[550px] bg-cover bg-center flex items-center text-white"
+class="min-h-screen md:min-h-[550px]  bg-cover bg-center flex items-center text-white"
 style="background-image:
 linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
 url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
@@ -360,7 +468,7 @@ url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
 
   <a href="https://wa.me/201068130159"
   target="_blank" rel="noopener noreferrer"
-  class="bg-white text-slate-900 px-8 py-4 rounded-xl font-black">
+  class="w-full sm:w-auto bg-white text-slate-900 px-8 py-4" rounded-xl font-black">
   تواصل واتساب
   </a>
   <a href="tel:201068130159"
