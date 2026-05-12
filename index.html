@@ -138,362 +138,6 @@ color:white !important;
 .dark .text-gray-400{
 color:#cbd5e1 !important;
 }
-  @media (max-width:768px){
-
-  h1{
-    font-size: 2rem !important;
-    line-height: 1.4;
-  }
-
-  h2{
-    font-size: 1.7rem !important;
-  }
-
-  h3{
-    font-size: 1.3rem !important;
-  }
-
-  p{
-    font-size: 15px !important;
-    line-height: 1.8;
-  }
-
-  button,
-  a,
-  select{
-    min-height: 48px;
-    font-size: 15px !important;
-  }
-
-  .product-card{
-    margin-bottom: 20px;
-  }
-}
-  body,
-body *{
-  max-width:100%;
-  word-wrap:break-word;
-}
-
-.goog-te-combo{
-  font-size:16px !important;
-}
-  /* MOBILE + TABLET FIX */
-html, body{
-  overflow-x:hidden;
-  width:100%;
-}
-
-/* كل العناصر ما تخرجش برا الشاشة */
-*{
-  box-sizing:border-box;
-  max-width:100%;
-}
-
-/* الكونتينر */
-.container{
-  width:100% !important;
-  padding-left:16px !important;
-  padding-right:16px !important;
-}
-
-/* صور */
-img{
-  max-width:100%;
-  height:auto;
-}
-
-/* التابلت */
-@media (max-width:1024px){
-
-  .grid{
-    gap:20px !important;
-  }
-
-  h1{
-    font-size:2.5rem !important;
-  }
-
-  h2{
-    font-size:2rem !important;
-  }
-}
-
-/* الموبايل */
-@media (max-width:768px){
-
-  nav{
-    display:none !important;
-  }
-
-  h1{
-    font-size:2rem !important;
-    line-height:1.4 !important;
-  }
-
-  h2{
-    font-size:1.6rem !important;
-  }
-
-  h3{
-    font-size:1.2rem !important;
-  }
-
-  p{
-    font-size:15px !important;
-    line-height:1.8 !important;
-  }
-
-  .grid{
-    grid-template-columns:1fr !important;
-  }
-
-  .flex{
-    flex-wrap:wrap !important;
-  }
-
-  button,
-  a,
-  input,
-  select{
-    width:100%;
-    min-height:48px;
-  }
-
-  #cartDrawer > div:last-child{
-    width:100% !important;
-  }
-}
-  /* =========================
-RESPONSIVE FIX ALL DEVICES
-========================= */
-
-/* reset */
-html,body{
-  width:100%;
-  overflow-x:hidden;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-/* container */
-.container{
-  width:100%;
-  max-width:1280px;
-  margin:auto;
-  padding-left:16px !important;
-  padding-right:16px !important;
-}
-
-/* images */
-img{
-  max-width:100%;
-  height:auto;
-  display:block;
-}
-
-/* header */
-header{
-  position:sticky;
-  top:0;
-  width:100%;
-}
-
-/* hero */
-#home{
-  min-height:100vh;
-  padding-top:40px;
-  padding-bottom:40px;
-}
-
-/* cart */
-#cartDrawer > div:last-child{
-  width:100%;
-  max-width:420px;
-}
-
-/* tablet */
-@media (max-width:1024px){
-
-  h1{
-    font-size:2.4rem !important;
-  }
-
-  h2{
-    font-size:2rem !important;
-  }
-
-  #products-container,
-  #wishlist-container,
-  #best-products{
-    grid-template-columns:repeat(2,1fr)!important;
-  }
-}
-
-/* mobile */
-@media (max-width:768px){
-
-  nav{
-    display:none !important;
-  }
-
-  #mobileMenu{
-    width:100%;
-    right:0;
-    top:68px;
-    border-radius:0;
-  }
-
-  #home{
-    min-height:auto;
-    padding:80px 0;
-  }
-
-  h1{
-    font-size:1.8rem !important;
-    line-height:1.4 !important;
-  }
-
-  h2{
-    font-size:1.5rem !important;
-  }
-
-  h3{
-    font-size:1.1rem !important;
-  }
-
-  p{
-    font-size:15px !important;
-  }
-
-  .grid{
-    grid-template-columns:1fr !important;
-  }
-
-  button:not(#menuBtn):not(#darkBtn),
-  input,
-  select,
-  textarea{
-    width:100%;
-  }
-
-  .product-card img{
-    height:260px !important;
-  }
-
-  #cartDrawer > div:last-child{
-    max-width:100%;
-  }
-}
-
-/* small phones */
-@media (max-width:480px){
-
-  h1{
-    font-size:1.5rem !important;
-  }
-
-  .p-10{
-    padding:1.5rem !important;
-  }
-}
-  /* PREMIUM RESPONSIVE */
-
-header{
- backdrop-filter:blur(15px);
-}
-
-#mobileMenu{
- animation:slideDown .35s ease;
-}
-
-@keyframes slideDown{
- from{
-  opacity:0;
-  transform:translateY(-30px);
- }
- to{
-  opacity:1;
-  transform:translateY(0);
- }
-}
-
-/* hero */
-#home{
- min-height:100vh;
- padding:80px 20px;
-}
-
-#home h1{
- font-size:clamp(2rem,5vw,5rem);
- line-height:1.2;
-}
-
-#home p{
- font-size:clamp(1rem,2vw,1.4rem);
-}
-
-/* cards */
-.product-card{
- border-radius:30px;
- overflow:hidden;
- transition:.35s;
-}
-
-.product-card:hover{
- transform:translateY(-10px) scale(1.02);
- box-shadow:0 25px 50px rgba(0,0,0,.12);
-}
-
-/* mobile */
-@media(max-width:768px){
-
- #home{
-   text-align:center;
-   min-height:auto;
-   padding:100px 20px;
- }
-
- .grid{
-   grid-template-columns:1fr !important;
- }
-
- .product-card img{
-   height:280px !important;
- }
-
- button:not(#menuBtn):not(#darkBtn){
-   width:100%;
- }
-
- #cartDrawer > div:last-child{
-   width:100%;
-   max-width:100%;
- }
-
- .container{
-   padding-left:14px !important;
-   padding-right:14px !important;
- }
-}
-
-/* ultra mobile */
-@media(max-width:480px){
-
- h1{
-   font-size:1.6rem !important;
- }
-
- h2{
-   font-size:1.3rem !important;
- }
-
- .rounded-3xl{
-   border-radius:20px !important;
- }
-}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -517,7 +161,7 @@ gtag('config', 'G-BTZGTJPGH7');
 <div id="pageLoader"
 class="fixed inset-0 bg-white z-[99999] flex items-center justify-center">
 
-  <div class="w-14 h-14 md:w-16 md:h-16 border-4 border-amber-700 border-t-transparent rounded-full animate-spin"></div>
+  <div class="w-16 h-16 border-4 border-amber-700 border-t-transparent rounded-full animate-spin"></div>
 
 </div>
 
@@ -528,7 +172,7 @@ class="fixed top-6 right-6 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-
 <div id="successPopup"
 class="fixed inset-0 bg-black/60 hidden z-[99999] flex items-center justify-center p-6">
 
-  <div class="bg-white rounded-3xl p-10 max-w-full md:max-w-md w-full text-center">
+  <div class="bg-white rounded-3xl p-10 max-w-md w-full text-center">
 
     <div class="text-6xl mb-5">✅</div>
 
@@ -547,130 +191,188 @@ class="text-gray-500 text-lg mb-6">
 </p>
     <button
     onclick="closeSuccessPopup()"
-    class="w-full md:w-auto bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
+    class="bg-amber-700 text-white px-8 py-3 rounded-xl font-black">
       إغلاق
     </button>
 
   </div>
 
 </div>
-<header class="bg-white/95 backdrop-blur-md shadow sticky top-0 z-50 border-b border-gray-100">
+<header class="bg-white shadow sticky top-0 z-50">
 
-<div class="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
+<div class="container mx-auto px-6 py-4 flex justify-between items-center">
 
 <div class="flex items-center gap-3">
-<i class="fa-solid fa-couch text-amber-700 text-2xl md:text-3xl"></i>
-<h1 class="text-xl md:text-3xl font-black">Era&Art</h1>
+
+<i class="fa-solid fa-couch text-3xl text-amber-700"></i>
+
+<h1 class="text-3xl font-black">
+Era&Art
+</h1>
+
 </div>
 
 <nav class="hidden md:flex gap-8 font-bold text-slate-700">
-<a href="#home">الرئيسية</a>
-<a href="#features">لماذا نحن</a>
-<a href="#best">الأكثر مبيعًا</a>
-<a href="#products">المنتجات</a>
+<a href="#home" class="hover:text-amber-700 transition">الرئيسية</a>
+<a href="#features" class="hover:text-amber-700 transition">لماذا نحن</a>
+<a href="#best" class="hover:text-amber-700 transition">الأكثر مبيعًا</a>
+<a href="#products" class="hover:text-amber-700 transition">المنتجات</a>
 </nav>
 
-<div class="flex items-center gap-3">
+<div class="flex items-center gap-4">
+  <select id="langSwitcher"
+onchange="changeLanguage(this.value)"
+class="bg-white px-3 py-2 rounded-xl shadow font-bold">
 
-<button id="darkBtn" onclick="toggleDarkMode()" class="text-xl">🌙</button>
-  <select id="langSwitcher" onchange="changeLanguage(this.value)">
-  <option value="ar">AR</option>
-  <option value="en">EN</option>
+  <option value="ar">العربية</option>
+  <option value="en">English</option>
+  <option value="fr">Français</option>
+  <option value="de">Deutsch</option>
+
 </select>
 
 <div id="google_translate_element" style="display:none"></div>
-<button onclick="toggleCart(true)" class="relative">
-  <i class="fa-solid fa-bag-shopping text-xl"></i>
+  <button
+onclick="toggleDarkMode()"
+class="text-2xl"
+aria-label="Dark Mode">
+🌙
+</button>
+<!-- WISHLIST BUTTON -->
 
-  <span id="cart-count"
-  class="absolute -top-2 -right-2 bg-amber-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-  0
-  </span>
+<button
+onclick="document.getElementById('wishlist-container').scrollIntoView({behavior:'smooth'})"
+aria-label="فتح المفضلة"
+class="relative">
 
-  <span id="wishlist-count"
-  class="absolute -top-2 -left-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-  0
-  </span>
+<i class="fa-solid fa-heart text-2xl text-red-500"></i>
+
+<span
+id="wishlist-count"
+class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+0
+</span>
+
+</button>
+<button
+onclick="toggleCart(true)"
+aria-label="فتح سلة الشراء"
+class="relative">
+
+<i class="fa-solid fa-bag-shopping text-2xl"></i>
+
+<span
+id="cart-count"
+class="absolute -top-2 -right-2 bg-amber-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+0
+</span>
+
 </button>
 
-<button id="menuBtn" class="md:hidden text-2xl">
+<!-- =========================
+MOBILE MENU BUTTON
+========================= -->
+
+<button
+id="menuBtn"
+aria-label="فتح القائمة"
+class="md:hidden text-2xl">
+
 <i class="fa-solid fa-bars"></i>
+
 </button>
 
 </div>
 
 </div>
+
 </header>
-<section class="w-full md:w-auto bg-amber-700 text-white py-3 text-center font-black text-lg">
+<section class="bg-amber-700 text-white py-3 text-center font-black text-lg">
 🔥 خصم 20% على أول طلبية لفترة محدودة
 </section>
 <!-- =========================
 MOBILE MENU
 ========================= -->
 
-<div id="mobileMenu"
-class="hidden fixed top-[72px] right-0 w-full bg-white shadow-2xl z-[9999] p-6 space-y-5 rounded-b-3xl">
+<div
+id="mobileMenu"
+class="hidden fixed top-[72px] right-0 w-64 bg-white px-6 py-5 space-y-4 font-bold shadow-2xl z-[9999] rounded-bl-2xl">
 
-<a href="#home" class="block text-lg font-bold">الرئيسية</a>
-<a href="#features" class="block text-lg font-bold">لماذا نحن</a>
-<a href="#best" class="block text-lg font-bold">الأكثر مبيعًا</a>
-<a href="#products" class="block text-lg font-bold">المنتجات</a>
+<a href="#home" onclick="mobileMenu.classList.add('hidden')" class="block hover:text-amber-700">
+الرئيسية
+</a>
+
+<a href="#features" onclick="mobileMenu.classList.add('hidden')" class="block hover:text-amber-700">
+لماذا نحن
+</a>
+
+<a href="#best" onclick="mobileMenu.classList.add('hidden')" class="block hover:text-amber-700">
+الأكثر مبيعًا
+</a>
+
+<a href="#products" onclick="mobileMenu.classList.add('hidden')" class="block hover:text-amber-700">
+المنتجات
+</a>
 
 </div>
+
 <section
 id="home"
-class="min-h-[100vh] md:min-h-[650px] bg-cover bg-center flex items-center text-white px-3"
+class="min-h-[650px] md:h-[550px] bg-cover bg-center flex items-center text-white"
 style="background-image:
-linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
 url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
 
-<div class="container mx-auto px-6 py-20 md:py-0 text-center md:text-right fade-up">
+<div class="container mx-auto px-6 fade-up">
 
-<h1 class="text-2xl sm:text-4xl md:text-6xl font-black leading-snug md:leading-tight">
+<h1 class="text-4xl md:text-6xl font-black leading-tight">
 أثاث فاخر
 <br>
 بتصميم عصري
 </h1>
 
-<p class="mt-6 text-base sm:text-lg md:text-2xl text-gray-200 leading-8 max-w-2xl mx-auto md:mx-0">
-أفضل الأثاث الحديث لمنزلك بتصميمات راقية وخامات عالية الجودة
-وبأسعار تنافسية داخل مصر.
+<p class="mt-5 text-lg md:text-xl text-gray-200 leading-8 md:leading-9 max-w-2xl">
+أفضل الأثاث الحديث لمنزلك بتصميمات راقية وخامات عالية الجودة.
 </p>
 
-<!-- buttons -->
-<div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center md:justify-start">
+<div class="flex gap-8 mt-8 flex-wrap text-center">
+  <div>
+    <h3 class="text-3xl font-black">+1200</h3>
+    <p class="text-gray-300">طلب مكتمل</p>
+  </div>
 
-<a href="#products"
-class="bg-amber-700 hover:bg-amber-800 px-8 py-4 rounded-2xl font-black text-lg transition">
-تصفح المنتجات
+  <div>
+    <h3 class="text-3xl font-black">+500</h3>
+    <p class="text-gray-300">عميل سعيد</p>
+  </div>
+
+  <div>
+    <h3 class="text-3xl font-black">5★</h3>
+    <p class="text-gray-300">تقييم العملاء</p>
+  </div>
+</div>
+
+<div class="flex gap-4 mt-8 flex-wrap">
+  <a href="#products"
+  class="bg-amber-700 hover:bg-amber-800 transition px-8 py-4 rounded-xl font-black">
+  تصفح المنتجات
+  </a>
+
+  <a href="https://wa.me/201068130159"
+  target="_blank" rel="noopener noreferrer"
+  class="bg-white text-slate-900 px-8 py-4 rounded-xl font-black">
+  تواصل واتساب
+  </a>
+  <a href="tel:201068130159"
+class="bg-slate-900 text-white px-8 py-4 rounded-xl font-black hover:scale-105 transition">
+اتصل الآن
 </a>
-
-<a href="https://wa.me/201068130159"
-target="_blank"
-class="bg-white text-slate-900 px-8 py-4 rounded-2xl font-black text-lg">
-واتساب
-</a>
-
 </div>
 
-<!-- stats -->
-<div class="grid grid-cols-3 gap-4 mt-12 max-w-xl mx-auto md:mx-0">
-
-<div class="bg-white/10 backdrop-blur rounded-2xl p-4">
-<h3 class="text-2xl md:text-3xl font-black">1200+</h3>
-<p class="text-sm text-gray-300">طلب</p>
-</div>
-
-<div class="bg-white/10 backdrop-blur rounded-2xl p-4">
-<h3 class="text-2xl md:text-3xl font-black">500+</h3>
-<p class="text-sm text-gray-300">عميل</p>
-</div>
-
-<div class="bg-white/10 backdrop-blur rounded-2xl p-4">
-<h3 class="text-2xl md:text-3xl font-black">5★</h3>
-<p class="text-sm text-gray-300">تقييم</p>
-</div>
-
+<div class="flex flex-wrap gap-4 mt-8">
+  <div class="bg-white/10 backdrop-blur px-5 py-3 rounded-xl">🚚 شحن سريع</div>
+  <div class="bg-white/10 backdrop-blur px-5 py-3 rounded-xl">💳 دفع عند الاستلام</div>
+  <div class="bg-white/10 backdrop-blur px-5 py-3 rounded-xl">✅ ضمان جودة</div>
 </div>
 
 </div>
@@ -700,7 +402,7 @@ class="bg-white text-slate-900 px-8 py-4 rounded-2xl font-black text-lg">
 
 <section id="features" class="container mx-auto px-6 py-20">
 
-<h2 class="text-3xl md:text-5xl font-black text-center mb-16">
+<h2 class="text-5xl font-black text-center mb-16">
 لماذا تختار Era&Art ؟
 </h2>
 
@@ -746,7 +448,7 @@ CUSTOMER REVIEWS
 ========================= -->
 
 
-<h2 class="text-3xl md:text-5xl font-black text-center mb-16">
+<h2 class="text-5xl font-black text-center mb-16">
 🔥 الأكثر مبيعًا
 </h2>
 
@@ -854,18 +556,19 @@ class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
    Products
 ========================= -->
 <div
-  id="productsLoader"
-  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+id="productsLoader"
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-  <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
-  <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
-  <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
-  <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
+<div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
+<div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
+<div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
+<div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
 
 </div>
 <div
-  id="products-container"
-  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+id="products-container"
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+</div>
 </div>
 <!-- =========================
 WISHLIST
@@ -873,13 +576,13 @@ WISHLIST
 
 <section class="container mx-auto px-6 py-20">
 
-<h2 class="text-3xl md:text-5xl font-black text-center mb-16">
+<h2 class="text-5xl font-black text-center mb-16">
 ❤️ المفضلة
 </h2>
 
 <div
 id="wishlist-container"
-class="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 </div>
 
 </section>
@@ -890,7 +593,7 @@ TESTIMONIALS
 
 <section class="container mx-auto px-6 py-20">
 
-<h2 class="text-3xl md:text-5xl font-black text-center mb-16">
+<h2 class="text-5xl font-black text-center mb-16">
 آراء عملائنا
 </h2>
 
@@ -905,7 +608,7 @@ TESTIMONIALS
 <img
 src="https://randomuser.me/api/portraits/women/44.jpg"
 loading="lazy"
-class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover">
+class="w-16 h-16 rounded-full object-cover">
 
 <div>
 
@@ -940,7 +643,7 @@ class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover">
 <img
 src="https://randomuser.me/api/portraits/men/32.jpg"
 loading="lazy"
-class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover">
+class="w-16 h-16 rounded-full object-cover">
 
 <div>
 
@@ -975,7 +678,7 @@ class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover">
 <img
 src="https://randomuser.me/api/portraits/women/68.jpg"
 loading="lazy"
-class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover">
+class="w-16 h-16 rounded-full object-cover">
 
 <div>
 
@@ -1017,7 +720,7 @@ ADMIN DASHBOARD
 
 <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/50"></div>
 
-<div class="absolute left-0 top-0 h-full w-full max-w-full md:max-w-md bg-white flex flex-col">
+<div class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
 
 <div class="bg-slate-900 text-white p-5 flex justify-between items-center">
 <h2 class="text-2xl font-black">سلة الشراء</h2>
@@ -1143,7 +846,7 @@ FLOATING WHATSAPP
 <a
 href="https://wa.me/201068130159"
 target="_blank" rel="noopener noreferrer"
-class="fixed bottom-6 left-6 bg-green-500 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center text-white text-4xl shadow-2xl z-50 hover:scale-110 transition animate-bounce">
+class="fixed bottom-6 left-6 bg-green-500 w-16 h-16 rounded-full flex items-center justify-center text-white text-4xl shadow-2xl z-50 hover:scale-110 transition animate-bounce">
 
 <i class="fa-brands fa-whatsapp"></i>
 
@@ -1526,7 +1229,7 @@ onclick="openModal(${product.id})"
 src="${product.image}"
 loading="lazy"
 decoding="async"
-class="w-full h-56 md:h-72 object-cover group-hover:scale-110 transition duration-700 cursor-pointer">
+class="w-full h-72 object-cover group-hover:scale-110 transition duration-700 cursor-pointer">
 
 <!-- CATEGORY -->
 
@@ -2313,19 +2016,19 @@ container.innerHTML = html;
 
 window.onload = ()=>{
 
-  loadProducts();
-  updateCart();
-  loadCustomerData();
-  renderWishlist();
+loadProducts();
 
-  const wishlistCount =
-  document.getElementById("wishlist-count");
+updateCart();
 
-  if(wishlistCount){
-    wishlistCount.innerText = wishlist.length;
-  }
+loadCustomerData();
 
-  document.getElementById("pageLoader").style.display = "none";
+renderWishlist();
+
+document.getElementById("wishlist-count").innerText =
+wishlist.length;
+
+document.getElementById("pageLoader").style.display = "none";
+
 };
 document.addEventListener("keydown",(e)=>{
   if(e.key === "Escape"){
@@ -2519,29 +2222,21 @@ function changeLanguage(lang){
 </script>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script>
+  <script>
 function toggleDarkMode(){
-  document.body.classList.toggle("dark");
 
-  const btn = document.getElementById("darkBtn");
+document.body.classList.toggle("dark");
 
-  if(document.body.classList.contains("dark")){
-    localStorage.setItem("theme","dark");
-    btn.innerText="☀️";
-  }else{
-    localStorage.setItem("theme","light");
-    btn.innerText="🌙";
-  }
+if(document.body.classList.contains("dark")){
+localStorage.setItem("theme","dark");
+}else{
+localStorage.setItem("theme","light");
+}
 }
 
-window.addEventListener("load", function(){
-
-  if(localStorage.getItem("theme")==="dark"){
-    document.body.classList.add("dark");
-    document.getElementById("darkBtn").innerText="☀️";
-  }
-
-});
+if(localStorage.getItem("theme")==="dark"){
+document.body.classList.add("dark");
+}
 </script>
 </body>
 </html>
