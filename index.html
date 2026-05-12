@@ -422,6 +422,13 @@ HEADER MOBILE FIX
     font-size: 1.3rem !important;
   }
 }
+  body{
+  top:0 !important;
+}
+
+.goog-te-banner-frame{
+  display:none !important;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -442,7 +449,8 @@ gtag('config', 'G-BTZGTJPGH7');
 </head>
 
 <body>
-  <div id="google_translate_element" style="display:none;"></div>
+ <div id="google_translate_element"
+style="position:absolute;left:-9999px;top:-9999px;"></div>
 <div id="pageLoader"
 class="fixed inset-0 bg-white z-[99999] flex items-center justify-center">
 
@@ -2465,8 +2473,6 @@ rel="noopener noreferrer"
 
 </footer>
 <script>
-let translateReady = false;
-
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: "ar",
@@ -2474,48 +2480,40 @@ function googleTranslateElementInit() {
     autoDisplay: false
   }, "google_translate_element");
 
-  translateReady = true;
-
   const savedLang = localStorage.getItem("siteLang");
+
   if (savedLang && savedLang !== "ar") {
-    setTimeout(() => translatePage(savedLang), 1500);
+    setTimeout(() => {
+      changeLanguage(savedLang);
+    }, 2000);
   }
-}
-
-function translatePage(lang) {
-  const select = document.querySelector(".goog-te-combo");
-
-  if (!select) {
-    console.log("Google Translate not ready");
-    return;
-  }
-
-  select.value = lang;
-  select.dispatchEvent(new Event("change"));
 }
 
 function changeLanguage(lang) {
   localStorage.setItem("siteLang", lang);
 
   if (lang === "ar") {
+    document.cookie =
+      "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     location.reload();
     return;
   }
 
-  let count = 0;
+  let tries = 0;
 
-  const wait = setInterval(() => {
+  const interval = setInterval(() => {
     const select = document.querySelector(".goog-te-combo");
 
     if (select) {
-      clearInterval(wait);
-      translatePage(lang);
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
     }
 
-    count++;
+    tries++;
 
-    if (count > 20) {
-      clearInterval(wait);
+    if (tries > 20) {
+      clearInterval(interval);
       alert("فشل تحميل الترجمة");
     }
   }, 500);
@@ -2526,7 +2524,9 @@ function toggleDarkMode() {
 
   localStorage.setItem(
     "theme",
-    document.body.classList.contains("dark") ? "dark" : "light"
+    document.body.classList.contains("dark")
+      ? "dark"
+      : "light"
   );
 }
 
@@ -2535,6 +2535,6 @@ if (localStorage.getItem("theme") === "dark") {
 }
 </script>
 
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
