@@ -112,12 +112,13 @@ transition:all .3s ease;
 footer a:hover i{
 transform:scale(1.15);
 }
-  .goog-te-banner-frame,
-.goog-te-gadget,
-.goog-logo-link,
-.goog-te-balloon-frame,
-.skiptranslate{
-display:none !important;
+ .goog-te-banner-frame,
+.goog-te-balloon-frame{
+  display:none !important;
+}
+
+body{
+  top:0 !important;
 }
 
 body{
@@ -2437,10 +2438,9 @@ function googleTranslateElementInit(){
 
 function changeLanguage(lang){
 
-  // حفظ اللغة
   localStorage.setItem("siteLang", lang);
 
-  const interval = setInterval(()=>{
+  const interval = setInterval(() => {
 
     const select =
     document.querySelector(".goog-te-combo");
@@ -2451,7 +2451,7 @@ function changeLanguage(lang){
       clearInterval(interval);
     }
 
-  },500);
+  }, 500);
 }
 </script>
 
