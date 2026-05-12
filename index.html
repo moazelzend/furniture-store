@@ -24,7 +24,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <link
 href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
-rel="sheet">
+rel="stylesheet"
 
 <style>
 
@@ -2468,7 +2468,6 @@ rel="noopener noreferrer"
 let translateLoaded = false;
 
 function googleTranslateElementInit(){
-
   if(translateLoaded) return;
 
   new google.translate.TranslateElement({
@@ -2500,7 +2499,6 @@ function applyGoogleTranslate(lang){
 }
 
 function changeLanguage(lang){
-
   localStorage.setItem("siteLang", lang);
 
   if(lang === "ar"){
@@ -2511,7 +2509,6 @@ function changeLanguage(lang){
   let tries = 0;
 
   const timer = setInterval(()=>{
-
     const select = document.querySelector(".goog-te-combo");
 
     if(select){
@@ -2527,7 +2524,6 @@ function changeLanguage(lang){
       clearInterval(timer);
       alert("تعذر تحميل الترجمة");
     }
-
   },500);
 }
 
@@ -2536,7 +2532,7 @@ function toggleDarkMode(){
 
   if(document.body.classList.contains("dark")){
     localStorage.setItem("theme","dark");
-  }else{
+  } else {
     localStorage.setItem("theme","light");
   }
 }
