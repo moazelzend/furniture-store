@@ -2302,23 +2302,19 @@ container.innerHTML = html;
 
 window.onload = ()=>{
 
-loadProducts();
+  loadProducts();
+  updateCart();
+  loadCustomerData();
+  renderWishlist();
 
-updateCart();
+  const wishlistCount =
+  document.getElementById("wishlist-count");
 
-loadCustomerData();
+  if(wishlistCount){
+    wishlistCount.innerText = wishlist.length;
+  }
 
-renderWishlist();
-
-const wishlistCount =
-document.getElementById("wishlist-count");
-
-if(wishlistCount){
-  wishlistCount.innerText = wishlist.length;
-}
-
-document.getElementById("pageLoader").style.display = "none";
-
+  document.getElementById("pageLoader").style.display = "none";
 };
 document.addEventListener("keydown",(e)=>{
   if(e.key === "Escape"){
