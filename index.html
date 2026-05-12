@@ -2162,15 +2162,28 @@ rel="noopener noreferrer"
   </div>
 
 </footer>
-  <script>
+ <script>
 function googleTranslateElementInit(){
   new google.translate.TranslateElement({
     pageLanguage:'ar',
     autoDisplay:false
   }, 'google_translate_element');
+
+  // بعد تحميل جوجل، رجّع اللغة المحفوظة
+  const savedLang = localStorage.getItem("siteLang");
+
+  if(savedLang && savedLang !== "ar"){
+    setTimeout(()=>{
+      changeLanguage(savedLang);
+      document.getElementById("langSwitcher").value = savedLang;
+    },1000);
+  }
 }
 
 function changeLanguage(lang){
+
+  // حفظ اللغة
+  localStorage.setItem("siteLang", lang);
 
   const interval = setInterval(()=>{
 
@@ -2184,7 +2197,6 @@ function changeLanguage(lang){
     }
 
   },500);
-
 }
 </script>
 
