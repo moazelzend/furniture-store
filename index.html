@@ -2453,32 +2453,49 @@ function applyGoogleTranslate(lang){
   }
 }
 
+<script>
 function changeLanguage(lang){
+
   localStorage.setItem("siteLang", lang);
+
+  // لو عربي = رجّع الصفحة طبيعي
+  if(lang === "ar"){
+    location.reload();
+    return;
+  }
 
   let tries = 0;
 
-  const interval = setInterval(()=>{
+  const waitForTranslate = setInterval(()=>{
 
-    const select =
-    document.querySelector(".goog-te-combo");
+    const select = document.querySelector(".goog-te-combo");
 
     if(select){
       select.value = lang;
       select.dispatchEvent(new Event("change"));
-      clearInterval(interval);
+      clearInterval(waitForTranslate);
+      return;
     }
 
     tries++;
 
-    if(tries > 10){
-      clearInterval(interval);
+    // لو مكتبة جوجل لم تُحمّل نحملها
+    if(tries === 3 && !window.google?.translate){
+      const s = document.createElement("script");
+      s.src =
+      "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      s.async = true;
+      document.body.appendChild(s);
     }
 
-  },300);
+    if(tries > 15){
+      clearInterval(waitForTranslate);
+      alert("تعذر تحميل الترجمة");
+    }
+
+  }, 500);
 }
 </script>
-
   <script>
 function toggleDarkMode(){
 
