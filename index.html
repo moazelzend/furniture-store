@@ -2316,22 +2316,7 @@ container.innerHTML = html;
 
 }
 
-window.onload = ()=>{
 
-loadProducts();
-
-updateCart();
-
-loadCustomerData();
-
-renderWishlist();
-
-document.getElementById("wishlist-count").innerText =
-wishlist.length;
-
-document.getElementById("pageLoader").style.display = "none";
-
-};
 document.addEventListener("keydown",(e)=>{
   if(e.key === "Escape"){
     closeModal();
@@ -2488,40 +2473,40 @@ rel="noopener noreferrer"
 <script>
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
-    pageLanguage: 'ar',
-    includedLanguages: 'ar,en,fr,de',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    pageLanguage: "ar",
+    includedLanguages: "ar,en,fr,de",
     autoDisplay: false
-  }, 'google_translate_element');
+  }, "google_translate_element");
 }
 
 function changeLanguage(lang){
   localStorage.setItem("siteLang", lang);
 
-  if(lang === "ar"){
-    document.cookie =
-      "googtrans=/ar/ar; path=/";
-    location.reload();
-    return;
-  }
-
-  document.cookie =
-    "googtrans=/ar/" + lang + "; path=/";
-
+  document.cookie = "googtrans=/ar/" + lang + "; path=/";
   location.reload();
 }
 
-window.onload = function(){
-  const saved =
-  localStorage.getItem("siteLang");
+window.addEventListener("load", function () {
 
-  if(saved && saved !== "ar"){
-    document.cookie =
-      "googtrans=/ar/" + saved + "; path=/";
+  const saved = localStorage.getItem("siteLang") || "ar";
+  document.getElementById("langSwitcher").value = saved;
+
+  if(saved !== "ar"){
+    document.cookie = "googtrans=/ar/" + saved + "; path=/";
   }
-}
+
+  loadProducts();
+  updateCart();
+  loadCustomerData();
+  renderWishlist();
+
+  document.getElementById("wishlist-count").innerText =
+  wishlist.length;
+
+  document.getElementById("pageLoader").style.display = "none";
+});
 </script>
 
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
