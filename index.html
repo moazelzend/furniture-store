@@ -2310,8 +2310,12 @@ loadCustomerData();
 
 renderWishlist();
 
-document.getElementById("wishlist-count").innerText =
-wishlist.length;
+const wishlistCount =
+document.getElementById("wishlist-count");
+
+if(wishlistCount){
+  wishlistCount.innerText = wishlist.length;
+}
 
 document.getElementById("pageLoader").style.display = "none";
 
