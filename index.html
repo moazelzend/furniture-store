@@ -178,6 +178,92 @@ body *{
 .goog-te-combo{
   font-size:16px !important;
 }
+  /* MOBILE + TABLET FIX */
+html, body{
+  overflow-x:hidden;
+  width:100%;
+}
+
+/* كل العناصر ما تخرجش برا الشاشة */
+*{
+  box-sizing:border-box;
+  max-width:100%;
+}
+
+/* الكونتينر */
+.container{
+  width:100% !important;
+  padding-left:16px !important;
+  padding-right:16px !important;
+}
+
+/* صور */
+img{
+  max-width:100%;
+  height:auto;
+}
+
+/* التابلت */
+@media (max-width:1024px){
+
+  .grid{
+    gap:20px !important;
+  }
+
+  h1{
+    font-size:2.5rem !important;
+  }
+
+  h2{
+    font-size:2rem !important;
+  }
+}
+
+/* الموبايل */
+@media (max-width:768px){
+
+  nav{
+    display:none !important;
+  }
+
+  h1{
+    font-size:2rem !important;
+    line-height:1.4 !important;
+  }
+
+  h2{
+    font-size:1.6rem !important;
+  }
+
+  h3{
+    font-size:1.2rem !important;
+  }
+
+  p{
+    font-size:15px !important;
+    line-height:1.8 !important;
+  }
+
+  .grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .flex{
+    flex-wrap:wrap !important;
+  }
+
+  button,
+  a,
+  input,
+  select{
+    width:100%;
+    min-height:48px;
+  }
+
+  #cartDrawer > div:last-child{
+    width:100% !important;
+  }
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -353,7 +439,7 @@ class="hidden fixed top-[72px] right-0 w-64 bg-white px-6 py-5 space-y-4 font-bo
 
 <section
 id="home"
-class="min-h-[650px] md:h-[550px] bg-cover bg-center flex items-center text-white"
+class="min-h-screen md:min-h-[550px] bg-cover bg-center flex items-center text-white"
 style="background-image:
 linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
 url('https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg')">
@@ -592,7 +678,7 @@ class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
 ========================= -->
 <div
 id="productsLoader"
-class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+class="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 sm:grid-cols-2 sm:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
 <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
 <div class="bg-white rounded-3xl h-[420px] animate-pulse"></div>
@@ -602,7 +688,7 @@ class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 </div>
 <div
 id="products-container"
-class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+class="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 sm:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 </div>
 </div>
 <!-- =========================
@@ -617,7 +703,7 @@ WISHLIST
 
 <div
 id="wishlist-container"
-class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+class="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 </div>
 
 </section>
