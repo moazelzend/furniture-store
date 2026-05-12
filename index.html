@@ -1187,6 +1187,20 @@ function safeParse(key){
 
 let cart = safeParse("cart");
 let wishlist = safeParse("wishlist");
+  function toggleDarkMode(){
+  document.body.classList.toggle("dark");
+
+  const btn =
+  document.querySelector('[aria-label="Dark Mode"]');
+
+  if(document.body.classList.contains("dark")){
+    localStorage.setItem("darkMode","true");
+    btn.innerText = "☀️";
+  }else{
+    localStorage.setItem("darkMode","false");
+    btn.innerText = "🌙";
+  }
+}
 /* =========================
 MOBILE MENU
 ========================= */
