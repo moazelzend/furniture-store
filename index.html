@@ -112,17 +112,18 @@ transition:all .3s ease;
 footer a:hover i{
 transform:scale(1.15);
 }
- .goog-te-banner-frame,
-.goog-te-balloon-frame{
-  display:none !important;
-}
-
-body{
-  top:0 !important;
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+.goog-te-gadget-icon{
+display:none !important;
 }
 
 body{
 top:0 !important;
+}
+
+.skiptranslate iframe{
+display:none !important;
 }
 .dark{
   background:#0f172a !important;
@@ -2418,29 +2419,46 @@ rel="noopener noreferrer"
   </div>
 
 </footer>
- <script>
+<script>
+let translateLoaded = false;
+
 function googleTranslateElementInit(){
+  if(translateLoaded) return;
+
   new google.translate.TranslateElement({
     pageLanguage:'ar',
-    autoDisplay:false
-  }, 'google_translate_element');
+    autoDisplay:false,
+    includedLanguages:'ar,en,fr,de',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  },'google_translate_element');
 
-  // بعد تحميل جوجل، رجّع اللغة المحفوظة
+  translateLoaded = true;
+
   const savedLang = localStorage.getItem("siteLang");
 
   if(savedLang && savedLang !== "ar"){
     setTimeout(()=>{
-      changeLanguage(savedLang);
+      applyGoogleTranslate(savedLang);
       document.getElementById("langSwitcher").value = savedLang;
     },1000);
   }
 }
 
-function changeLanguage(lang){
+function applyGoogleTranslate(lang){
+  const select = document.querySelector(".goog-te-combo");
 
+  if(select){
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
+
+function changeLanguage(lang){
   localStorage.setItem("siteLang", lang);
 
-  const interval = setInterval(() => {
+  let tries = 0;
+
+  const interval = setInterval(()=>{
 
     const select =
     document.querySelector(".goog-te-combo");
@@ -2451,7 +2469,13 @@ function changeLanguage(lang){
       clearInterval(interval);
     }
 
-  }, 500);
+    tries++;
+
+    if(tries > 10){
+      clearInterval(interval);
+    }
+
+  },300);
 }
 </script>
 
@@ -2471,14 +2495,9 @@ if(localStorage.getItem("theme")==="dark"){
 document.body.classList.add("dark");
 }
 </script>
-  <script>
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'ar'
-  }, 'google_translate_element');
-}
-</script>
 
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script async
+src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
 </body>
 </html>
