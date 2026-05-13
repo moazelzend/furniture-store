@@ -157,9 +157,7 @@ RESPONSIVE FIXES
 ========================= */
 
 /* الصور */
-img{
-  max-width:100%;
-}
+
 /* يمنع السكرول الأفقي */
 html,body{
   overflow-x:hidden;
@@ -464,6 +462,20 @@ body{
   #cartDrawer,
 #cart-items{
   overflow-x:hidden !important;
+}
+  #cart-items img{
+  width: 112px !important;
+  height: 112px !important;
+  min-width: 112px !important;
+  min-height: 112px !important;
+  max-width: 112px !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+#cart-items .flex{
+  align-items: center !important;
 }
 </style>
 <!-- Google Analytics -->
