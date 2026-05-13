@@ -2512,49 +2512,68 @@ rel="noopener noreferrer"
 
 </footer>
   <script>
-function googleTranslateElementInit() {
+function googleTranslateElementInit(){
   new google.translate.TranslateElement({
-    pageLanguage: "ar",
-    includedLanguages: "ar,en,fr,de",
-    autoDisplay: false
-  }, "google_translate_element");
+    pageLanguage:"ar",
+    includedLanguages:"ar,en,fr,de",
+    autoDisplay:false
+  },"google_translate_element");
 }
 
+/* تطبيق اللغة المحفوظة بدون لوب */
+function applySavedLanguage(){
+  const saved =
+  localStorage.getItem("siteLang") || "ar";
+
+  const langSelect =
+  document.getElementById("langSwitcher");
+
+  if(langSelect){
+    langSelect.value = saved;
+  }
+
+  const currentCookie =
+  document.cookie.match(/googtrans=([^;]+)/);
+
+  const wanted =
+  "/ar/" + saved;
+
+  if(!currentCookie || currentCookie[1] !== wanted){
+    document.cookie =
+    "googtrans=" + wanted + "; path=/";
+
+    if(saved !== "ar"){
+      setTimeout(()=>{
+        location.reload();
+      },300);
+    }
+  }
+}
+
+/* تغيير اللغة */
 function changeLanguage(lang){
   localStorage.setItem("siteLang", lang);
 
   document.cookie =
   "googtrans=/ar/" + lang + "; path=/";
 
-  sessionStorage.removeItem("translated");
-
   location.reload();
 }
 
-window.addEventListener("load", function(){
+window.addEventListener("load",function(){
 
   if(localStorage.getItem("darkMode")==="true"){
     document.body.classList.add("dark");
-    document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
+
+    const btn =
+    document.querySelector('[aria-label="Dark Mode"]');
+
+    if(btn){
+      btn.innerText="☀️";
+    }
   }
 
-  const saved =
-  localStorage.getItem("siteLang") || "ar";
-
-  document.getElementById("langSwitcher").value =
-  saved;
-
-  if(saved !== "ar" &&
-     !sessionStorage.getItem("translated")){
-
-    document.cookie =
-    "googtrans=/ar/" + saved + "; path=/";
-
-    sessionStorage.setItem("translated","yes");
-
-    location.reload();
-    return;
-  }
+  applySavedLanguage();
 
   loadProducts();
   updateCart();
