@@ -1912,7 +1912,7 @@ saveCart();
 
 updateCart();
 
-showToast("تمت إضافة المنتج للسلة");
+showToast(t("productAdded"));
 
 }
 
@@ -2069,7 +2069,7 @@ saveCart();
 
 updateCart();
 
-showToast("تم حذف المنتج");
+showToast(t("productRemoved"));
 
 }
 
@@ -2080,7 +2080,7 @@ showToast("تم حذف المنتج");
 
 function clearCart(){
 
-if(!confirm("هل تريد إلغاء الطلب؟")){
+if(!confirm(t("cancelConfirm"))){
 return;
 }
 
@@ -2090,7 +2090,7 @@ saveCart();
 
 updateCart();
 
-showToast("تم إلغاء الطلب");
+showToast(t("orderCancelled"));
 
 }
 
@@ -2102,7 +2102,7 @@ showToast("تم إلغاء الطلب");
 async function checkout(){
 
 if(cart.length === 0){
-showToast("السلة فارغة");
+showToast(t("cartEmpty"));
 return;
 }
 
@@ -2515,10 +2515,11 @@ function toggleDarkMode(){
 }
   
 window.addEventListener("load", function () {
-if(localStorage.getItem("darkMode")==="true"){
-  document.body.classList.add("dark");
-  document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
-}
+  if(localStorage.getItem("darkMode")==="true"){
+    document.body.classList.add("dark");
+    document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
+  }
+
   const saved = localStorage.getItem("siteLang") || "ar";
   document.getElementById("langSwitcher").value = saved;
 
@@ -2534,10 +2535,86 @@ if(localStorage.getItem("darkMode")==="true"){
   document.getElementById("wishlist-count").innerText =
   wishlist.length;
 
+  document.getElementById("customer-name").placeholder = t("name");
+  document.getElementById("customer-address").placeholder = t("address");
+  document.getElementById("checkoutBtn").innerText = t("checkout");
+
   document.getElementById("pageLoader").style.display = "none";
 });
 </script>
 
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+const translations = {
+  ar: {
+    cancelConfirm: "هل تريد إلغاء الطلب؟",
+    orderCancelled: "تم إلغاء الطلب",
+    cartEmpty: "السلة فارغة",
+    productAdded: "تمت إضافة المنتج للسلة",
+    productRemoved: "تم حذف المنتج",
+    fillData: "املأ جميع البيانات",
+    checkout: "إتمام الشراء",
+    cancelOrder: "إلغاء الطلب",
+    name: "الاسم",
+    address: "العنوان",
+    total: "الإجمالي",
+    addToCart: "أضف للسلة",
+    details: "التفاصيل"
+  },
+
+  en: {
+    cancelConfirm: "Do you want to cancel the order?",
+    orderCancelled: "Order cancelled",
+    cartEmpty: "Cart is empty",
+    productAdded: "Product added to cart",
+    productRemoved: "Product removed",
+    fillData: "Fill all fields",
+    checkout: "Checkout",
+    cancelOrder: "Cancel Order",
+    name: "Name",
+    address: "Address",
+    total: "Total",
+    addToCart: "Add to Cart",
+    details: "Details"
+  },
+
+  fr: {
+    cancelConfirm: "Voulez-vous annuler la commande ?",
+    orderCancelled: "Commande annulée",
+    cartEmpty: "Panier vide",
+    productAdded: "Produit ajouté au panier",
+    productRemoved: "Produit supprimé",
+    fillData: "Remplissez tous les champs",
+    checkout: "Commander",
+    cancelOrder: "Annuler la commande",
+    name: "Nom",
+    address: "Adresse",
+    total: "Total",
+    addToCart: "Ajouter au panier",
+    details: "Détails"
+  },
+
+  de: {
+    cancelConfirm: "Möchten Sie die Bestellung stornieren?",
+    orderCancelled: "Bestellung storniert",
+    cartEmpty: "Warenkorb ist leer",
+    productAdded: "Produkt hinzugefügt",
+    productRemoved: "Produkt entfernt",
+    fillData: "Bitte alle Felder ausfüllen",
+    checkout: "Zur Kasse",
+    cancelOrder: "Bestellung stornieren",
+    name: "Name",
+    address: "Adresse",
+    total: "Gesamt",
+    addToCart: "In den Warenkorb",
+    details: "Details"
+  }
+};
+
+function t(key){
+  const lang = localStorage.getItem("siteLang") || "ar";
+  return translations[lang]?.[key] || translations.ar[key];
+}
+</script>
 </body>
 </html>
