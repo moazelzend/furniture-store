@@ -461,29 +461,9 @@ body{
   left:-99999px !important;
   visibility:hidden !important;
 }
-#cartDrawer{
-  overflow: hidden;
-}
-
-
-
-/* إصلاح كارت المنتج داخل السلة */
+  #cartDrawer,
 #cart-items{
-  direction: ltr;
-}
-#cart-items > div{
-  width: 100%;
-  max-width: 100%;
-}
-
-#cart-items img{
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: 1/1;
-  object-fit: cover !important;
-  object-position: center !important;
-  display: block;
-  border-radius: 12px;
+  overflow-x:hidden !important;
 }
 </style>
 <!-- Google Analytics -->
@@ -567,7 +547,7 @@ Era&Art
 <a href="#products" class="hover:text-amber-700 transition">المنتجات</a>
 </nav>
 
-<div class="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+<div class="flex items-center gap-4">
   <select id="langSwitcher"
 onchange="changeLanguage(this.value)"
 class="bg-white px-3 py-2 rounded-xl shadow font-bold">
@@ -1072,62 +1052,59 @@ ADMIN DASHBOARD
 
 <div class="bg-slate-900 text-white p-5 flex justify-between items-center">
 <h2 class="text-2xl font-black">سلة الشراء</h2>
-<button onclick="toggleCart(false)" class="text-3xl">×</button>
+
+<button onclick="toggleCart(false)" class="text-3xl">
+×
+</button>
+
 </div>
 
 <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-5"></div>
 
-<!-- منطقة البيانات المعدلة بمسافات أفضل -->
-<div class="border-t p-6 bg-gray-50 flex flex-col gap-4">
+<div class="border-t p-5 bg-gray-50 space-y-4">
 
-    <!-- مجموعة حقول الإدخال -->
-    <div class="flex flex-col gap-3">
-        <input
-        id="customer-name"
-        type="text"
-        placeholder="الاسم"
-        class="w-full border p-3 rounded-xl focus:border-amber-700 outline-none">
+<input
+id="customer-name"
+type="text"
+placeholder="الاسم"
+class="w-full border p-3 rounded-lg">
 
-        <input
-        id="customer-phone"
-        type="tel"
-        placeholder="+201234567891"
-        class="w-full border p-3 rounded-xl focus:border-amber-700 outline-none"
-        dir="ltr">
+<input
+id="customer-phone"
+type="tel"
+placeholder="+201234567891"
+class="w-full border p-3 rounded-lg"
+dir="ltr">
 
-        <textarea
-        id="customer-address"
-        placeholder="العنوان"
-        class="w-full border p-3 rounded-xl h-20 resize-none focus:border-amber-700 outline-none"></textarea>
-    </div>
+<textarea
+id="customer-address"
+placeholder="العنوان"
+class="w-full border p-3 rounded-lg h-24"></textarea>
 
-    <!-- منطقة الإجمالي -->
-    <div class="flex justify-between items-center text-2xl font-black border-y py-3 border-dashed border-gray-300">
-        <span class="text-gray-600 text-lg">الإجمالي</span>
-        <span id="cart-total" class="text-amber-700">0 ج.م</span>
-    </div>
+<div class="flex justify-between text-2xl font-black">
+<span>الإجمالي</span>
+<span id="cart-total">0 ج.م</span>
+</div>
 
-    <!-- الأزرار -->
-    <div class="flex flex-col gap-2">
-        <button
-        id="checkoutBtn"
-        onclick="checkout()"
-        class="w-full bg-amber-700 text-white py-4 rounded-xl font-black flex justify-center items-center gap-3 shadow-md active:scale-95 transition">
-        إتمام الشراء
-        </button>
+<button
+onclick="clearCart()"
+class="w-full bg-red-500 text-white py-3 rounded-lg font-black">
+إلغاء الطلب
+</button>
 
-        <button
-        onclick="clearCart()"
-        class="w-full text-red-500 py-2 font-bold text-sm hover:underline">
-        إلغاء الطلب بالكامل
-        </button>
-    </div>
+<button
+id="checkoutBtn"
+onclick="checkout()"
+class="w-full bg-amber-700 text-white py-4 rounded-lg font-black flex justify-center items-center gap-3">
+إتمام الشراء
+</button>
 
 </div>
 
 </div>
 
 </div>
+
 
 <!-- =========================
 PRODUCT DETAILS MODAL
@@ -1979,11 +1956,11 @@ function updateCart(){
   let total = 0;
 
   count.innerText =
-    cart.reduce((sum,item)=> sum + item.qty, 0);
+    cart.reduce((sum,item)=>sum + item.qty,0);
 
   if(cart.length === 0){
     items.innerHTML =
-      '<p class="text-center text-gray-500">السلة فارغة</p>';
+    `<p class="text-center text-gray-500">السلة فارغة</p>`;
   }
 
   cart.forEach(item => {
@@ -1991,43 +1968,44 @@ function updateCart(){
     total += item.price * item.qty;
 
     items.innerHTML += `
-      <div class="bg-slate-800 rounded-2xl p-4 mb-4 w-full">
-        <div class="flex gap-4 items-start">
+      <div class="bg-slate-800 rounded-2xl p-4 mb-5 overflow-hidden">
 
-          <div class="w-[100px] h-[100px] overflow-hidden rounded-xl bg-slate-700">
-            <img
-              src="${item.image}"
-              loading="lazy"
-              decoding="async"
-              class="w-full h-full object-cover">
-          </div>
+       <div class="flex items-center gap-4">
 
-          <div>
-            <h3 class="text-white font-black text-lg mb-2">
-              ${item.name}
-            </h3>
+          <img
+  src="${item.image}"
+  loading="lazy"
+  decoding="async"
+  class="w-28 h-28 min-w-[112px] min-h-[112px] object-cover rounded-xl block flex-shrink-0">
+
+          <div class="flex-1 w-full text-center md:text-right">
+
+            <h3 class="font-black text-lg mb-2">${item.name}</h3>
 
             <p class="text-amber-500 text-xl font-black mb-3">
               ${item.price} ج.م
             </p>
 
-            <div class="flex items-center gap-3 mb-2">
-              <button onclick="decreaseQty(${item.id})"
-                class="bg-slate-700 text-white w-8 h-8 rounded">-</button>
+            <div class="flex items-center justify-center md:justify-start gap-3">
 
-              <span class="text-white">${item.qty}</span>
+              <button onclick="decreaseQty(${item.id})"
+                class="bg-slate-700 text-white w-10 h-10 rounded-lg">-</button>
+
+              <span>${item.qty}</span>
 
               <button onclick="increaseQty(${item.id})"
-                class="bg-slate-700 text-white w-8 h-8 rounded">+</button>
+                class="bg-slate-700 text-white w-10 h-10 rounded-lg">+</button>
+
             </div>
 
             <button onclick="removeItem(${item.id})"
-              class="text-red-400 text-sm">
+              class="text-red-500 text-sm mt-3">
               حذف المنتج
             </button>
-          </div>
 
+          </div>
         </div>
+
       </div>
     `;
   });
