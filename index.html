@@ -443,25 +443,6 @@ HEADER MOBILE FIX
 body{
   top:0 !important;
 }
-  .goog-te-banner-frame,
-.goog-te-balloon-frame,
-.goog-te-menu-frame,
-.goog-te-ftab,
-.goog-te-ftab-float,
-.goog-te-spinner-pos,
-.goog-tooltip,
-#goog-gt-tt,
-.skiptranslate,
-iframe.goog-te-banner-frame,
-iframe.goog-te-menu-frame{
-  display:none !important;
-  visibility:hidden !important;
-  opacity:0 !important;
-}
-
-body{
-  top:0 !important;
-}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -874,6 +855,9 @@ class="category-btn bg-white px-6 py-3 rounded-xl font-bold shadow">
 
 </div>
 
+</div>
+
+
 <!-- =========================
    Products
 ========================= -->
@@ -1085,6 +1069,7 @@ onclick="clearCart()"
 class="w-full bg-red-500 text-white py-3 rounded-lg font-black">
 إلغاء الطلب
 </button>
+
 <button
 id="checkoutBtn"
 onclick="checkout()"
@@ -2095,32 +2080,20 @@ showToast("تم حذف المنتج");
 
 function clearCart(){
 
-  const lang =
-  localStorage.getItem("siteLang") || "ar";
-
-  const msg = {
-    ar:"هل تريد إلغاء الطلب؟",
-    en:"Do you want to cancel the order?",
-    fr:"Voulez-vous annuler la commande ?",
-    de:"Möchten Sie die Bestellung stornieren?"
-  };
-
-  if(!confirm(msg[lang])){
-    return;
-  }
-
-  cart = [];
-  saveCart();
-  updateCart();
-  const toastMsg = {
- ar:"تم إلغاء الطلب",
- en:"Order cancelled",
- fr:"Commande annulée",
- de:"Bestellung storniert"
-};
-
-showToast(toastMsg[lang]);
+if(!confirm("هل تريد إلغاء الطلب؟")){
+return;
 }
+
+cart = [];
+
+saveCart();
+
+updateCart();
+
+showToast("تم إلغاء الطلب");
+
+}
+
 
 /* =========================
    إتمام الطلب
@@ -2251,15 +2224,8 @@ try{
 showToast("رقم طلبك: " + orderId);
 
 setTimeout(() => {
- const lang =
-localStorage.getItem("siteLang") || "ar";
-
-
-window.location.href =
-"./track.html?orderId=" +
-encodeURIComponent(orderId) +
-"&lang=" + lang;
-"&lang=" + lang;
+  window.location.href =
+  "./track.html?orderId=" + encodeURIComponent(orderId);
 }, 2000);
 }catch(err){
 
@@ -2518,46 +2484,47 @@ rel="noopener noreferrer"
   </div>
 
 </footer>
- <script>
-function googleTranslateElementInit(){
+<script>
+function googleTranslateElementInit() {
   new google.translate.TranslateElement({
-    pageLanguage:"ar",
-    includedLanguages:"ar,en,fr,de",
-    autoDisplay:false
-  },"google_translate_element");
-}
-
-function setGoogleTranslateCookie(lang){
-  document.cookie = "googtrans=/ar/" + lang + "; path=/";
-}
-
-function applySavedLanguage(){
-  const saved = localStorage.getItem("siteLang") || "ar";
-
-  const langSelect =
-  document.getElementById("langSwitcher");
-
-  if(langSelect){
-    langSelect.value = saved;
-  }
-
-  if(saved !== "ar" &&
-     !sessionStorage.getItem("translated")){
-    sessionStorage.setItem("translated","1");
-    setGoogleTranslateCookie(saved);
-    location.reload();
-  }
+    pageLanguage: "ar",
+    includedLanguages: "ar,en,fr,de",
+    autoDisplay: false
+  }, "google_translate_element");
 }
 
 function changeLanguage(lang){
   localStorage.setItem("siteLang", lang);
-  sessionStorage.removeItem("translated");
-  setGoogleTranslateCookie(lang);
+
+  document.cookie = "googtrans=/ar/" + lang + "; path=/";
   location.reload();
 }
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
 
-window.onload = function(){
-  applySavedLanguage();
+  const btn =
+  document.querySelector('[aria-label="Dark Mode"]');
+
+  if(document.body.classList.contains("dark")){
+    localStorage.setItem("darkMode","true");
+    btn.innerText = "☀️";
+  }else{
+    localStorage.setItem("darkMode","false");
+    btn.innerText = "🌙";
+  }
+}
+  
+window.addEventListener("load", function () {
+if(localStorage.getItem("darkMode")==="true"){
+  document.body.classList.add("dark");
+  document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
+}
+  const saved = localStorage.getItem("siteLang") || "ar";
+  document.getElementById("langSwitcher").value = saved;
+
+  if(saved !== "ar"){
+    document.cookie = "googtrans=/ar/" + saved + "; path=/";
+  }
 
   loadProducts();
   updateCart();
@@ -2567,9 +2534,8 @@ window.onload = function(){
   document.getElementById("wishlist-count").innerText =
   wishlist.length;
 
-  document.getElementById("pageLoader").style.display =
-  "none";
-};
+  document.getElementById("pageLoader").style.display = "none";
+});
 </script>
 
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
