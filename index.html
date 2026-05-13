@@ -463,10 +463,7 @@ body{
   left:-99999px !important;
   visibility:hidden !important;
 }
-  #cartDrawer{
-  overflow-x:hidden !important;
-}
-
+  #cartDrawer,
 #cart-items{
   overflow-x:hidden !important;
 }
@@ -1950,80 +1947,90 @@ showToast(t("productAdded"));
 
 function updateCart(){
 
-const items = document.getElementById("cart-items");
+  const items = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-total");
+  const count = document.getElementById("cart-count");
+  const checkoutBtn = document.getElementById("checkoutBtn");
 
-const totalEl = document.getElementById("cart-total");
+  if(!items || !totalEl || !count) return;
 
-const count = document.getElementById("cart-count");
-const checkoutBtn =
-document.getElementById("checkoutBtn");
-if(!items || !totalEl || !count){
-return;
-}
+  items.innerHTML = "";
+  let total = 0;
 
-items.innerHTML = "";
+  count.innerText =
+    cart.reduce((sum,item)=>sum + item.qty,0);
 
-let total = 0;
+  if(cart.length === 0){
+    items.innerHTML =
+    `<p class="text-center text-gray-500">السلة فارغة</p>`;
+  }
 
-count.innerText =
-cart.reduce((sum,item)=>sum + item.qty,0);
+  cart.forEach(item => {
 
-if(cart.length === 0){
+    total += item.price * item.qty;
 
-items.innerHTML =
-`<p class="text-center text-gray-500">السلة فارغة</p>`;
+    items.innerHTML += `
+      <div class="bg-slate-800 rounded-2xl p-4 mb-5 overflow-hidden">
 
-}
+        <div class="flex flex-col md:flex-row items-center gap-4">
 
-cart.forEach(item => {
+          <img
+            src="${item.image}"
+            loading="lazy"
+            decoding="async"
+            class="w-full md:w-28 h-40 md:h-28 object-cover rounded-xl">
 
-  total += item.price * item.qty;
+          <div class="flex-1 w-full text-center md:text-right">
 
- items.innerHTML += `
-<div class="bg-slate-800 rounded-2xl p-4 mb-5 overflow-hidden">
+            <h3 class="font-black text-lg mb-2">
+              ${item.name}
+            </h3>
 
-  <div class="flex flex-col md:flex-row items-center gap-4">
+            <p class="text-amber-500 text-xl font-black mb-3">
+              ${item.price} ج.م
+            </p>
 
-    <img
-      src="${item.image}"
-      loading="lazy"
-      decoding="async"
-      class="w-full md:w-28 h-40 md:h-28 object-cover rounded-xl">
+            <div class="flex items-center justify-center md:justify-start gap-3">
 
-    <div class="flex-1 w-full text-center md:text-right">
+              <button
+                onclick="decreaseQty(${item.id})"
+                class="bg-slate-700 text-white w-10 h-10 rounded-lg">
+                -
+              </button>
 
-      <h3 class="font-black text-lg mb-2">
-        ${item.name}
-      </h3>
+              <span>${item.qty}</span>
 
-      <p class="text-amber-500 text-xl font-black mb-3">
-        ${item.price} ج.م
-      </p>
+              <button
+                onclick="increaseQty(${item.id})"
+                class="bg-slate-700 text-white w-10 h-10 rounded-lg">
+                +
+              </button>
 
-      <div class="flex items-center justify-center md:justify-start gap-3">
+            </div>
 
-        <button
-          onclick="decreaseQty(${item.id})"
-          class="bg-slate-700 text-white w-10 h-10 rounded-lg">-</button>
+            <button
+              onclick="removeItem(${item.id})"
+              class="text-red-500 text-sm mt-3">
+              حذف المنتج
+            </button>
 
-        <span>${item.qty}</span>
-
-        <button
-          onclick="increaseQty(${item.id})"
-          class="bg-slate-700 text-white w-10 h-10 rounded-lg">+</button>
+          </div>
+        </div>
 
       </div>
+    `;
+  });
 
-      <button
-        onclick="removeItem(${item.id})"
-        class="text-red-500 text-sm mt-3">
-        حذف المنتج
-      </button>
+  totalEl.innerText = total + " ج.م";
 
-    </div>
-  </div>
-</div>
-`;
+  checkoutBtn.disabled = cart.length === 0;
+
+  if(cart.length === 0){
+    checkoutBtn.classList.add("opacity-50","cursor-not-allowed");
+  }else{
+    checkoutBtn.classList.remove("opacity-50","cursor-not-allowed");
+  }
+}
 
 totalEl.innerText = total + " ج.م";
 checkoutBtn.disabled = cart.length === 0;
