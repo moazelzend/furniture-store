@@ -2531,14 +2531,13 @@ function applySavedLanguage(){
     langSwitcher.value = saved;
   }
 
-  if(saved !== "ar"){
-    document.cookie =
-    "googtrans=/ar/" + saved + "; path=/";
-
-    setTimeout(()=>{
-      location.reload();
-    },300);
-  }
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: "ar",
+    includedLanguages: "ar,en,fr,de",
+    autoDisplay: false
+  }, "google_translate_element");
 }
 
 function changeLanguage(lang){
@@ -2547,6 +2546,8 @@ function changeLanguage(lang){
   document.cookie =
   "googtrans=/ar/" + lang + "; path=/";
 
+  sessionStorage.removeItem("translated");
+
   location.reload();
 }
 
@@ -2554,10 +2555,26 @@ window.addEventListener("load", function () {
 
   if(localStorage.getItem("darkMode")==="true"){
     document.body.classList.add("dark");
-    document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
+    document.querySelector('[aria-label="Dark Mode"]').innerText = "☀️";
   }
 
-  applySavedLanguage();
+  const saved =
+  localStorage.getItem("siteLang") || "ar";
+
+  document.getElementById("langSwitcher").value =
+  saved;
+
+  if(saved !== "ar" &&
+     !sessionStorage.getItem("translated")){
+
+    document.cookie =
+    "googtrans=/ar/" + saved + "; path=/";
+
+    sessionStorage.setItem("translated","yes");
+
+    location.reload();
+    return;
+  }
 
   loadProducts();
   updateCart();
