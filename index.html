@@ -435,13 +435,33 @@ HEADER MOBILE FIX
 }
 
 .goog-te-banner-frame,
+.goog-te-banner,
 .goog-te-gadget,
-.goog-logo-link{
+.goog-te-gadget-simple,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-text-highlight,
+.goog-logo-link,
+#goog-gt-tt,
+.skiptranslate,
+iframe.skiptranslate{
   display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  height:0 !important;
+  width:0 !important;
+  border:none !important;
 }
 
 body{
   top:0 !important;
+  position:static !important;
+}
+
+#google_translate_element{
+  position:absolute !important;
+  left:-99999px !important;
+  visibility:hidden !important;
 }
 </style>
 <!-- Google Analytics -->
@@ -2489,9 +2509,17 @@ function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: "ar",
     includedLanguages: "ar,en,fr,de",
-    autoDisplay: false
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
   }, "google_translate_element");
 }
+  setInterval(() => {
+  const frame = document.querySelector(".goog-te-banner-frame");
+  if(frame) frame.remove();
+
+  const tooltip = document.querySelector("#goog-gt-tt");
+  if(tooltip) tooltip.remove();
+}, 500);
 
 function changeLanguage(lang){
   localStorage.setItem("siteLang", lang);
