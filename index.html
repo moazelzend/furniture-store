@@ -461,9 +461,15 @@ body{
   left:-99999px !important;
   visibility:hidden !important;
 }
-#cartDrawer,
+#cartDrawer{
+  overflow: hidden;
+}
+
 #cart-items{
+  overflow-y: auto !important;
   overflow-x: hidden !important;
+  max-height: 45vh;
+  padding: 20px;
 }
 
 /* إصلاح كارت المنتج داخل السلة */
@@ -1988,58 +1994,44 @@ function updateCart(){
     total += item.price * item.qty;
 
     items.innerHTML += `
-<div class="bg-slate-800 rounded-2xl p-4 mb-5">
+<div class="bg-slate-800 rounded-2xl p-4 mb-4 w-full">
 
-  <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+  <div class="grid grid-cols-[100px_1fr] gap-4 items-start">
 
-    <div class="w-28 h-28 overflow-hidden rounded-xl bg-slate-700 shrink-0">
+    <div class="w-[100px] h-[100px] overflow-hidden rounded-xl bg-slate-700">
       <img
         src="${item.image}"
         loading="lazy"
         decoding="async"
-        class="w-full h-full object-cover object-center">
+        class="w-full h-full object-cover">
     </div>
 
-    <div class="flex-1 text-center sm:text-right w-full">
-
-      <h3 class="font-black text-lg mb-2 text-white">
+    <div>
+      <h3 class="text-white font-black text-lg mb-2">
         ${item.name}
       </h3>
 
-      <p class="text-amber-500 text-xl font-black mb-3">
+      <p class="text-amber-500 font-black text-xl mb-3">
         ${item.price} ج.م
       </p>
 
-      <div class="flex items-center justify-center sm:justify-start gap-3 mb-3">
+      <div class="flex items-center gap-3 mb-2">
+        <button onclick="decreaseQty(${item.id})"
+          class="bg-slate-700 text-white w-8 h-8 rounded">-</button>
 
-        <button
-          onclick="decreaseQty(${item.id})"
-          class="bg-slate-700 text-white w-10 h-10 rounded-lg">
-          -
-        </button>
+        <span class="text-white">${item.qty}</span>
 
-        <span class="text-white font-bold">
-          ${item.qty}
-        </span>
-
-        <button
-          onclick="increaseQty(${item.id})"
-          class="bg-slate-700 text-white w-10 h-10 rounded-lg">
-          +
-        </button>
-
+        <button onclick="increaseQty(${item.id})"
+          class="bg-slate-700 text-white w-8 h-8 rounded">+</button>
       </div>
 
-      <button
-        onclick="removeItem(${item.id})"
+      <button onclick="removeItem(${item.id})"
         class="text-red-400 text-sm">
         حذف المنتج
       </button>
-
     </div>
 
   </div>
-
 </div>
 `;
   totalEl.innerText = total + " ج.م";
