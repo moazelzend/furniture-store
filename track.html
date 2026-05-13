@@ -31,6 +31,10 @@ body{
   top:0 !important;
 }
 
+.notranslate{
+  translate:no;
+}
+
 .dark{
   background:#0f172a !important;
   color:white !important;
@@ -149,8 +153,6 @@ function toggleDarkMode(){
   }
 }
 
-
-/* عند التحميل */
 document.addEventListener("DOMContentLoaded",function(){
 
   if(localStorage.getItem("darkMode")==="true"){
@@ -178,12 +180,10 @@ document.addEventListener("DOMContentLoaded",function(){
   if(autoId){
     document.getElementById("orderId").value =
     autoId;
-
     setTimeout(trackOrder,300);
   }
 
 });
-
 
 function trackOrder(){
 
@@ -218,12 +218,12 @@ function trackOrder(){
     }else if(data.result === "found"){
 
       result.innerHTML = `
-      <div class="resultBox bg-green-50 p-6 rounded-2xl text-right">
-        <p class="mb-3"><b>رقم الطلب:</b> ${data.orderId}</p>
-        <p class="mb-3"><b>الحالة:</b> ${data.status}</p>
-        <p class="mb-3"><b>الاسم:</b> ${data.name}</p>
-        <p class="mb-3"><b>المنتجات:</b> ${data.products}</p>
-        <p><b>الإجمالي:</b> ${data.total} ج.م</p>
+      <div class="resultBox bg-green-50 p-6 rounded-2xl text-left notranslate" dir="ltr">
+        <p class="mb-3"><b>رقم الطلب:</b> <span>${data.orderId}</span></p>
+        <p class="mb-3"><b>الحالة:</b> <span>${data.status}</span></p>
+        <p class="mb-3"><b>الاسم:</b> <span>${data.name}</span></p>
+        <p class="mb-3"><b>المنتجات:</b> <span>${data.products}</span></p>
+        <p><b>الإجمالي:</b> <span>${data.total} ج.م</span></p>
       </div>
       `;
 
