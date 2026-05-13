@@ -2254,8 +2254,6 @@ setTimeout(() => {
  const lang =
 localStorage.getItem("siteLang") || "ar";
 
-const lang =
-localStorage.getItem("siteLang") || "ar";
 
 window.location.href =
 "./track.html?orderId=" +
@@ -2520,7 +2518,7 @@ rel="noopener noreferrer"
   </div>
 
 </footer>
-  <script>
+ <script>
 function googleTranslateElementInit(){
   new google.translate.TranslateElement({
     pageLanguage:"ar",
@@ -2530,17 +2528,11 @@ function googleTranslateElementInit(){
 }
 
 function setGoogleTranslateCookie(lang){
-  document.cookie =
-  "googtrans=/ar/" + lang + "; path=/";
-
-  document.cookie =
-  "googtrans=/ar/" + lang +
-  "; path=/; domain=" + window.location.hostname;
+  document.cookie = "googtrans=/ar/" + lang + "; path=/";
 }
 
 function applySavedLanguage(){
-  const saved =
-  localStorage.getItem("siteLang") || "ar";
+  const saved = localStorage.getItem("siteLang") || "ar";
 
   const langSelect =
   document.getElementById("langSwitcher");
@@ -2549,43 +2541,22 @@ function applySavedLanguage(){
     langSelect.value = saved;
   }
 
-  const current =
-  document.cookie.includes("googtrans=/ar/" + saved);
-
-  if(!current){
+  if(saved !== "ar" &&
+     !sessionStorage.getItem("translated")){
+    sessionStorage.setItem("translated","1");
     setGoogleTranslateCookie(saved);
-
-    if(saved !== "ar" &&
-       !sessionStorage.getItem("translated")){
-      sessionStorage.setItem("translated","1");
-      location.reload();
-    }
+    location.reload();
   }
 }
 
 function changeLanguage(lang){
   localStorage.setItem("siteLang", lang);
-
   sessionStorage.removeItem("translated");
-
   setGoogleTranslateCookie(lang);
-
   location.reload();
 }
 
-window.addEventListener("load",function(){
-
-  if(localStorage.getItem("darkMode")==="true"){
-    document.body.classList.add("dark");
-
-    const btn =
-    document.querySelector('[aria-label="Dark Mode"]');
-
-    if(btn){
-      btn.innerText = "☀️";
-    }
-  }
-
+window.onload = function(){
   applySavedLanguage();
 
   loadProducts();
@@ -2598,7 +2569,7 @@ window.addEventListener("load",function(){
 
   document.getElementById("pageLoader").style.display =
   "none";
-});
+};
 </script>
 
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
