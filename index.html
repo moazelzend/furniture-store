@@ -2520,7 +2520,15 @@ function googleTranslateElementInit(){
   },"google_translate_element");
 }
 
-/* تطبيق اللغة المحفوظة بدون لوب */
+function setGoogleTranslateCookie(lang){
+  document.cookie =
+  "googtrans=/ar/" + lang + "; path=/";
+
+  document.cookie =
+  "googtrans=/ar/" + lang +
+  "; path=/; domain=" + window.location.hostname;
+}
+
 function applySavedLanguage(){
   const saved =
   localStorage.getItem("siteLang") || "ar";
@@ -2532,30 +2540,26 @@ function applySavedLanguage(){
     langSelect.value = saved;
   }
 
-  const currentCookie =
-  document.cookie.match(/googtrans=([^;]+)/);
+  const current =
+  document.cookie.includes("googtrans=/ar/" + saved);
 
-  const wanted =
-  "/ar/" + saved;
+  if(!current){
+    setGoogleTranslateCookie(saved);
 
-  if(!currentCookie || currentCookie[1] !== wanted){
-    document.cookie =
-    "googtrans=" + wanted + "; path=/";
-
-    if(saved !== "ar"){
-      setTimeout(()=>{
-        location.reload();
-      },300);
+    if(saved !== "ar" &&
+       !sessionStorage.getItem("translated")){
+      sessionStorage.setItem("translated","1");
+      location.reload();
     }
   }
 }
 
-/* تغيير اللغة */
 function changeLanguage(lang){
   localStorage.setItem("siteLang", lang);
 
-  document.cookie =
-  "googtrans=/ar/" + lang + "; path=/";
+  sessionStorage.removeItem("translated");
+
+  setGoogleTranslateCookie(lang);
 
   location.reload();
 }
@@ -2569,7 +2573,7 @@ window.addEventListener("load",function(){
     document.querySelector('[aria-label="Dark Mode"]');
 
     if(btn){
-      btn.innerText="☀️";
+      btn.innerText = "☀️";
     }
   }
 
@@ -2589,14 +2593,5 @@ window.addEventListener("load",function(){
 </script>
 
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script>
-setInterval(() => {
-  document.querySelectorAll("iframe").forEach(el => {
-    if(el.src && el.src.includes("translate.google")){
-      el.remove();
-    }
-  });
-}, 500);
-</script>
 </body>
 </html>
