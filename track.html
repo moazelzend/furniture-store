@@ -157,7 +157,27 @@ document.addEventListener("DOMContentLoaded",function(){
 
   if(localStorage.getItem("darkMode")==="true"){
     document.body.classList.add("dark");
-    document.getElementById("darkBtn").innerText="☀️";
+
+    const darkBtn =
+    document.getElementById("darkBtn");
+
+    if(darkBtn){
+      darkBtn.innerText = "☀️";
+    }
+  }
+
+  const params =
+  new URLSearchParams(window.location.search);
+
+  /* استلام اللغة من الرابط */
+  const lang =
+  params.get("lang");
+
+  if(lang){
+    localStorage.setItem("siteLang", lang);
+
+    document.cookie =
+    "googtrans=/ar/" + lang + "; path=/";
   }
 
   const savedLang =
@@ -171,15 +191,13 @@ document.addEventListener("DOMContentLoaded",function(){
     "googtrans=/ar/" + savedLang + "; path=/";
   }
 
-  const params =
-  new URLSearchParams(window.location.search);
-
   const autoId =
   params.get("orderId");
 
   if(autoId){
     document.getElementById("orderId").value =
     autoId;
+
     setTimeout(trackOrder,300);
   }
 
