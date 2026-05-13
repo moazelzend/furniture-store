@@ -2251,8 +2251,13 @@ try{
 showToast("رقم طلبك: " + orderId);
 
 setTimeout(() => {
-  window.location.href =
-  "./track.html?orderId=" + encodeURIComponent(orderId);
+ const lang =
+localStorage.getItem("siteLang") || "ar";
+
+window.location.href =
+"./track.html?orderId=" +
+encodeURIComponent(orderId) +
+"&lang=" + lang;
 }, 2000);
 }catch(err){
 
