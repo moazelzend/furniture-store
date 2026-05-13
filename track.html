@@ -217,15 +217,15 @@ function trackOrder(){
 
     }else if(data.result === "found"){
 
-      result.innerHTML = `
-      <div class="resultBox bg-green-50 p-6 rounded-2xl text-left notranslate" dir="ltr">
-        <p class="mb-3"><b>رقم الطلب:</b> <span>${data.orderId}</span></p>
-        <p class="mb-3"><b>الحالة:</b> <span>${data.status}</span></p>
-        <p class="mb-3"><b>الاسم:</b> <span>${data.name}</span></p>
-        <p class="mb-3"><b>المنتجات:</b> <span>${data.products}</span></p>
-        <p><b>الإجمالي:</b> <span>${data.total} ج.م</span></p>
-      </div>
-      `;
+     result.innerHTML = `
+<div class="resultBox bg-green-50 p-6 rounded-2xl text-left" dir="ltr">
+  <p class="mb-3"><b>رقم الطلب:</b> <span class="notranslate">${data.orderId}</span></p>
+  <p class="mb-3"><b>الحالة:</b> <span class="notranslate">${data.status}</span></p>
+  <p class="mb-3"><b>الاسم:</b> <span class="notranslate">${data.name}</span></p>
+  <p class="mb-3"><b>المنتجات:</b> <span class="notranslate">${data.products}</span></p>
+  <p><b>الإجمالي:</b> <span class="notranslate">${data.total} ج.م</span></p>
+</div>
+`;
 
     }else{
       result.innerHTML =
