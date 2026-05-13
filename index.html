@@ -493,6 +493,18 @@ body{
   border-radius:12px !important;
   display:block;
 }
+  #cart-items{
+  overflow-y: auto !important;
+  min-height: 220px;
+  max-height: 320px;
+}
+
+#cart-items img{
+  width: 112px !important;
+  height: 112px !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -1076,7 +1088,7 @@ ADMIN DASHBOARD
 
 <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/50"></div>
 
-<div class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col overflow-y-auto">
+<div class="absolute left-0 top-0 h-full w-full max-w-md bg-white flex flex-col">
 
 <div class="bg-slate-900 text-white p-5 flex justify-between items-center">
 <h2 class="text-2xl font-black">سلة الشراء</h2>
@@ -1087,7 +1099,7 @@ ADMIN DASHBOARD
 
 </div>
 
-<div id="cart-items" class="p-5 space-y-5"></div>
+<div id="cart-items" class="flex-1 p-5 space-y-5"></div>
 
 <div class="border-t p-5 bg-gray-50 space-y-4">
 
