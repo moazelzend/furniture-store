@@ -2520,25 +2520,44 @@ function googleTranslateElementInit() {
   }, "google_translate_element");
 }
 
+function applySavedLanguage(){
+  const saved =
+  localStorage.getItem("siteLang") || "ar";
+
+  const langSwitcher =
+  document.getElementById("langSwitcher");
+
+  if(langSwitcher){
+    langSwitcher.value = saved;
+  }
+
+  if(saved !== "ar"){
+    document.cookie =
+    "googtrans=/ar/" + saved + "; path=/";
+
+    setTimeout(()=>{
+      location.reload();
+    },300);
+  }
+}
+
 function changeLanguage(lang){
   localStorage.setItem("siteLang", lang);
 
-  document.cookie = "googtrans=/ar/" + lang + "; path=/";
+  document.cookie =
+  "googtrans=/ar/" + lang + "; path=/";
+
   location.reload();
 }
 
-  
 window.addEventListener("load", function () {
-if(localStorage.getItem("darkMode")==="true"){
-  document.body.classList.add("dark");
-  document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
-}
-  const saved = localStorage.getItem("siteLang") || "ar";
-  document.getElementById("langSwitcher").value = saved;
 
-  if(saved !== "ar"){
-    document.cookie = "googtrans=/ar/" + saved + "; path=/";
+  if(localStorage.getItem("darkMode")==="true"){
+    document.body.classList.add("dark");
+    document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
   }
+
+  applySavedLanguage();
 
   loadProducts();
   updateCart();
@@ -2548,7 +2567,8 @@ if(localStorage.getItem("darkMode")==="true"){
   document.getElementById("wishlist-count").innerText =
   wishlist.length;
 
-  document.getElementById("pageLoader").style.display = "none";
+  document.getElementById("pageLoader").style.display =
+  "none";
 });
 </script>
 
