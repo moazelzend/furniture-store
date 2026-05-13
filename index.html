@@ -159,9 +159,7 @@ RESPONSIVE FIXES
 /* الصور */
 img{
   max-width:100%;
-  height:auto;
 }
-
 /* يمنع السكرول الأفقي */
 html,body{
   overflow-x:hidden;
@@ -1972,13 +1970,13 @@ function updateCart(){
     items.innerHTML += `
       <div class="bg-slate-800 rounded-2xl p-4 mb-5 overflow-hidden">
 
-        <div class="flex flex-col md:flex-row items-center gap-4">
+       <div class="flex items-center gap-4">
 
           <img
-            src="${item.image}"
-            loading="lazy"
-            decoding="async"
-            class="w-full md:w-28 h-40 md:h-28 object-cover rounded-xl">
+  src="${item.image}"
+  loading="lazy"
+  decoding="async"
+  class="w-28 h-28 min-w-[112px] min-h-[112px] object-cover rounded-xl block flex-shrink-0">
 
           <div class="flex-1 w-full text-center md:text-right">
 
