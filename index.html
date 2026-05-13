@@ -1072,59 +1072,62 @@ ADMIN DASHBOARD
 
 <div class="bg-slate-900 text-white p-5 flex justify-between items-center">
 <h2 class="text-2xl font-black">سلة الشراء</h2>
-
-<button onclick="toggleCart(false)" class="text-3xl">
-×
-</button>
-
+<button onclick="toggleCart(false)" class="text-3xl">×</button>
 </div>
 
 <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-5"></div>
 
-<div class="border-t p-5 bg-gray-50 space-y-4">
+<!-- منطقة البيانات المعدلة بمسافات أفضل -->
+<div class="border-t p-6 bg-gray-50 flex flex-col gap-4">
 
-<input
-id="customer-name"
-type="text"
-placeholder="الاسم"
-class="w-full border p-3 rounded-lg">
+    <!-- مجموعة حقول الإدخال -->
+    <div class="flex flex-col gap-3">
+        <input
+        id="customer-name"
+        type="text"
+        placeholder="الاسم"
+        class="w-full border p-3 rounded-xl focus:border-amber-700 outline-none">
 
-<input
-id="customer-phone"
-type="tel"
-placeholder="+201234567891"
-class="w-full border p-3 rounded-lg"
-dir="ltr">
+        <input
+        id="customer-phone"
+        type="tel"
+        placeholder="+201234567891"
+        class="w-full border p-3 rounded-xl focus:border-amber-700 outline-none"
+        dir="ltr">
 
-<textarea
-id="customer-address"
-placeholder="العنوان"
-class="w-full border p-3 rounded-lg h-24"></textarea>
+        <textarea
+        id="customer-address"
+        placeholder="العنوان"
+        class="w-full border p-3 rounded-xl h-20 resize-none focus:border-amber-700 outline-none"></textarea>
+    </div>
 
-<div class="flex justify-between text-2xl font-black">
-<span>الإجمالي</span>
-<span id="cart-total">0 ج.م</span>
+    <!-- منطقة الإجمالي -->
+    <div class="flex justify-between items-center text-2xl font-black border-y py-3 border-dashed border-gray-300">
+        <span class="text-gray-600 text-lg">الإجمالي</span>
+        <span id="cart-total" class="text-amber-700">0 ج.م</span>
+    </div>
+
+    <!-- الأزرار -->
+    <div class="flex flex-col gap-2">
+        <button
+        id="checkoutBtn"
+        onclick="checkout()"
+        class="w-full bg-amber-700 text-white py-4 rounded-xl font-black flex justify-center items-center gap-3 shadow-md active:scale-95 transition">
+        إتمام الشراء
+        </button>
+
+        <button
+        onclick="clearCart()"
+        class="w-full text-red-500 py-2 font-bold text-sm hover:underline">
+        إلغاء الطلب بالكامل
+        </button>
+    </div>
+
 </div>
 
-<button
-onclick="clearCart()"
-class="w-full bg-red-500 text-white py-3 rounded-lg font-black">
-إلغاء الطلب
-</button>
-
-<button
-id="checkoutBtn"
-onclick="checkout()"
-class="w-full bg-amber-700 text-white py-4 rounded-lg font-black flex justify-center items-center gap-3">
-إتمام الشراء
-</button>
-
 </div>
 
 </div>
-
-</div>
-
 
 <!-- =========================
 PRODUCT DETAILS MODAL
