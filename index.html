@@ -2511,27 +2511,7 @@ rel="noopener noreferrer"
   </div>
 
 </footer>
-<script>
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: "ar",
-    includedLanguages: "ar,en,fr,de",
-    autoDisplay: false
-  }, "google_translate_element");
-}
-
-function applySavedLanguage(){
-  const saved =
-  localStorage.getItem("siteLang") || "ar";
-
-  const langSwitcher =
-  document.getElementById("langSwitcher");
-
-  if(langSwitcher){
-    langSwitcher.value = saved;
-  }
-
-<script>
+  <script>
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: "ar",
@@ -2551,11 +2531,11 @@ function changeLanguage(lang){
   location.reload();
 }
 
-window.addEventListener("load", function () {
+window.addEventListener("load", function(){
 
   if(localStorage.getItem("darkMode")==="true"){
     document.body.classList.add("dark");
-    document.querySelector('[aria-label="Dark Mode"]').innerText = "☀️";
+    document.querySelector('[aria-label="Dark Mode"]').innerText="☀️";
   }
 
   const saved =
