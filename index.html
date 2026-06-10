@@ -465,6 +465,13 @@ body{
 #cart-items{
   overflow-x:hidden !important;
 }
+  #cart-items img{
+  width:120px !important;
+  height:120px !important;
+  min-width:120px !important;
+  object-fit:cover !important;
+  border-radius:16px;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -1972,11 +1979,11 @@ function updateCart(){
 
        <div class="flex items-center gap-4">
 
-          <img
+         <img
   src="${item.image}"
   loading="lazy"
   decoding="async"
-  class="w-28 h-28 min-w-[112px] min-h-[112px] object-cover rounded-xl block flex-shrink-0">
+  class="w-32 h-32 min-w-[128px] min-h-[128px] object-cover rounded-2xl block flex-shrink-0">
 
           <div class="flex-1 w-full text-center md:text-right">
 
