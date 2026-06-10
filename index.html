@@ -472,6 +472,13 @@ body{
   object-fit:cover !important;
   border-radius:16px;
 }
+  #cart-items{
+  padding-top: 15px !important;
+}
+
+#cart-items > div{
+  overflow: visible !important;
+}
 </style>
 <!-- Google Analytics -->
 <script async
@@ -1975,15 +1982,14 @@ function updateCart(){
     total += item.price * item.qty;
 
     items.innerHTML += `
-<div class="bg-slate-800 rounded-2xl p-4 mb-5">
+<div class="bg-slate-800 rounded-2xl p-4 mb-5 min-h-[130px]">
 
-  <div class="flex items-center gap-4">
-
+  <div class="flex items-start gap-4">
     <img
-      src="${item.image}"
-      loading="lazy"
-      decoding="async"
-      class="w-20 h-20 min-w-[80px] h-[80px] object-cover rounded-lg flex-shrink-0">
+  src="${item.image}"
+  loading="lazy"
+  decoding="async"
+  class="w-24 h-24 min-w-[96px] object-cover rounded-xl flex-shrink-0">
 
     <div class="flex-1">
 
